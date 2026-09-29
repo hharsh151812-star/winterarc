@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Winter Arc OS</title>
+
+<style>
+:root{
+  --bg:#07090d;
+  --panel:#10141c;
+  --panel2:#151b25;
+  --line:#252d3a;
+  --text:#f4f7fb;
+  --muted:#8d98a9;
+  --ice:#c9e3ff;
+  --green:#9ee6b8;
+  --yellow:#ffd98a;
+  --red:#ff9f9f;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 75% -10%,#1b3049 0,transparent 35%),
+    radial-gradient(circle at -10% 40%,#111d2b 0,transparent 30%),
+    var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  min-height:100vh;
+}
+
+button,input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.app{
+  width:min(1180px,100%);
+  margin:auto;
+  padding:18px;
+}
+
+/* HEADER */
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:18px;
+}
+
+.logo{
+  font-weight:900;
+  letter-spacing:.12em;
+  font-size:15px;
+}
+
+.logo span{
+  color:var(--ice);
+}
+
+.date{
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* NAV */
+
+.nav{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding-bottom:3px;
+  margin-bottom:18px;
+}
+
+.nav button{
+  white-space:nowrap;
+  background:#0d1118;
+  color:var(--muted);
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:10px 14px;
+}
+
+.nav button.active{
+  background:var(--ice);
+  color:#080b10;
+  border-color:var(--ice);
+}
+
+/* PAGES */
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+/* CARDS */
+
+.grid{
+  display:grid;
+  grid-template-columns:1.45fr .85fr;
+  gap:15px;
+}
+
+.card{
+  background:linear-gradient(145deg,#111620,#0d1118);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:15px;
+  box-shadow:0 14px 45px #0005;
+}
+
+.eyebrow{
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+}
+
+h1{
+  margin:7px 0 15px;
+  font-size:32px;
+}
+
+h2{
+  font-size:18px;
+  margin:0 0 14px;
+}
+
+h3{
+  font-size:15px;
+  margin:7px 0 4px;
+}
+
+.muted{
+  color:var(--muted);
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+/* HERO */
+
+.hero{
+  padding:22px;
+}
+
+.hero h1{
+  font-size:30px;
+  letter-spacing:-.02em;
+}
+
+.progress{
+  height:9px;
+  background:#252c37;
+  border-radius:100px;
+  overflow:hidden;
+  margin-top:9px;
+}
+
+.progress i{
+  display:block;
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#86b9ed,#e0f0ff);
+  border-radius:100px;
+  transition:.3s;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+  margin-top:17px;
+}
+
+.stat{
+  background:#0a0e14;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:11px;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.stat-value{
+  font-size:20px;
+  font-weight:800;
+  margin-top:4px;
+}
+
+/* HABITS */
+
+.habits{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+
+.habit{
+  background:#0b0f15;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:12px;
+  transition:.15s;
+}
+
+.habit:hover{
+  transform:translateY(-1px);
+  border-color:#3a4556;
+}
+
+.habit.done{
+  background:#102016;
+  border-color:#4e8060;
+}
+
+.habit-name{
+  font-size:13px;
+}
+
+.habit-xp{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:5px;
+}
+
+.check{
+  font-size:19px;
+}
+
+/* QUESTS */
+
+.quest{
+  background:#0b0f15;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:13px;
+  margin-bottom:9px;
+}
+
+.quest-description{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.pill{
+  display:inline-block;
+  color:var(--muted);
+  border:1px solid #303846;
+  border-radius:100px;
+  padding:3px 7px;
+  font-size:10px;
+}
+
+.primary{
+  background:var(--ice);
+  color:#080b10;
+  border:0;
+  border-radius:9px;
+  padding:9px 12px;
+  font-weight:700;
+}
+
+.primary:disabled{
+  opacity:.35;
+  cursor:not-allowed;
+}
+
+/* ACHIEVEMENTS */
+
+.achievement-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.achievement{
+  background:#0b0f15;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+}
+
+.achievement.locked{
+  opacity:.4;
+}
+
+.achievement-icon{
+  font-size:27px;
+}
+
+/* TABLE */
+
+.table-wrap{
+  overflow:auto;
+}
+
+table{
+  border-collapse:collapse;
+  min-width:900px;
+  width:100%;
+}
+
+th,td{
+  border:1px solid var(--line);
+  padding:7px;
+  text-align:center;
+  font-size:11px;
+}
+
+th:first-child,
+td:first-child{
+  text-align:left;
+  position:sticky;
+  left:0;
+  background:#10141c;
+  z-index:1;
+}
+
+.cell-done{
+  background:#183722;
+}
+
+.cell-empty{
+  color:#394150;
+}
+
+/* STATS */
+
+.stat-row{
+  margin:14px 0;
+}
+
+.stat-row-top{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  margin-bottom:5px;
+}
+
+/* NOVA */
+
+.chat{
+  height:320px;
+  overflow:auto;
+  background:#090d13;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:11px;
+}
+
+.message{
+  max-width:85%;
+  padding:10px 12px;
+  border-radius:12px;
+  margin:7px 0;
+  font-size:13px;
+  line-height:1.4;
+}
+
+.message.bot{
+  background:#151b25;
+}
+
+.message.user{
+  background:var(--ice);
+  color:#080b10;
+  margin-left:auto;
+}
+
+.chat-input{
+  display:flex;
+  gap:8px;
+  margin-top:8px;
+}
+
+.chat-input input{
+  flex:1;
+  min-width:0;
+  background:#0a0e14;
+  color:white;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:11px;
+  outline:none;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  right:17px;
+  bottom:17px;
+  background:var(--ice);
+  color:#080b10;
+  padding:12px 15px;
+  border-radius:12px;
+  font-weight:800;
+  transform:translateY(100px);
+  transition:.25s;
+  z-index:100;
+}
+
+.toast.show{
+  transform:translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .achievement-grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:560px){
+  .app{
+    padding:12px;
+  }
+
+  .header{
+    align-items:flex-start;
+  }
+
+  .date{
+    text-align:right;
+  }
+
+  h1{
+    font-size:27px;
+  }
+
+  .habits{
+    grid-template-columns:1fr;
+  }
+
+  .achievement-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+  <div class="logo">❄ WINTER <span>ARC</span> OS</div>
+  <div class="date">OCT 1 → DEC 31 · 92 DAYS</div>
+</header>
+
+<nav class="nav" id="nav"></nav>
+
+<!-- ================= DASHBOARD ================= -->
+
+<section class="page active" id="dashboard">
+
+<div class="grid">
+
+<main>
+
+<div class="card hero">
+
+<div class="eyebrow">
+WINTER ARC 2026 · DAY <span id="dayNumber">1</span> / 92
+</div>
+
+<h1>
+LEVEL <span id="level">1</span>
+—
+<span id="levelTitle">THE INITIATE</span>
+</h1>
+
+<div class="row">
+<strong>
+<span id="totalXP">0</span> XP
+</strong>
+
+<span class="muted">
+Next level: 1000 XP
+</span>
+</div>
+
+<div class="progress">
+<i id="levelProgress"></i>
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<div class="stat-label">TODAY</div>
+<div class="stat-value">
+<span id="todayXP">0</span>/100
+</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">STREAK</div>
+<div class="stat-value">
+🔥 <span id="streak">0</span>
+</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">ARC</div>
+<div class="stat-value">
+<span id="arcProgress">0</span>%
+</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">RANK</div>
+<div class="stat-value" id="rank">—</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="row">
+<h2>Today's Objectives</h2>
+<span class="pill">90+ = DAY SECURED</span>
+</div>
+
+<div class="habits" id="habitList"></div>
+
+</div>
+
+</main>
+
+<aside>
+
+<div class="card">
+
+<h2>⚔ ACTIVE QUESTS</h2>
+
+<div id="dashboardQuests"></div>
+
+</div>
+
+<div class="card">
+
+<div class="eyebrow">NOVA DAILY READ</div>
+
+<h2 id="novaHeadline">
+Log today's habits.
+</h2>
+
+<p class="muted" id="novaSub">
+NOVA will analyse your Winter Arc data.
+</p>
+
+<button class="primary" onclick="openPage('nova')">
+ASK NOVA →
+</button>
+
+</div>
+
+</aside>
+
+</div>
+
+</section>
+
+
+<!-- ================= CALENDAR ================= -->
+
+<section class="page" id="calendar">
+
+<div class="card">
+
+<div class="eyebrow">ARC MATRIX</div>
+
+<h1>October 2026</h1>
+
+<div class="table-wrap">
+<table id="calendarTable"></table>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= QUESTS ================= -->
+
+<section class="page" id="quests">
+
+<div class="card">
+
+<div class="eyebrow">QUEST BOARD</div>
+
+<h1>⚔ QUESTS</h1>
+
+<p class="muted">
+Core habits build the foundation. Quests push the grind.
+</p>
+
+<div id="fullQuestList"></div>
+
+</div>
+
+</section>
+
+
+<!-- ================= STATS ================= -->
+
+<section class="page" id="stats">
+
+<div class="grid">
+
+<div class="card">
+
+<div class="eyebrow">PERFORMANCE</div>
+
+<h1 id="overallScore">0%</h1>
+
+<p class="muted">
+Overall logged completion
+</p>
+
+<div id="habitStats"></div>
+
+</div>
+
+<div class="card">
+
+<h2>🏆 PERSONAL RECORDS</h2>
+
+<div id="records"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= ACHIEVEMENTS ================= -->
+
+<section class="page" id="achievements">
+
+<div class="card">
+
+<div class="eyebrow">LONG-TERM GRIND</div>
+
+<h1>🏆 ACHIEVEMENTS</h1>
+
+<div class="achievement-grid" id="achievementList"></div>
+
+</div>
+
+</section>
+
+
+<!-- ================= NOVA ================= -->
+
+<section class="page" id="nova">
+
+<div class="grid">
+
+<div class="card">
+
+<div class="eyebrow">
+WINTER ARC INTELLIGENCE
+</div>
+
+<h1>🤖 NOVA</h1>
+
+<div class="chat" id="chat">
+
+<div class="message bot">
+NOVA online. Ask me about your current Winter Arc performance.
+</div>
+
+</div>
+
+<div class="chat-input">
+
+<input
+id="novaInput"
+placeholder="How am I doing?"
+onkeydown="if(event.key==='Enter')askNova()"
+/>
+
+<button class="primary" onclick="askNova()">
+SEND
+</button>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>QUICK COMMANDS</h2>
+
+<button class="primary" onclick="quickNova('review')">
+📊 Review my progress
+</button>
+
+<br><br>
+
+<button class="primary" onclick="quickNova('weak')">
+🎯 Find my weakest habit
+</button>
+
+<br><br>
+
+<button class="primary" onclick="quickNova('quest')">
+⚔ Give me a quest
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   WINTER ARC OS
+   Local-first single-file version
+========================================================= */
+
+
+/* ---------- HABITS ---------- */
+
+const HABITS = [
+
+{
+ id:"training",
+ name:"Training / Movement",
+ icon:"🏋️",
+ xp:20
+},
+
+{
+ id:"study",
+ name:"Study",
+ icon:"📚",
+ xp:20
+},
+
+{
+ id:"sleep",
+ name:"Sleep / Recovery",
+ icon:"😴",
+ xp:15
+},
+
+{
+ id:"skill",
+ name:"Skill Development",
+ icon:"🧠",
+ xp:10
+},
+
+{
+ id:"reading",
+ name:"Reading / Learning",
+ icon:"📖",
+ xp:10
+},
+
+{
+ id:"skincare",
+ name:"Skincare",
+ icon:"🧴",
+ xp:10
+},
+
+{
+ id:"screen",
+ name:"Screen Discipline",
+ icon:"📵",
+ xp:10
+},
+
+{
+ id:"planning",
+ name:"Planning / Review",
+ icon:"📝",
+ xp:5
+}
+
+];
+
+
+/* ---------- QUESTS ---------- */
+
+const QUESTS = [
+
+{
+ id:"foundation",
+ name:"THE FOUNDATION",
+ description:"Complete 5 successful 90+ days.",
+ target:5,
+ reward:100
+},
+
+{
+ id:"triple",
+ name:"TRIPLE THREAT",
+ description:"Complete Training + Study + Skill on the same day.",
+ target:1,
+ reward:50
+},
+
+{
+ id:"bookworm",
+ name:"BOOKWORM",
+ description:"Complete 7 Reading days.",
+ target:7,
+ reward:75
+},
+
+{
+ id:"routine",
+ name:"ROUTINE LOCKED",
+ description:"Complete 14 Skincare days.",
+ target:14,
+ reward:100
+}
+
+];
+
+
+/* ---------- ACHIEVEMENTS ---------- */
+
+const ACHIEVEMENTS = [
+
+{
+ icon:"🏁",
+ name:"THE FIRST FROST",
+ description:"Complete your first logged day.",
+ check:()=>STATE.days.length>=1
+},
+
+{
+ icon:"🔥",
+ name:"COLD-BLOODED",
+ description:"Reach a 14-day 90+ streak.",
+ check:()=>getStreak()>=14
+},
+
+{
+ icon:"🗿",
+ name:"BUILT DIFFERENT",
+ description:"Reach a 30-day 90+ streak.",
+ check:()=>getStreak()>=30
+},
+
+{
+ icon:"💯",
+ name:"PERFECT EXECUTION",
+ description:"Score exactly 100 XP in one day.",
+ check:()=>STATE.days.some(d=>d.xp===100)
+},
+
+{
+ icon:"⚡",
+ name:"THE GRIND",
+ description:"Earn 1,000 total XP.",
+ check:()=>STATE.totalXP>=1000
+},
+
+{
+ icon:"📚",
+ name:"ACADEMIC WEAPON",
+ description:"Complete 30 Study days.",
+ check:()=>countHabit("study")>=30
+},
+
+{
+ icon:"🧴",
+ name:"ROUTINE LOCKED",
+ description:"Complete 30 Skincare days.",
+ check:()=>countHabit("skincare")>=30
+},
+
+{
+ icon:"📖",
+ name:"BOOKWORM",
+ description:"Complete 30 Reading days.",
+ check:()=>countHabit("reading")>=30
+},
+
+{
+ icon:"❄️",
+ name:"WINTER FORGED",
+ description:"Complete the full 92-day Arc.",
+ check:()=>STATE.days.length>=92
+}
+
+];
+
+
+/* ---------- STORAGE ---------- */
+
+let STATE =
+JSON.parse(localStorage.getItem("WINTER_ARC_OS"))
+||
+{
+ days:[],
+ totalXP:0,
+ quests:{}
+};
+
+
+/* ---------- DATE ---------- */
+
+function todayKey(){
+
+return new Date().toISOString().slice(0,10);
+
+}
+
+
+function getToday(){
+
+const key=todayKey();
+
+let day=STATE.days.find(
+d=>d.date===key
+);
+
+if(!day){
+
+day={
+date:key,
+xp:0,
+habits:{}
+};
+
+STATE.days.push(day);
+
+}
+
+return day;
+
+}
+
+
+/* ---------- SAVE ---------- */
+
+function save(){
+
+STATE.totalXP=
+STATE.days.reduce(
+(total,day)=>total+day.xp,
+0
+);
+
+localStorage.setItem(
+"WINTER_ARC_OS",
+JSON.stringify(STATE)
+);
+
+render();
+
+}
+
+
+/* ---------- HABITS ---------- */
+
+function toggleHabit(id){
+
+const day=getToday();
+
+const habit=
+HABITS.find(h=>h.id===id);
+
+if(day.habits[id]){
+
+delete day.habits[id];
+
+}else{
+
+day.habits[id]=habit.xp;
+
+}
+
+day.xp=
+Object.values(day.habits)
+.reduce((a,b)=>a+b,0);
+
+save();
+
+showToast(
+day.habits[id]
+? `+${habit.xp} XP`
+: "Habit unchecked"
+);
+
+}
+
+
+/* ---------- STATS ---------- */
+
+function countHabit(id){
+
+return STATE.days.filter(
+day=>day.habits[id]
+).length;
+
+}
+
+
+function getStreak(){
+
+let streak=0;
+
+for(
+let i=STATE.days.length-1;
+i>=0;
+i--
+){
+
+if(
+STATE.days[i].xp>=90
+){
+
+streak++;
+
+}else{
+
+break;
+
+}
+
+}
+
+return streak;
+
+}
+
+
+function getRank(xp){
+
+if(xp>=90)return"S";
+
+if(xp>=80)return"A";
+
+if(xp>=70)return"B";
+
+if(xp>=60)return"C";
+
+if(xp>=40)return"D";
+
+return"F";
+
+}
+
+
+function getLevel(){
+
+return Math.floor(
+STATE.totalXP/1000
+)+1;
+
+}
+
+
+function getLevelTitle(level){
+
+if(level>=10)return"WINTER FORGED";
+
+if(level>=7)return"UNSTOPPABLE";
+
+if(level>=5)return"LOCKED IN";
+
+if(level>=3)return"GETTING SERIOUS";
+
+return"THE INITIATE";
+
+}
+
+
+function getArcProgress(){
+
+const successful=
+STATE.days.filter(
+d=>d.xp>=90
+).length;
+
+return Math.round(
+successful/92*100
+);
+
+}
+
+
+/* ---------- QUESTS ---------- */
+
+function getQuestProgress(id){
+
+return STATE.quests[id] || 0;
+
+}
+
+
+function progressQuest(id){
+
+const quest=
+QUESTS.find(q=>q.id===id);
+
+let progress=
+getQuestProgress(id);
+
+if(progress>=quest.target)return;
+
+progress++;
+
+STATE.quests[id]=progress;
+
+if(progress===quest.target){
+
+STATE.totalXP+=quest.reward;
+
+showToast(
+`QUEST COMPLETE · +${quest.reward} XP`
+);
+
+}
+
+save();
+
+}
+
+
+/* ---------- NAVIGATION ---------- */
+
+const PAGES=[
+"dashboard",
+"calendar",
+"quests",
+"stats",
+"achievements",
+"nova"
+];
+
+
+function buildNavigation(){
+
+const nav=
+document.getElementById("nav");
+
+nav.innerHTML=
+PAGES.map(
+(page,index)=>`
+
+<button
+class="${index===0?"active":""}"
+onclick="openPage('${page}')"
+id="nav-${page}"
+>
+${page==="nova"?"🤖 NOVA":
+page.charAt(0).toUpperCase()+page.slice(1)}
+</button>
+
+`
+).join("");
+
+}
+
+
+function openPage(page){
+
+document
+.querySelectorAll(".page")
+.forEach(p=>p.classList.remove("active"));
+
+document
+.getElementById(page)
+.classList.add("active");
+
+document
+.querySelectorAll(".nav button")
+.forEach(button=>{
+button.classList.remove("active");
+});
+
+document
+.getElementById("nav-"+page)
+.classList.add("active");
+
+}
+
+
+/* ---------- DASHBOARD ---------- */
+
+function renderDashboard(){
+
+const day=getToday();
+
+const level=getLevel();
+
+const currentLevelXP=
+STATE.totalXP%1000;
+
+document.getElementById("dayNumber")
+.textContent=
+Math.min(92,STATE.days.length);
+
+document.getElementById("level")
+.textContent=level;
+
+document.getElementById("levelTitle")
+.textContent=
+getLevelTitle(level);
+
+document.getElementById("totalXP")
+.textContent=
+STATE.totalXP;
+
+document.getElementById("todayXP")
+.textContent=
+day.xp;
+
+document.getElementById("streak")
+.textContent=
+getStreak();
+
+document.getElementById("arcProgress")
+.textContent=
+getArcProgress();
+
+document.getElementById("rank")
+.textContent=
+getRank(day.xp);
+
+document.getElementById("levelProgress")
+.style.width=
+(currentLevelXP/10)+"%";
+
+
+document.getElementById("habitList")
+.innerHTML=
+HABITS.map(
+habit=>`
+
+<div
+class="habit ${day.habits[habit.id]?"done":""}"
+onclick="toggleHabit('${habit.id}')"
+>
+
+<div class="row">
+
+<span class="habit-name">
+${habit.icon} ${habit.name}
+</span>
+
+<span class="check">
+${day.habits[habit.id]?"✓":"○"}
+</span>
+
+</div>
+
+<div class="habit-xp">
+${habit.xp} XP
+</div>
+
+</div>
+
+`
+).join("");
+
+
+renderQuests();
+
+
+if(day.xp>=90){
+
+document.getElementById("novaHeadline")
+.textContent=
+"DAY SECURED. 90+ ACHIEVED.";
+
+document.getElementById("novaSub")
+.textContent=
+"Optional quests are now the grind.";
+
+}else{
+
+const needed=
+90-day.xp;
+
+document.getElementById("novaHeadline")
+.textContent=
+`${needed} XP needed to secure today.`;
+
+const remaining=
+HABITS
+.filter(h=>!day.habits[h.id])
+.slice(0,3)
+.map(h=>h.name)
+.join(", ");
+
+document.getElementById("novaSub")
+.textContent=
+remaining
+?`Remaining: ${remaining}`
+:"Keep going.";
+
+}
+
+}
+
+
+/* ---------- QUEST RENDER ---------- */
+
+function questHTML(quest){
+
+const progress=
+getQuestProgress(quest.id);
+
+const percentage=
+Math.min(
+100,
+progress/quest.target*100
+);
+
+const complete=
+progress>=quest.target;
+
+return`
+
+<div class="quest">
+
+<div class="row">
+
+<div>
+
+<span class="pill">
+${complete?"COMPLETE":"ACTIVE"}
+</span>
+
+<h3>
+${quest.name}
+</h3>
+
+<div class="quest-description">
+${quest.description}
+</div>
+
+</div>
+
+<strong>
++${quest.reward} XP
+</strong>
+
+</div>
+
+<div class="progress">
+<i style="width:${percentage}%"></i>
+</div>
+
+<div class="row" style="margin-top:9px">
+
+<span class="muted">
+${progress}/${quest.target}
+</span>
+
+<button
+class="primary"
+${complete?"disabled":""}
+onclick="progressQuest('${quest.id}')"
+>
+${complete?"DONE":"PROGRESS"}
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+function renderQuests(){
+
+const html=
+QUESTS.map(questHTML)
+.join("");
+
+document.getElementById("dashboardQuests")
+.innerHTML=
+html;
+
+document.getElementById("fullQuestList")
+.innerHTML=
+html;
+
+}
+
+
+/* ---------- CALENDAR ---------- */
+
+function renderCalendar(){
+
+let html=
+"<tr><th>HABIT</th>";
+
+for(let day=1;day<=31;day++){
+
+html+=
+`<th>${day}</th>`;
+
+}
+
+html+="</tr>";
+
+HABITS.forEach(habit=>{
+
+html+=
+`<tr><td>${habit.icon} ${habit.name}</td>`;
+
+for(let day=1;day<=31;day++){
+
+const date=
+`2026-10-${String(day).padStart(2,"0")}`;
+
+const record=
+STATE.days.find(
+d=>d.date===date
+);
+
+const done=
+record &&
+record.habits[habit.id];
+
+html+=
+`<td class="${done?"cell-done":"cell-empty"}">
+${done?"✓":"·"}
+</td>`;
+
+}
+
+html+="</tr>";
+
+});
+
+document.getElementById("calendarTable")
+.innerHTML=
+html;
+
+}
+
+
+/* ---------- STATS ---------- */
+
+function renderStats(){
+
+const totalPossible=
+STATE.days.length*100;
+
+const score=
+totalPossible
+?Math.round(
+STATE.totalXP/totalPossible*100
+)
+:0;
+
+document.getElementById("overallScore")
+.textContent=
+score+"%";
+
+
+document.getElementById("habitStats")
+.innerHTML=
+HABITS.map(habit=>{
+
+const completed=
+countHabit(habit.id);
+
+const percentage=
+STATE.days.length
+?Math.round(
+completed/STATE.days.length*100
+)
+:0;
+
+return`
+
+<div class="stat-row">
+
+<div class="stat-row-top">
+
+<span>
+${habit.icon} ${habit.name}
+</span>
+
+<strong>
+${percentage}%
+</strong>
+
+</div>
+
+<div class="progress">
+
+<i style="width:${percentage}%"></i>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+
+const highest=
+Math.max(
+0,
+...STATE.days.map(d=>d.xp)
+);
+
+const successful=
+STATE.days.filter(
+d=>d.xp>=90
+).length;
+
+
+document.getElementById("records")
+.innerHTML=`
+
+<div class="stat">
+<div class="stat-label">
+HIGHEST DAILY XP
+</div>
+<div class="stat-value">
+${highest}
+</div>
+</div>
+
+<br>
+
+<div class="stat">
+<div class="stat-label">
+TOTAL XP
+</div>
+<div class="stat-value">
+${STATE.totalXP}
+</div>
+</div>
+
+<br>
+
+<div class="stat">
+<div class="stat-label">
+BEST STREAK
+</div>
+<div class="stat-value">
+🔥 ${getStreak()}
+</div>
+</div>
+
+<br>
+
+<div class="stat">
+<div class="stat-label">
+SUCCESSFUL DAYS
+</div>
+<div class="stat-value">
+${successful}
+</div>
+</div>
+
+`;
+
+}
+
+
+/* ---------- ACHIEVEMENTS ---------- */
+
+function renderAchievements(){
+
+document.getElementById("achievementList")
+.innerHTML=
+ACHIEVEMENTS.map(
+achievement=>{
+
+const unlocked=
+achievement.check();
+
+return`
+
+<div
+class="achievement
+${unlocked?"":"locked"}"
+>
+
+<div class="achievement-icon">
+${unlocked?achievement.icon:"🔒"}
+</div>
+
+<h3>
+${unlocked
+?achievement.name
+:"HIDDEN ACHIEVEMENT"}
+</h3>
+
+<div class="muted">
+${unlocked
+?achievement.description
+:"Keep grinding to reveal this achievement."}
+</div>
+
+</div>
+
+`;
+
+}
+).join("");
+
+}
+
+
+/* ---------- NOVA ---------- */
+
+function addNovaMessage(text,type){
+
+const box=
+document.getElementById("chat");
+
+const message=
+document.createElement("div");
+
+message.className=
+"message "+type;
+
+message.textContent=
+text;
+
+box.appendChild(message);
+
+box.scrollTop=
+box.scrollHeight;
+
+}
+
+
+function askNova(){
+
+const input=
+document.getElementById("novaInput");
+
+const question=
+input.value.trim();
+
+if(!question)return;
+
+addNovaMessage(
+question,
+"user"
+);
+
+input.value="";
+
+const lower=
+question.toLowerCase();
+
+const today=
+getToday();
+
+let response="";
+
+
+if(
+lower.includes("weak") ||
+lower.includes("weakest")
+){
+
+let weakest=
+HABITS
+.map(h=>[
+h,
+countHabit(h.id)
+])
+.sort(
+(a,b)=>a[1]-b[1]
+)[0];
+
+const percentage=
+STATE.days.length
+?Math.round(
+weakest[1]/STATE.days.length*100
+)
+:0;
+
+response=
+`Your weakest logged habit is ${weakest[0].name} at ${percentage}% completion. That's the first area I'd target.`;
+
+}
+
+else if(
+lower.includes("quest")
+){
+
+const weakest=
+HABITS
+.map(h=>[
+h,
+countHabit(h.id)
+])
+.sort(
+(a,b)=>a[1]-b[1]
+)[0];
+
+response=
+`Quest suggestion: "${weakest[0].name} Lock-In" — complete ${weakest[0].name} for 7 consecutive logged days.`;
+
+}
+
+else{
+
+response=
+`Current snapshot: ${STATE.totalXP} total XP, ${getStreak()} successful-day streak, ${today.xp}/100 XP today, and ${getArcProgress()}% Arc progress.`;
+
+}
+
+setTimeout(
+()=>{
+addNovaMessage(
+response,
+"bot"
+);
+},
+250
+);
+
+}
+
+
+function quickNova(type){
+
+if(type==="review"){
+
+document.getElementById("novaInput")
+.value=
+"How am I doing?";
+
+}
+
+if(type==="weak"){
+
+document.getElementById("novaInput")
+.value=
+"What is my weakest habit?";
+
+}
+
+if(type==="quest"){
+
+document.getElementById("novaInput")
+.value=
+"Give me a quest.";
+
+}
+
+askNova();
+
+}
+
+
+/* ---------- TOAST ---------- */
+
+function showToast(text){
+
+const toast=
+document.getElementById("toast");
+
+toast.textContent=
+text;
+
+toast.classList.add("show");
+
+setTimeout(
+()=>{
+toast.classList.remove("show");
+},
+1600
+);
+
+}
+
+
+/* ---------- START ---------- */
+
+buildNavigation();
+
+renderDashboard();
+
+renderCalendar();
+
+renderStats();
+
+renderAchievements();
+
+</script>
+
+</body>
+</html>
