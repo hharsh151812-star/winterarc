@@ -2,34 +2,42 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Winter Arc OS</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#07090d">
+<title>Winter Arc OS — V2</title>
 
 <style>
 :root{
-  --bg:#07090d;
-  --panel:#10141c;
-  --panel2:#151b25;
-  --line:#252d3a;
-  --text:#f4f7fb;
-  --muted:#8d98a9;
-  --ice:#c9e3ff;
-  --green:#9ee6b8;
-  --yellow:#ffd98a;
-  --red:#ff9f9f;
+  --bg:#06080c;
+  --panel:#0d1118;
+  --panel2:#111722;
+  --panel3:#151c28;
+  --line:#222b39;
+  --line2:#303b4c;
+  --text:#f5f8fc;
+  --muted:#8793a5;
+  --ice:#cce7ff;
+  --ice2:#83bfff;
+  --green:#8ff0b2;
+  --gold:#ffd36e;
+  --red:#ff8585;
+  --purple:#bda7ff;
+  --cyan:#73e5ff;
 }
 
 *{box-sizing:border-box}
 
+html{scroll-behavior:smooth}
+
 body{
   margin:0;
-  background:
-    radial-gradient(circle at 75% -10%,#1b3049 0,transparent 35%),
-    radial-gradient(circle at -10% 40%,#111d2b 0,transparent 30%),
-    var(--bg);
-  color:var(--text);
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   min-height:100vh;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 80% -10%,rgba(74,137,201,.20),transparent 32%),
+    radial-gradient(circle at -10% 35%,rgba(55,92,135,.13),transparent 30%),
+    linear-gradient(180deg,#080b11,#05070b 70%);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
 button,input{
@@ -40,8 +48,12 @@ button{
   cursor:pointer;
 }
 
+button:active{
+  transform:scale(.98);
+}
+
 .app{
-  width:min(1180px,100%);
+  width:min(1220px,100%);
   margin:auto;
   padding:18px;
 }
@@ -52,23 +64,24 @@ button{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:15px;
-  margin-bottom:18px;
+  gap:16px;
+  margin-bottom:16px;
 }
 
 .logo{
-  font-weight:900;
-  letter-spacing:.12em;
+  font-weight:950;
+  letter-spacing:.13em;
   font-size:15px;
 }
 
 .logo span{
-  color:var(--ice);
+  color:var(--ice2);
 }
 
-.date{
+.arc-date{
   color:var(--muted);
-  font-size:12px;
+  font-size:11px;
+  letter-spacing:.08em;
 }
 
 /* NAV */
@@ -77,22 +90,33 @@ button{
   display:flex;
   gap:7px;
   overflow-x:auto;
-  padding-bottom:3px;
+  padding-bottom:5px;
   margin-bottom:18px;
+  scrollbar-width:none;
+}
+
+.nav::-webkit-scrollbar{
+  display:none;
 }
 
 .nav button{
   white-space:nowrap;
-  background:#0d1118;
+  background:rgba(13,17,24,.82);
   color:var(--muted);
   border:1px solid var(--line);
   border-radius:11px;
-  padding:10px 14px;
+  padding:9px 13px;
+  transition:.18s;
+}
+
+.nav button:hover{
+  border-color:var(--line2);
+  color:white;
 }
 
 .nav button.active{
   background:var(--ice);
-  color:#080b10;
+  color:#070a0f;
   border-color:var(--ice);
 }
 
@@ -100,49 +124,57 @@ button{
 
 .page{
   display:none;
+  animation:pageIn .25s ease;
 }
 
 .page.active{
   display:block;
 }
 
-/* CARDS */
+@keyframes pageIn{
+  from{opacity:0;transform:translateY(5px)}
+  to{opacity:1;transform:none}
+}
+
+/* GENERAL */
 
 .grid{
   display:grid;
-  grid-template-columns:1.45fr .85fr;
+  grid-template-columns:1.45fr .82fr;
   gap:15px;
 }
 
 .card{
-  background:linear-gradient(145deg,#111620,#0d1118);
+  background:
+    linear-gradient(145deg,rgba(19,25,35,.96),rgba(10,14,20,.98));
   border:1px solid var(--line);
-  border-radius:18px;
+  border-radius:19px;
   padding:18px;
   margin-bottom:15px;
-  box-shadow:0 14px 45px #0005;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
 }
 
 .eyebrow{
   color:var(--muted);
-  font-size:11px;
+  font-size:10px;
   text-transform:uppercase;
-  letter-spacing:.14em;
+  letter-spacing:.16em;
 }
 
 h1{
   margin:7px 0 15px;
   font-size:32px;
+  letter-spacing:-.035em;
 }
 
 h2{
-  font-size:18px;
-  margin:0 0 14px;
+  margin:0 0 13px;
+  font-size:17px;
 }
 
 h3{
-  font-size:15px;
-  margin:7px 0 4px;
+  margin:6px 0 4px;
+  font-size:14px;
 }
 
 .muted{
@@ -159,40 +191,82 @@ h3{
 /* HERO */
 
 .hero{
+  position:relative;
+  overflow:hidden;
   padding:22px;
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  width:220px;
+  height:220px;
+  right:-80px;
+  top:-100px;
+  border-radius:50%;
+  background:rgba(108,176,235,.10);
+  filter:blur(35px);
+  pointer-events:none;
+}
+
+.hero-top{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:flex-start;
 }
 
 .hero h1{
   font-size:30px;
-  letter-spacing:-.02em;
+}
+
+.hero-sub{
+  color:var(--muted);
+  font-size:12px;
+  max-width:520px;
+  line-height:1.5;
+}
+
+/* XP */
+
+.xp-wrap{
+  margin-top:18px;
+}
+
+.xp-line{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
 }
 
 .progress{
   height:9px;
-  background:#252c37;
+  background:#202734;
   border-radius:100px;
   overflow:hidden;
-  margin-top:9px;
+  margin-top:8px;
 }
 
 .progress i{
   display:block;
   height:100%;
   width:0;
-  background:linear-gradient(90deg,#86b9ed,#e0f0ff);
+  background:linear-gradient(90deg,var(--ice2),#e8f5ff);
   border-radius:100px;
-  transition:.3s;
+  transition:width .45s cubic-bezier(.2,.8,.2,1);
 }
+
+/* STAT GRID */
 
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:9px;
+  gap:8px;
   margin-top:17px;
 }
 
 .stat{
-  background:#0a0e14;
+  background:rgba(5,8,12,.68);
   border:1px solid var(--line);
   border-radius:13px;
   padding:11px;
@@ -200,13 +274,44 @@ h3{
 
 .stat-label{
   color:var(--muted);
-  font-size:11px;
+  font-size:9px;
+  letter-spacing:.08em;
 }
 
 .stat-value{
   font-size:20px;
-  font-weight:800;
+  font-weight:850;
   margin-top:4px;
+}
+
+/* SCORE */
+
+.score-orb{
+  width:86px;
+  height:86px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:
+    radial-gradient(circle,#111824 57%,transparent 58%),
+    conic-gradient(var(--ice2) var(--score,0%),#26303e 0);
+  flex-shrink:0;
+  box-shadow:0 0 35px rgba(131,191,255,.10);
+}
+
+.score-orb-inner{
+  text-align:center;
+}
+
+.score-number{
+  font-size:21px;
+  font-weight:900;
+}
+
+.score-label{
+  font-size:8px;
+  color:var(--muted);
+  letter-spacing:.08em;
 }
 
 /* HABITS */
@@ -218,73 +323,234 @@ h3{
 }
 
 .habit{
-  background:#0b0f15;
+  position:relative;
+  background:#090d13;
   border:1px solid var(--line);
-  border-radius:13px;
-  padding:12px;
-  transition:.15s;
+  border-radius:14px;
+  padding:13px;
+  transition:.18s;
+  user-select:none;
+  overflow:hidden;
 }
 
 .habit:hover{
+  border-color:#3a4658;
   transform:translateY(-1px);
-  border-color:#3a4556;
 }
 
 .habit.done{
-  background:#102016;
-  border-color:#4e8060;
+  background:
+    linear-gradient(145deg,rgba(25,63,39,.65),rgba(9,17,13,.95));
+  border-color:#3f7351;
+}
+
+.habit.done:after{
+  content:"";
+  position:absolute;
+  width:100px;
+  height:100px;
+  right:-40px;
+  top:-50px;
+  background:rgba(115,238,163,.12);
+  border-radius:50%;
+  filter:blur(20px);
+}
+
+.habit-icon{
+  font-size:21px;
 }
 
 .habit-name{
-  font-size:13px;
+  font-size:12px;
+  font-weight:650;
 }
 
 .habit-xp{
   color:var(--muted);
-  font-size:11px;
-  margin-top:5px;
+  font-size:10px;
+  margin-top:6px;
 }
 
 .check{
-  font-size:19px;
+  width:27px;
+  height:27px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid var(--line2);
+  color:var(--muted);
+  transition:.2s;
+}
+
+.habit.done .check{
+  background:var(--green);
+  color:#06100a;
+  border-color:var(--green);
+  animation:pop .25s ease;
+}
+
+@keyframes pop{
+  50%{transform:scale(1.25)}
 }
 
 /* QUESTS */
 
 .quest{
-  background:#0b0f15;
+  background:#090d13;
   border:1px solid var(--line);
-  border-radius:13px;
+  border-radius:14px;
   padding:13px;
   margin-bottom:9px;
 }
 
+.quest.complete{
+  border-color:#466f55;
+  background:linear-gradient(145deg,#102016,#090d13);
+}
+
 .quest-description{
   color:var(--muted);
-  font-size:12px;
+  font-size:11px;
+  line-height:1.45;
 }
 
 .pill{
   display:inline-block;
   color:var(--muted);
-  border:1px solid #303846;
+  border:1px solid #303a49;
   border-radius:100px;
   padding:3px 7px;
-  font-size:10px;
+  font-size:9px;
+  letter-spacing:.05em;
+}
+
+.pill.active{
+  color:var(--ice);
+  border-color:#3d5d78;
+}
+
+.pill.complete{
+  color:var(--green);
+  border-color:#3e6d50;
 }
 
 .primary{
   background:var(--ice);
-  color:#080b10;
+  color:#070a0f;
   border:0;
   border-radius:9px;
   padding:9px 12px;
-  font-weight:700;
+  font-weight:750;
+}
+
+.secondary{
+  background:#151b25;
+  color:var(--text);
+  border:1px solid var(--line2);
+  border-radius:9px;
+  padding:9px 12px;
+  font-weight:650;
 }
 
 .primary:disabled{
   opacity:.35;
   cursor:not-allowed;
+}
+
+/* NOVA */
+
+.nova-card{
+  background:
+    radial-gradient(circle at 90% 0%,rgba(122,170,255,.15),transparent 35%),
+    linear-gradient(145deg,#111a27,#090d13);
+}
+
+.nova-status{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  color:var(--green);
+  font-size:10px;
+  letter-spacing:.08em;
+}
+
+.status-dot{
+  width:7px;
+  height:7px;
+  background:var(--green);
+  border-radius:50%;
+  box-shadow:0 0 12px var(--green);
+}
+
+.insight{
+  background:#090e15;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:13px;
+  margin-top:10px;
+}
+
+.insight-title{
+  font-size:10px;
+  color:var(--muted);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+
+.insight-text{
+  margin-top:7px;
+  line-height:1.45;
+  font-size:13px;
+}
+
+.chat{
+  height:350px;
+  overflow:auto;
+  background:#070a0f;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:11px;
+}
+
+.message{
+  max-width:86%;
+  padding:10px 12px;
+  border-radius:12px;
+  margin:7px 0;
+  font-size:13px;
+  line-height:1.45;
+  white-space:pre-line;
+}
+
+.message.bot{
+  background:#141b27;
+}
+
+.message.user{
+  background:var(--ice);
+  color:#080b10;
+  margin-left:auto;
+}
+
+.chat-input{
+  display:flex;
+  gap:8px;
+  margin-top:8px;
+}
+
+.chat-input input{
+  flex:1;
+  min-width:0;
+  background:#090d13;
+  color:white;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:11px;
+  outline:none;
+}
+
+.chat-input input:focus{
+  border-color:#55728f;
 }
 
 /* ACHIEVEMENTS */
@@ -296,18 +562,30 @@ h3{
 }
 
 .achievement{
-  background:#0b0f15;
+  position:relative;
+  background:#090d13;
   border:1px solid var(--line);
-  border-radius:14px;
-  padding:14px;
+  border-radius:15px;
+  padding:15px;
+  overflow:hidden;
+}
+
+.achievement.unlocked{
+  border-color:#405d77;
 }
 
 .achievement.locked{
-  opacity:.4;
+  opacity:.42;
 }
 
 .achievement-icon{
-  font-size:27px;
+  font-size:28px;
+}
+
+.rarity{
+  font-size:9px;
+  letter-spacing:.1em;
+  color:var(--gold);
 }
 
 /* TABLE */
@@ -326,7 +604,11 @@ th,td{
   border:1px solid var(--line);
   padding:7px;
   text-align:center;
-  font-size:11px;
+  font-size:10px;
+}
+
+th{
+  color:var(--muted);
 }
 
 th:first-child,
@@ -334,16 +616,17 @@ td:first-child{
   text-align:left;
   position:sticky;
   left:0;
-  background:#10141c;
+  background:#10151e;
   z-index:1;
 }
 
 .cell-done{
-  background:#183722;
+  background:#183d28;
+  color:var(--green);
 }
 
 .cell-empty{
-  color:#394150;
+  color:#343d4a;
 }
 
 /* STATS */
@@ -355,75 +638,30 @@ td:first-child{
 .stat-row-top{
   display:flex;
   justify-content:space-between;
-  font-size:13px;
+  font-size:12px;
   margin-bottom:5px;
-}
-
-/* NOVA */
-
-.chat{
-  height:320px;
-  overflow:auto;
-  background:#090d13;
-  border:1px solid var(--line);
-  border-radius:13px;
-  padding:11px;
-}
-
-.message{
-  max-width:85%;
-  padding:10px 12px;
-  border-radius:12px;
-  margin:7px 0;
-  font-size:13px;
-  line-height:1.4;
-}
-
-.message.bot{
-  background:#151b25;
-}
-
-.message.user{
-  background:var(--ice);
-  color:#080b10;
-  margin-left:auto;
-}
-
-.chat-input{
-  display:flex;
-  gap:8px;
-  margin-top:8px;
-}
-
-.chat-input input{
-  flex:1;
-  min-width:0;
-  background:#0a0e14;
-  color:white;
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:11px;
-  outline:none;
 }
 
 /* TOAST */
 
 .toast{
   position:fixed;
-  right:17px;
-  bottom:17px;
-  background:var(--ice);
-  color:#080b10;
-  padding:12px 15px;
+  left:50%;
+  bottom:20px;
+  transform:translate(-50%,120px);
+  background:#e9f6ff;
+  color:#070a0f;
+  padding:12px 17px;
   border-radius:12px;
   font-weight:800;
-  transform:translateY(100px);
-  transition:.25s;
+  font-size:12px;
+  box-shadow:0 15px 50px #0008;
+  transition:.28s;
   z-index:100;
 }
 
 .toast.show{
-  transform:translateY(0);
+  transform:translate(-50%,0);
 }
 
 /* MOBILE */
@@ -444,19 +682,29 @@ td:first-child{
 
 @media(max-width:560px){
   .app{
-    padding:12px;
+    padding:11px;
   }
 
   .header{
     align-items:flex-start;
   }
 
-  .date{
+  .arc-date{
     text-align:right;
+    font-size:9px;
   }
 
   h1{
     font-size:27px;
+  }
+
+  .hero-top{
+    align-items:center;
+  }
+
+  .score-orb{
+    width:75px;
+    height:75px;
   }
 
   .habits{
@@ -465,6 +713,10 @@ td:first-child{
 
   .achievement-grid{
     grid-template-columns:1fr;
+  }
+
+  .nav button{
+    padding:8px 11px;
   }
 }
 </style>
@@ -476,12 +728,13 @@ td:first-child{
 
 <header class="header">
   <div class="logo">❄ WINTER <span>ARC</span> OS</div>
-  <div class="date">OCT 1 → DEC 31 · 92 DAYS</div>
+  <div class="arc-date">OCT 01 → JAN 01 · 92 DAYS</div>
 </header>
 
 <nav class="nav" id="nav"></nav>
 
-<!-- ================= DASHBOARD ================= -->
+
+<!-- DASHBOARD -->
 
 <section class="page active" id="dashboard">
 
@@ -490,6 +743,10 @@ td:first-child{
 <main>
 
 <div class="card hero">
+
+<div class="hero-top">
+
+<div>
 
 <div class="eyebrow">
 WINTER ARC 2026 · DAY <span id="dayNumber">1</span> / 92
@@ -501,18 +758,34 @@ LEVEL <span id="level">1</span>
 <span id="levelTitle">THE INITIATE</span>
 </h1>
 
-<div class="row">
-<strong>
-<span id="totalXP">0</span> XP
-</strong>
+<div class="hero-sub" id="heroMessage">
+The Arc has not started yet. Prepare the system.
+</div>
 
+</div>
+
+<div class="score-orb" id="scoreOrb">
+<div class="score-orb-inner">
+<div class="score-number" id="scoreNumber">0</div>
+<div class="score-label">TODAY</div>
+</div>
+</div>
+
+</div>
+
+<div class="xp-wrap">
+
+<div class="xp-line">
+<strong><span id="totalXP">0</span> XP</strong>
 <span class="muted">
-Next level: 1000 XP
+<span id="levelXP">0</span> / 1000
 </span>
 </div>
 
 <div class="progress">
 <i id="levelProgress"></i>
+</div>
+
 </div>
 
 <div class="stats">
@@ -547,6 +820,7 @@ Next level: 1000 XP
 
 </div>
 
+
 <div class="card">
 
 <div class="row">
@@ -558,33 +832,85 @@ Next level: 1000 XP
 
 </div>
 
+
+<div class="card nova-card">
+
+<div class="row">
+
+<div>
+<div class="eyebrow">NOVA · DAILY INTELLIGENCE</div>
+<h2 id="novaHeadline">SYSTEM READY</h2>
+</div>
+
+<div class="nova-status">
+<span class="status-dot"></span>
+ANALYZING
+</div>
+
+</div>
+
+<div class="insight">
+
+<div class="insight-title">NOVA'S READ</div>
+
+<div class="insight-text" id="novaInsight">
+The system will analyze your behavior once the Arc begins.
+</div>
+
+</div>
+
+<div class="row" style="margin-top:12px">
+
+<span class="muted" id="novaSub">
+No recommendation yet.
+</span>
+
+<button class="primary" onclick="openPage('nova')">
+OPEN NOVA →
+</button>
+
+</div>
+
+</div>
+
 </main>
+
 
 <aside>
 
 <div class="card">
 
+<div class="row">
 <h2>⚔ ACTIVE QUESTS</h2>
+<span class="pill active">LIVE</span>
+</div>
 
 <div id="dashboardQuests"></div>
 
 </div>
 
+
 <div class="card">
 
-<div class="eyebrow">NOVA DAILY READ</div>
+<div class="eyebrow">ARC COMMAND</div>
 
-<h2 id="novaHeadline">
-Log today's habits.
-</h2>
+<h2>Don't chase perfection.</h2>
 
-<p class="muted" id="novaSub">
-NOVA will analyse your Winter Arc data.
+<p class="muted">
+Secure the day. Build the streak. Let the system compound.
 </p>
 
-<button class="primary" onclick="openPage('nova')">
-ASK NOVA →
+<div class="row">
+
+<button class="secondary" onclick="openPage('stats')">
+VIEW STATS
 </button>
+
+<button class="primary" onclick="openPage('quests')">
+QUESTS →
+</button>
+
+</div>
 
 </div>
 
@@ -595,7 +921,7 @@ ASK NOVA →
 </section>
 
 
-<!-- ================= CALENDAR ================= -->
+<!-- CALENDAR -->
 
 <section class="page" id="calendar">
 
@@ -604,6 +930,10 @@ ASK NOVA →
 <div class="eyebrow">ARC MATRIX</div>
 
 <h1>October 2026</h1>
+
+<p class="muted">
+Your first month of the Arc. Green cells are completed habits.
+</p>
 
 <div class="table-wrap">
 <table id="calendarTable"></table>
@@ -614,7 +944,7 @@ ASK NOVA →
 </section>
 
 
-<!-- ================= QUESTS ================= -->
+<!-- QUESTS -->
 
 <section class="page" id="quests">
 
@@ -635,7 +965,7 @@ Core habits build the foundation. Quests push the grind.
 </section>
 
 
-<!-- ================= STATS ================= -->
+<!-- STATS -->
 
 <section class="page" id="stats">
 
@@ -648,7 +978,7 @@ Core habits build the foundation. Quests push the grind.
 <h1 id="overallScore">0%</h1>
 
 <p class="muted">
-Overall logged completion
+Overall logged completion.
 </p>
 
 <div id="habitStats"></div>
@@ -668,7 +998,7 @@ Overall logged completion
 </section>
 
 
-<!-- ================= ACHIEVEMENTS ================= -->
+<!-- ACHIEVEMENTS -->
 
 <section class="page" id="achievements">
 
@@ -685,24 +1015,36 @@ Overall logged completion
 </section>
 
 
-<!-- ================= NOVA ================= -->
+<!-- NOVA -->
 
 <section class="page" id="nova">
 
 <div class="grid">
 
-<div class="card">
+<div class="card nova-card">
 
-<div class="eyebrow">
-WINTER ARC INTELLIGENCE
+<div class="row">
+
+<div>
+<div class="eyebrow">WINTER ARC INTELLIGENCE</div>
+<h1>🤖 NOVA</h1>
 </div>
 
-<h1>🤖 NOVA</h1>
+<div class="nova-status">
+<span class="status-dot"></span>
+ONLINE
+</div>
+
+</div>
 
 <div class="chat" id="chat">
 
 <div class="message bot">
-NOVA online. Ask me about your current Winter Arc performance.
+NOVA online.
+
+I have access to your local Winter Arc data.
+
+Ask me about your performance, habits, streaks, weak points, quests, or what you should focus on next.
 </div>
 
 </div>
@@ -711,7 +1053,7 @@ NOVA online. Ask me about your current Winter Arc performance.
 
 <input
 id="novaInput"
-placeholder="How am I doing?"
+placeholder="Ask NOVA anything..."
 onkeydown="if(event.key==='Enter')askNova()"
 />
 
@@ -723,25 +1065,40 @@ SEND
 
 </div>
 
+
+<div>
+
+<div class="card">
+
+<div class="eyebrow">LIVE ANALYSIS</div>
+<h2>What NOVA sees</h2>
+
+<div id="novaAnalysis"></div>
+
+</div>
+
+
 <div class="card">
 
 <h2>QUICK COMMANDS</h2>
 
-<button class="primary" onclick="quickNova('review')">
-📊 Review my progress
+<button class="secondary" onclick="quickNova('review')">
+📊 Analyze my progress
 </button>
 
 <br><br>
 
-<button class="primary" onclick="quickNova('weak')">
+<button class="secondary" onclick="quickNova('weak')">
 🎯 Find my weakest habit
 </button>
 
 <br><br>
 
-<button class="primary" onclick="quickNova('quest')">
-⚔ Give me a quest
+<button class="secondary" onclick="quickNova('quest')">
+⚔ Give me a challenge
 </button>
+
+</div>
 
 </div>
 
@@ -751,18 +1108,26 @@ SEND
 
 </div>
 
+
 <div class="toast" id="toast"></div>
 
 
 <script>
 
 /* =========================================================
-   WINTER ARC OS
-   Local-first single-file version
+   WINTER ARC OS V2
+   Fixed interaction engine + upgraded UI
 ========================================================= */
 
 
-/* ---------- HABITS ---------- */
+/* ================= CONFIG ================= */
+
+const ARC_START = new Date("2026-10-01T00:00:00");
+const ARC_END   = new Date("2027-01-01T00:00:00");
+const ARC_DAYS  = 92;
+
+
+/* ================= HABITS ================= */
 
 const HABITS = [
 
@@ -825,7 +1190,7 @@ const HABITS = [
 ];
 
 
-/* ---------- QUESTS ---------- */
+/* ================= QUESTS ================= */
 
 const QUESTS = [
 
@@ -864,7 +1229,7 @@ const QUESTS = [
 ];
 
 
-/* ---------- ACHIEVEMENTS ---------- */
+/* ================= ACHIEVEMENTS ================= */
 
 const ACHIEVEMENTS = [
 
@@ -872,6 +1237,7 @@ const ACHIEVEMENTS = [
  icon:"🏁",
  name:"THE FIRST FROST",
  description:"Complete your first logged day.",
+ rarity:"COMMON",
  check:()=>STATE.days.length>=1
 },
 
@@ -879,6 +1245,7 @@ const ACHIEVEMENTS = [
  icon:"🔥",
  name:"COLD-BLOODED",
  description:"Reach a 14-day 90+ streak.",
+ rarity:"RARE",
  check:()=>getStreak()>=14
 },
 
@@ -886,6 +1253,7 @@ const ACHIEVEMENTS = [
  icon:"🗿",
  name:"BUILT DIFFERENT",
  description:"Reach a 30-day 90+ streak.",
+ rarity:"EPIC",
  check:()=>getStreak()>=30
 },
 
@@ -893,6 +1261,7 @@ const ACHIEVEMENTS = [
  icon:"💯",
  name:"PERFECT EXECUTION",
  description:"Score exactly 100 XP in one day.",
+ rarity:"RARE",
  check:()=>STATE.days.some(d=>d.xp===100)
 },
 
@@ -900,6 +1269,7 @@ const ACHIEVEMENTS = [
  icon:"⚡",
  name:"THE GRIND",
  description:"Earn 1,000 total XP.",
+ rarity:"EPIC",
  check:()=>STATE.totalXP>=1000
 },
 
@@ -907,6 +1277,7 @@ const ACHIEVEMENTS = [
  icon:"📚",
  name:"ACADEMIC WEAPON",
  description:"Complete 30 Study days.",
+ rarity:"EPIC",
  check:()=>countHabit("study")>=30
 },
 
@@ -914,6 +1285,7 @@ const ACHIEVEMENTS = [
  icon:"🧴",
  name:"ROUTINE LOCKED",
  description:"Complete 30 Skincare days.",
+ rarity:"RARE",
  check:()=>countHabit("skincare")>=30
 },
 
@@ -921,6 +1293,7 @@ const ACHIEVEMENTS = [
  icon:"📖",
  name:"BOOKWORM",
  description:"Complete 30 Reading days.",
+ rarity:"RARE",
  check:()=>countHabit("reading")>=30
 },
 
@@ -928,16 +1301,17 @@ const ACHIEVEMENTS = [
  icon:"❄️",
  name:"WINTER FORGED",
  description:"Complete the full 92-day Arc.",
- check:()=>STATE.days.length>=92
+ rarity:"LEGENDARY",
+ check:()=>STATE.days.filter(d=>d.xp>=90).length>=92
 }
 
 ];
 
 
-/* ---------- STORAGE ---------- */
+/* ================= STORAGE ================= */
 
 let STATE =
-JSON.parse(localStorage.getItem("WINTER_ARC_OS"))
+JSON.parse(localStorage.getItem("WINTER_ARC_OS_V2"))
 ||
 {
  days:[],
@@ -946,20 +1320,54 @@ JSON.parse(localStorage.getItem("WINTER_ARC_OS"))
 };
 
 
-/* ---------- DATE ---------- */
+/* ================= DATE ENGINE ================= */
 
-function todayKey(){
+function dateKey(date){
 
-return new Date().toISOString().slice(0,10);
+return date.toISOString().slice(0,10);
+
+}
+
+
+function getCurrentArcDate(){
+
+const now = new Date();
+
+if(now < ARC_START){
+
+return null;
+
+}
+
+if(now >= ARC_END){
+
+return dateKey(
+new Date(ARC_END.getTime()-86400000)
+);
+
+}
+
+return dateKey(now);
 
 }
 
 
 function getToday(){
 
-const key=todayKey();
+const key=getCurrentArcDate();
 
-let day=STATE.days.find(
+if(!key){
+
+return {
+date:"pre-arc",
+xp:0,
+habits:{}
+};
+
+}
+
+let day=
+STATE.days.find(
 d=>d.date===key
 );
 
@@ -980,7 +1388,7 @@ return day;
 }
 
 
-/* ---------- SAVE ---------- */
+/* ================= STORAGE ================= */
 
 function save(){
 
@@ -991,50 +1399,76 @@ STATE.days.reduce(
 );
 
 localStorage.setItem(
-"WINTER_ARC_OS",
+"WINTER_ARC_OS_V2",
 JSON.stringify(STATE)
 );
 
-render();
+/*
+IMPORTANT FIX:
+
+The old code called render()
+but no render() function existed.
+
+Now every state change goes through renderAll().
+*/
+
+renderAll();
 
 }
 
 
-/* ---------- HABITS ---------- */
+/* ================= HABITS ================= */
 
 function toggleHabit(id){
 
-const day=getToday();
+const today=getToday();
 
-const habit=
-HABITS.find(h=>h.id===id);
+if(today.date==="pre-arc"){
 
-if(day.habits[id]){
+showToast("❄ THE ARC STARTS OCTOBER 1");
 
-delete day.habits[id];
-
-}else{
-
-day.habits[id]=habit.xp;
+return;
 
 }
 
-day.xp=
-Object.values(day.habits)
-.reduce((a,b)=>a+b,0);
+const habit=
+HABITS.find(
+h=>h.id===id
+);
 
-save();
+if(!habit)return;
+
+if(today.habits[id]){
+
+delete today.habits[id];
 
 showToast(
-day.habits[id]
-? `+${habit.xp} XP`
-: "Habit unchecked"
+`−${habit.xp} XP · ${habit.name}`
+);
+
+}else{
+
+today.habits[id]=habit.xp;
+
+showToast(
+`+${habit.xp} XP · ${habit.name}`
 );
 
 }
 
+today.xp=
+Object.values(today.habits)
+.reduce(
+(a,b)=>a+b,
+0
+);
 
-/* ---------- STATS ---------- */
+save();
+
+}
+
+
+/* ================= STATS ================= */
 
 function countHabit(id){
 
@@ -1047,19 +1481,38 @@ day=>day.habits[id]
 
 function getStreak(){
 
+if(!STATE.days.length)return 0;
+
+const successful=
+STATE.days
+.filter(d=>d.xp>=90)
+.map(d=>d.date)
+.sort();
+
 let streak=0;
 
-for(
-let i=STATE.days.length-1;
-i>=0;
-i--
-){
+const todayKey=getCurrentArcDate();
 
-if(
-STATE.days[i].xp>=90
-){
+if(!todayKey)return 0;
+
+let cursor=new Date(todayKey+"T00:00:00");
+
+for(let i=0;i<ARC_DAYS;i++){
+
+const key=dateKey(cursor);
+
+const day=
+STATE.days.find(
+d=>d.date===key
+);
+
+if(day && day.xp>=90){
 
 streak++;
+
+cursor.setDate(
+cursor.getDate()-1
+);
 
 }else{
 
@@ -1123,15 +1576,65 @@ d=>d.xp>=90
 ).length;
 
 return Math.round(
-successful/92*100
+successful/ARC_DAYS*100
 );
 
 }
 
 
-/* ---------- QUESTS ---------- */
+/* ================= QUESTS ================= */
 
 function getQuestProgress(id){
+
+const quest=
+QUESTS.find(
+q=>q.id===id
+);
+
+if(!quest)return 0;
+
+
+/* Foundation */
+
+if(id==="foundation"){
+
+return STATE.days.filter(
+d=>d.xp>=90
+).length;
+
+}
+
+
+/* Bookworm */
+
+if(id==="bookworm"){
+
+return countHabit("reading");
+
+}
+
+
+/* Routine */
+
+if(id==="routine"){
+
+return countHabit("skincare");
+
+}
+
+
+/* Triple threat */
+
+if(id==="triple"){
+
+return STATE.days.filter(
+d=>
+d.habits.training &&
+d.habits.study &&
+d.habits.skill
+).length;
+
+}
 
 return STATE.quests[id] || 0;
 
@@ -1141,33 +1644,48 @@ return STATE.quests[id] || 0;
 function progressQuest(id){
 
 const quest=
-QUESTS.find(q=>q.id===id);
-
-let progress=
-getQuestProgress(id);
-
-if(progress>=quest.target)return;
-
-progress++;
-
-STATE.quests[id]=progress;
-
-if(progress===quest.target){
-
-STATE.totalXP+=quest.reward;
-
-showToast(
-`QUEST COMPLETE · +${quest.reward} XP`
+QUESTS.find(
+q=>q.id===id
 );
 
+if(!quest)return;
+
+const progress=
+getQuestProgress(id);
+
+if(progress>=quest.target){
+
+showToast("QUEST ALREADY COMPLETE");
+
+return;
+
 }
+
+/*
+For behavior-based quests, progress is automatic.
+*/
+
+if(
+["foundation","bookworm","routine","triple"]
+.includes(id)
+){
+
+showToast("QUEST PROGRESS IS AUTOMATIC");
+
+renderAll();
+
+return;
+
+}
+
+STATE.quests[id]=progress+1;
 
 save();
 
 }
 
 
-/* ---------- NAVIGATION ---------- */
+/* ================= NAVIGATION ================= */
 
 const PAGES=[
 "dashboard",
@@ -1193,8 +1711,9 @@ class="${index===0?"active":""}"
 onclick="openPage('${page}')"
 id="nav-${page}"
 >
-${page==="nova"?"🤖 NOVA":
-page.charAt(0).toUpperCase()+page.slice(1)}
+${page==="nova"
+?"🤖 NOVA"
+:page.charAt(0).toUpperCase()+page.slice(1)}
 </button>
 
 `
@@ -1207,7 +1726,9 @@ function openPage(page){
 
 document
 .querySelectorAll(".page")
-.forEach(p=>p.classList.remove("active"));
+.forEach(
+p=>p.classList.remove("active")
+);
 
 document
 .getElementById(page)
@@ -1215,31 +1736,43 @@ document
 
 document
 .querySelectorAll(".nav button")
-.forEach(button=>{
-button.classList.remove("active");
-});
+.forEach(
+button=>button.classList.remove("active")
+);
 
 document
 .getElementById("nav-"+page)
 .classList.add("active");
 
+renderAll();
+
 }
 
 
-/* ---------- DASHBOARD ---------- */
+/* ================= DASHBOARD ================= */
 
 function renderDashboard(){
 
-const day=getToday();
+const today=
+getToday();
 
-const level=getLevel();
+const preArc=
+today.date==="pre-arc";
 
-const currentLevelXP=
-STATE.totalXP%1000;
+const level=
+getLevel();
+
+const score=
+today.xp;
 
 document.getElementById("dayNumber")
 .textContent=
-Math.min(92,STATE.days.length);
+preArc
+?"0"
+:Math.min(
+ARC_DAYS,
+STATE.days.length
+);
 
 document.getElementById("level")
 .textContent=level;
@@ -1254,7 +1787,7 @@ STATE.totalXP;
 
 document.getElementById("todayXP")
 .textContent=
-day.xp;
+score;
 
 document.getElementById("streak")
 .textContent=
@@ -1266,91 +1799,114 @@ getArcProgress();
 
 document.getElementById("rank")
 .textContent=
-getRank(day.xp);
+preArc?"—":getRank(score);
+
+document.getElementById("scoreNumber")
+.textContent=
+score;
+
+document
+.getElementById("scoreOrb")
+.style.setProperty(
+"--score",
+score+"%"
+);
+
+const levelXP=
+STATE.totalXP%1000;
+
+document.getElementById("levelXP")
+.textContent=
+levelXP;
 
 document.getElementById("levelProgress")
 .style.width=
-(currentLevelXP/10)+"%";
+(levelXP/10)+"%";
+
+
+if(preArc){
+
+document.getElementById("heroMessage")
+.textContent=
+"Pre-Arc mode. Prepare your system. The grind begins October 1.";
+
+}else if(score>=90){
+
+document.getElementById("heroMessage")
+.textContent=
+"DAY SECURED. You hit the 90+ threshold. Anything else is bonus XP.";
+
+}else{
+
+document.getElementById("heroMessage")
+.textContent=
+`${90-score} XP remaining to secure today's Arc.`;
+
+}
 
 
 document.getElementById("habitList")
 .innerHTML=
 HABITS.map(
-habit=>`
+habit=>{
+
+const done=
+today.habits[habit.id];
+
+return`
 
 <div
-class="habit ${day.habits[habit.id]?"done":""}"
+class="habit ${done?"done":""}"
 onclick="toggleHabit('${habit.id}')"
 >
 
 <div class="row">
 
-<span class="habit-name">
-${habit.icon} ${habit.name}
-</span>
+<div>
 
-<span class="check">
-${day.habits[habit.id]?"✓":"○"}
-</span>
+<div class="habit-icon">
+${habit.icon}
+</div>
 
+<div class="habit-name">
+${habit.name}
 </div>
 
 <div class="habit-xp">
-${habit.xp} XP
++${habit.xp} XP
 </div>
 
 </div>
 
-`
+<div class="check">
+${done?"✓":"+"}
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
 ).join("");
 
 
 renderQuests();
-
-
-if(day.xp>=90){
-
-document.getElementById("novaHeadline")
-.textContent=
-"DAY SECURED. 90+ ACHIEVED.";
-
-document.getElementById("novaSub")
-.textContent=
-"Optional quests are now the grind.";
-
-}else{
-
-const needed=
-90-day.xp;
-
-document.getElementById("novaHeadline")
-.textContent=
-`${needed} XP needed to secure today.`;
-
-const remaining=
-HABITS
-.filter(h=>!day.habits[h.id])
-.slice(0,3)
-.map(h=>h.name)
-.join(", ");
-
-document.getElementById("novaSub")
-.textContent=
-remaining
-?`Remaining: ${remaining}`
-:"Keep going.";
-
-}
+renderNovaDashboard();
 
 }
 
 
-/* ---------- QUEST RENDER ---------- */
+/* ================= QUEST RENDER ================= */
 
 function questHTML(quest){
 
 const progress=
-getQuestProgress(quest.id);
+Math.min(
+quest.target,
+getQuestProgress(quest.id)
+);
 
 const percentage=
 Math.min(
@@ -1363,13 +1919,13 @@ progress>=quest.target;
 
 return`
 
-<div class="quest">
+<div class="quest ${complete?"complete":""}">
 
 <div class="row">
 
 <div>
 
-<span class="pill">
+<span class="pill ${complete?"complete":"active"}">
 ${complete?"COMPLETE":"ACTIVE"}
 </span>
 
@@ -1390,10 +1946,15 @@ ${quest.description}
 </div>
 
 <div class="progress">
+
 <i style="width:${percentage}%"></i>
+
 </div>
 
-<div class="row" style="margin-top:9px">
+<div
+class="row"
+style="margin-top:9px"
+>
 
 <span class="muted">
 ${progress}/${quest.target}
@@ -1404,7 +1965,7 @@ class="primary"
 ${complete?"disabled":""}
 onclick="progressQuest('${quest.id}')"
 >
-${complete?"DONE":"PROGRESS"}
+${complete?"DONE":"VIEW"}
 </button>
 
 </div>
@@ -1419,28 +1980,161 @@ ${complete?"DONE":"PROGRESS"}
 function renderQuests(){
 
 const html=
-QUESTS.map(questHTML)
+QUESTS
+.map(questHTML)
 .join("");
 
-document.getElementById("dashboardQuests")
-.innerHTML=
-html;
+document.getElementById(
+"dashboardQuests"
+).innerHTML=html;
 
-document.getElementById("fullQuestList")
-.innerHTML=
-html;
+document.getElementById(
+"fullQuestList"
+).innerHTML=html;
 
 }
 
 
-/* ---------- CALENDAR ---------- */
+/* ================= NOVA ANALYSIS ================= */
+
+function getWeakestHabit(){
+
+if(!STATE.days.length){
+
+return HABITS[0];
+
+}
+
+return HABITS
+.map(
+habit=>({
+
+habit,
+
+rate:
+countHabit(habit.id)/
+STATE.days.length
+
+})
+)
+.sort(
+(a,b)=>a.rate-b.rate
+)[0]
+.habit;
+
+}
+
+
+function getStrongestHabit(){
+
+if(!STATE.days.length){
+
+return HABITS[0];
+
+}
+
+return HABITS
+.map(
+habit=>({
+
+habit,
+
+rate:
+countHabit(habit.id)/
+STATE.days.length
+
+})
+)
+.sort(
+(a,b)=>b.rate-a.rate
+)[0]
+.habit;
+
+}
+
+
+function generateNovaInsight(){
+
+const today=getToday();
+
+if(today.date==="pre-arc"){
+
+return {
+headline:"SYSTEM READY",
+insight:
+"The Winter Arc hasn't started. Use the pre-Arc period to prepare your routine rather than pretending the data exists.",
+sub:"Arc start: October 1, 2026."
+};
+
+}
+
+
+if(today.xp>=90){
+
+return {
+headline:"DAY SECURED",
+insight:
+"You've crossed the 90 XP threshold. The highest-value move now is consistency, not adding unnecessary work.",
+sub:
+`${getStreak()} day successful streak.`
+};
+
+}
+
+
+const remaining=
+90-today.xp;
+
+const weakest=
+getWeakestHabit();
+
+return {
+headline:
+`${remaining} XP TO DAY SECURED`,
+insight:
+`Your current weakest logged area is ${weakest.name}. Secure the remaining high-value habits first instead of spreading effort everywhere.`,
+sub:
+`Current score: ${today.xp}/100`
+};
+
+}
+
+
+function renderNovaDashboard(){
+
+const analysis=
+generateNovaInsight();
+
+document.getElementById(
+"novaHeadline"
+).textContent=
+analysis.headline;
+
+document.getElementById(
+"novaInsight"
+).textContent=
+analysis.insight;
+
+document.getElementById(
+"novaSub"
+).textContent=
+analysis.sub;
+
+}
+
+
+/* ================= CALENDAR ================= */
 
 function renderCalendar(){
 
 let html=
 "<tr><th>HABIT</th>";
 
-for(let day=1;day<=31;day++){
+for(
+let day=1;
+day<=31;
+day++
+){
 
 html+=
 `<th>${day}</th>`;
@@ -1449,12 +2143,20 @@ html+=
 
 html+="</tr>";
 
-HABITS.forEach(habit=>{
+HABITS.forEach(
+habit=>{
 
 html+=
-`<tr><td>${habit.icon} ${habit.name}</td>`;
+`<tr>
+<td>
+${habit.icon} ${habit.name}
+</td>`;
 
-for(let day=1;day<=31;day++){
+for(
+let day=1;
+day<=31;
+day++
+){
 
 const date=
 `2026-10-${String(day).padStart(2,"0")}`;
@@ -1479,14 +2181,14 @@ html+="</tr>";
 
 });
 
-document.getElementById("calendarTable")
-.innerHTML=
-html;
+document.getElementById(
+"calendarTable"
+).innerHTML=html;
 
 }
 
 
-/* ---------- STATS ---------- */
+/* ================= STATS ================= */
 
 function renderStats(){
 
@@ -1496,18 +2198,23 @@ STATE.days.length*100;
 const score=
 totalPossible
 ?Math.round(
-STATE.totalXP/totalPossible*100
+STATE.totalXP/
+totalPossible*
+100
 )
 :0;
 
-document.getElementById("overallScore")
-.textContent=
+document.getElementById(
+"overallScore"
+).textContent=
 score+"%";
 
 
-document.getElementById("habitStats")
-.innerHTML=
-HABITS.map(habit=>{
+document.getElementById(
+"habitStats"
+).innerHTML=
+HABITS.map(
+habit=>{
 
 const completed=
 countHabit(habit.id);
@@ -1515,7 +2222,9 @@ countHabit(habit.id);
 const percentage=
 STATE.days.length
 ?Math.round(
-completed/STATE.days.length*100
+completed/
+STATE.days.length*
+100
 )
 :0;
 
@@ -1537,7 +2246,9 @@ ${percentage}%
 
 <div class="progress">
 
-<i style="width:${percentage}%"></i>
+<i
+style="width:${percentage}%"
+></i>
 
 </div>
 
@@ -1545,13 +2256,16 @@ ${percentage}%
 
 `;
 
-}).join("");
+}
+).join("");
 
 
 const highest=
 Math.max(
 0,
-...STATE.days.map(d=>d.xp)
+...STATE.days.map(
+d=>d.xp
+)
 );
 
 const successful=
@@ -1560,8 +2274,9 @@ d=>d.xp>=90
 ).length;
 
 
-document.getElementById("records")
-.innerHTML=`
+document.getElementById(
+"records"
+).innerHTML=`
 
 <div class="stat">
 <div class="stat-label">
@@ -1587,7 +2302,7 @@ ${STATE.totalXP}
 
 <div class="stat">
 <div class="stat-label">
-BEST STREAK
+BEST CURRENT STREAK
 </div>
 <div class="stat-value">
 🔥 ${getStreak()}
@@ -1610,12 +2325,13 @@ ${successful}
 }
 
 
-/* ---------- ACHIEVEMENTS ---------- */
+/* ================= ACHIEVEMENTS ================= */
 
 function renderAchievements(){
 
-document.getElementById("achievementList")
-.innerHTML=
+document.getElementById(
+"achievementList"
+).innerHTML=
 ACHIEVEMENTS.map(
 achievement=>{
 
@@ -1626,11 +2342,19 @@ return`
 
 <div
 class="achievement
-${unlocked?"":"locked"}"
+${unlocked?"unlocked":"locked"}"
 >
 
 <div class="achievement-icon">
-${unlocked?achievement.icon:"🔒"}
+${unlocked
+?achievement.icon
+:"🔒"}
+</div>
+
+<div class="rarity">
+${unlocked
+?achievement.rarity
+:"LOCKED"}
 </div>
 
 <h3>
@@ -1655,15 +2379,22 @@ ${unlocked
 }
 
 
-/* ---------- NOVA ---------- */
+/* ================= NOVA ================= */
 
-function addNovaMessage(text,type){
+function addNovaMessage(
+text,
+type
+){
 
 const box=
-document.getElementById("chat");
+document.getElementById(
+"chat"
+);
 
 const message=
-document.createElement("div");
+document.createElement(
+"div"
+);
 
 message.className=
 "message "+type;
@@ -1671,7 +2402,9 @@ message.className=
 message.textContent=
 text;
 
-box.appendChild(message);
+box.appendChild(
+message
+);
 
 box.scrollTop=
 box.scrollHeight;
@@ -1679,10 +2412,164 @@ box.scrollHeight;
 }
 
 
+function novaResponse(question){
+
+const q=
+question.toLowerCase();
+
+const today=
+getToday();
+
+const weakest=
+getWeakestHabit();
+
+const strongest=
+getStrongestHabit();
+
+const streak=
+getStreak();
+
+const xp=
+today.xp;
+
+
+/* WEAKNESS */
+
+if(
+q.includes("weak")||
+q.includes("bad")||
+q.includes("worst")
+){
+
+const rate=
+STATE.days.length
+?Math.round(
+countHabit(weakest.id)/
+STATE.days.length*
+100
+)
+:0;
+
+return `Your weakest logged habit is ${weakest.icon} ${weakest.name} at ${rate}% completion.
+
+Don't try to fix everything simultaneously. That's how routines collapse.
+
+Your highest-value move is to make this habit automatic for the next 3–7 days.`;
+
+
+}
+
+
+/* PROGRESS */
+
+if(
+q.includes("progress")||
+q.includes("doing")||
+q.includes("how am i")||
+q.includes("status")
+){
+
+return `Here's the current read:
+
+${STATE.totalXP} total XP
+${xp}/100 today
+🔥 ${streak}-day successful streak
+${getArcProgress()}% Arc progress
+
+Strongest area: ${strongest.icon} ${strongest.name}
+Weakest area: ${weakest.icon} ${weakest.name}
+
+My recommendation: don't chase more habits if today's score is already close to 90. Secure the day first.`;
+
+
+}
+
+
+/* QUEST */
+
+if(
+q.includes("quest")||
+q.includes("challenge")||
+q.includes("mission")
+){
+
+if(xp>=90){
+
+return `Today's main objective is already complete.
+
+⚔️ OPTIONAL QUEST:
+Complete your weakest habit before tomorrow.
+
+Reward: consistency.
+
+The Arc isn't won by heroic single days. It's won by making boring days successful.`;
+
+
+}
+
+const needed=
+90-xp;
+
+return `⚔️ QUEST GENERATED
+
+CLOSE THE GAP
+
+You need ${needed} more XP to secure today.
+
+Priority:
+1. Complete the highest-value unfinished habit.
+2. Finish one easy habit.
+3. Stop once you've secured the day.
+
+No unnecessary grind.`;
+
+
+}
+
+
+/* STREAK */
+
+if(
+q.includes("streak")
+){
+
+return `Your current successful-day streak is ${streak}.
+
+The rule is simple: 90+ XP secures a day.
+
+Don't gamble a streak because you wanted a perfect 100. 90 is the target. Everything above it is bonus.`;
+
+
+}
+
+
+/* DEFAULT */
+
+return `I’m tracking your Winter Arc locally.
+
+Right now:
+• ${STATE.totalXP} XP
+• ${xp}/100 today
+• 🔥 ${streak} successful days
+• ${getArcProgress()}% Arc progress
+
+Try asking:
+“What's my weakest habit?”
+“Analyze my progress.”
+“Give me a quest.”
+“What's my streak?”
+
+For true conversational AI, this interface is ready to connect to a secure AI backend later.`;
+
+}
+
+
 function askNova(){
 
 const input=
-document.getElementById("novaInput");
+document.getElementById(
+"novaInput"
+);
 
 const question=
 input.value.trim();
@@ -1696,67 +2583,8 @@ question,
 
 input.value="";
 
-const lower=
-question.toLowerCase();
-
-const today=
-getToday();
-
-let response="";
-
-
-if(
-lower.includes("weak") ||
-lower.includes("weakest")
-){
-
-let weakest=
-HABITS
-.map(h=>[
-h,
-countHabit(h.id)
-])
-.sort(
-(a,b)=>a[1]-b[1]
-)[0];
-
-const percentage=
-STATE.days.length
-?Math.round(
-weakest[1]/STATE.days.length*100
-)
-:0;
-
-response=
-`Your weakest logged habit is ${weakest[0].name} at ${percentage}% completion. That's the first area I'd target.`;
-
-}
-
-else if(
-lower.includes("quest")
-){
-
-const weakest=
-HABITS
-.map(h=>[
-h,
-countHabit(h.id)
-])
-.sort(
-(a,b)=>a[1]-b[1]
-)[0];
-
-response=
-`Quest suggestion: "${weakest[0].name} Lock-In" — complete ${weakest[0].name} for 7 consecutive logged days.`;
-
-}
-
-else{
-
-response=
-`Current snapshot: ${STATE.totalXP} total XP, ${getStreak()} successful-day streak, ${today.xp}/100 XP today, and ${getArcProgress()}% Arc progress.`;
-
-}
+const response=
+novaResponse(question);
 
 setTimeout(
 ()=>{
@@ -1773,60 +2601,150 @@ response,
 
 function quickNova(type){
 
-if(type==="review"){
+const commands={
 
-document.getElementById("novaInput")
-.value=
-"How am I doing?";
+review:
+"Analyze my progress.",
 
-}
+weak:
+"What is my weakest habit?",
 
-if(type==="weak"){
+quest:
+"Give me a quest."
 
-document.getElementById("novaInput")
-.value=
-"What is my weakest habit?";
+};
 
-}
-
-if(type==="quest"){
-
-document.getElementById("novaInput")
-.value=
-"Give me a quest.";
-
-}
+document.getElementById(
+"novaInput"
+).value=
+commands[type];
 
 askNova();
 
 }
 
 
-/* ---------- TOAST ---------- */
+function renderNovaAnalysis(){
+
+const weakest=
+getWeakestHabit();
+
+const strongest=
+getStrongestHabit();
+
+const days=
+STATE.days.length;
+
+const weakestRate=
+days
+?Math.round(
+countHabit(weakest.id)/
+days*
+100
+)
+:0;
+
+const strongestRate=
+days
+?Math.round(
+countHabit(strongest.id)/
+days*
+100
+)
+:0;
+
+document.getElementById(
+"novaAnalysis"
+).innerHTML=`
+
+<div class="insight">
+
+<div class="insight-title">
+STRONGEST SIGNAL
+</div>
+
+<div class="insight-text">
+${strongest.icon} ${strongest.name}
+<br>
+<span class="muted">
+${strongestRate}% completion
+</span>
+</div>
+
+</div>
+
+<div class="insight">
+
+<div class="insight-title">
+WEAKEST SIGNAL
+</div>
+
+<div class="insight-text">
+${weakest.icon} ${weakest.name}
+<br>
+<span class="muted">
+${weakestRate}% completion
+</span>
+</div>
+
+</div>
+
+<div class="insight">
+
+<div class="insight-title">
+CURRENT STREAK
+</div>
+
+<div class="insight-text">
+🔥 ${getStreak()} successful days
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* ================= TOAST ================= */
 
 function showToast(text){
 
 const toast=
-document.getElementById("toast");
+document.getElementById(
+"toast"
+);
 
-toast.textContent=
-text;
+toast.textContent=text;
 
 toast.classList.add("show");
 
+clearTimeout(
+window.toastTimer
+);
+
+window.toastTimer=
 setTimeout(
 ()=>{
 toast.classList.remove("show");
 },
-1600
+1700
 );
 
 }
 
 
-/* ---------- START ---------- */
+/* ================= MASTER RENDER ================= */
 
-buildNavigation();
+/*
+THIS is the function that was missing
+from your previous version.
+
+Every state-changing action calls save(),
+which calls this function.
+*/
+
+function renderAll(){
 
 renderDashboard();
 
@@ -1836,7 +2754,18 @@ renderStats();
 
 renderAchievements();
 
+renderNovaAnalysis();
+
+}
+
+
+/* ================= START ================= */
+
+buildNavigation();
+
+renderAll();
+
 </script>
 
 </body>
-</html>
+  </html>
