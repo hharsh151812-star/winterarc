@@ -2,33 +2,38 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<meta name="theme-color" content="#07090d">
-<title>WINTER ARC OS</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#05070a">
+<title>WINTER ARC OS — v2.1</title>
 
 <style>
 :root{
-  --bg:#06080c;
-  --panel:#0b0f15;
-  --panel2:#0f141c;
-  --line:#1b2430;
-  --text:#edf3fa;
-  --muted:#788594;
-  --accent:#dce9f7;
-  --blue:#8bbcff;
-  --green:#72e0a0;
-  --yellow:#ffd76a;
-  --red:#ff7272;
-  --radius:18px;
+  --bg:#05070a;
+  --panel:#0a0e14;
+  --panel2:#0e141c;
+  --panel3:#111923;
+  --line:#1b2530;
+  --line2:#273341;
+  --text:#edf3f9;
+  --muted:#7c8997;
+  --muted2:#566473;
+  --blue:#9fc5eb;
+  --green:#79e0a3;
+  --yellow:#f4d477;
+  --red:#ff7c7c;
+  --white:#eaf1f8;
+  --radius:17px;
   --font:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
+
 html{scroll-behavior:smooth}
+
 body{
   background:
-    radial-gradient(circle at 70% -10%,rgba(90,140,210,.11),transparent 35%),
-    radial-gradient(circle at 0% 70%,rgba(80,110,150,.06),transparent 30%),
+    radial-gradient(circle at 75% -15%,rgba(105,155,210,.12),transparent 35%),
+    radial-gradient(circle at -10% 80%,rgba(75,105,140,.06),transparent 30%),
     var(--bg);
   color:var(--text);
   font-family:var(--font);
@@ -36,173 +41,187 @@ body{
   min-height:100vh;
 }
 
-button,input,textarea,select{font:inherit}
+button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-a{text-decoration:none;color:inherit}
+button:active{transform:scale(.985)}
+.hidden{display:none!important}
 
-.app{min-height:100vh}
-
-/* =========================
+/* =====================================================
    LOADING
-========================= */
+===================================================== */
 
 #loading{
   position:fixed;
   inset:0;
-  z-index:9999;
+  z-index:99999;
+  background:#040609;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#05070a;
-  transition:.7s ease;
+  transition:opacity .7s ease;
 }
 
-.loader{text-align:center}
-.loader-mark{
-  width:54px;
-  height:54px;
-  margin:0 auto 22px;
-  border:1px solid #354353;
-  border-top-color:#fff;
+.loader{
+  width:min(400px,85%);
+  text-align:center;
+}
+
+.loader-ring{
+  width:55px;
+  height:55px;
+  margin:0 auto 24px;
   border-radius:50%;
+  border:1px solid #334252;
+  border-top-color:#f0f5fa;
   animation:spin 1s linear infinite;
 }
+
 .loader h1{
   font-size:25px;
-  letter-spacing:.18em;
-  font-weight:700;
+  letter-spacing:.17em;
+  font-weight:800;
 }
+
 .loader p{
-  margin-top:8px;
-  color:#8190a0;
-  font-size:11px;
-  letter-spacing:.12em;
+  margin-top:9px;
+  color:#8492a0;
   text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:10px;
 }
-.loader-bar{
-  width:190px;
+
+.loader-line{
   height:2px;
-  background:#18202a;
-  margin:24px auto 0;
+  width:190px;
+  background:#18212b;
+  margin:25px auto 0;
   overflow:hidden;
 }
-.loader-bar span{
+
+.loader-line span{
   display:block;
   width:0;
   height:100%;
-  background:#dce9f7;
+  background:#dce8f4;
   animation:load 1.8s ease forwards;
 }
 
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes load{to{width:100%}}
 
-/* =========================
+/* =====================================================
    ONBOARDING
-========================= */
+===================================================== */
 
 #onboarding{
   position:fixed;
   inset:0;
-  z-index:5000;
+  z-index:9000;
   background:
-    radial-gradient(circle at 50% 0%,rgba(112,159,212,.12),transparent 38%),
-    #06080c;
-  overflow-y:auto;
+    radial-gradient(circle at 50% 0,rgba(105,150,205,.12),transparent 40%),
+    #05070a;
+  overflow:auto;
   display:none;
 }
 
-.onboard-wrap{
-  width:min(680px,calc(100% - 30px));
-  margin:0 auto;
-  padding:55px 0 70px;
+.ob-wrap{
+  width:min(690px,calc(100% - 28px));
+  margin:auto;
+  padding:48px 0 70px;
 }
 
-.ob-top{
+.ob-header{
   display:flex;
   align-items:center;
   justify-content:space-between;
   margin-bottom:35px;
 }
 
-.ob-brand{
+.ob-logo{
   font-weight:800;
   letter-spacing:.16em;
-  font-size:13px;
+  font-size:12px;
 }
 
-.ob-step{
-  color:var(--muted);
-  font-size:11px;
+.ob-status{
+  color:#657382;
+  font-size:10px;
 }
 
 .ob-intro{
-  margin-bottom:30px;
+  margin-bottom:27px;
 }
-.ob-intro .eyebrow{
-  color:#8fa5bd;
-  letter-spacing:.15em;
-  font-size:10px;
+
+.eyebrow{
+  color:#8194a8;
+  font-size:9px;
   text-transform:uppercase;
-  margin-bottom:12px;
+  letter-spacing:.18em;
+  margin-bottom:9px;
 }
-.ob-intro h2{
+
+.ob-intro h1{
   font-size:31px;
   line-height:1.05;
-  margin-bottom:12px;
+  letter-spacing:-.035em;
+  margin-bottom:11px;
 }
+
 .ob-intro p{
   color:var(--muted);
   line-height:1.7;
+  max-width:600px;
 }
 
 .ob-card{
-  background:rgba(12,16,22,.9);
+  background:rgba(10,14,20,.95);
   border:1px solid var(--line);
-  border-radius:22px;
-  padding:24px;
-  margin-bottom:14px;
+  border-radius:20px;
+  padding:22px;
+  margin-bottom:12px;
 }
 
-.ob-card h3{
-  font-size:14px;
+.ob-card h2{
+  font-size:13px;
   margin-bottom:6px;
 }
+
 .ob-card>p{
   color:var(--muted);
-  font-size:11px;
-  margin-bottom:18px;
+  font-size:10px;
+  line-height:1.6;
+  margin-bottom:17px;
 }
 
 .grid2{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
+  gap:10px;
 }
 
 .field label{
   display:block;
-  color:#91a0af;
-  font-size:10px;
+  color:#82909e;
+  font-size:9px;
   text-transform:uppercase;
-  letter-spacing:.1em;
-  margin-bottom:7px;
+  letter-spacing:.12em;
+  margin-bottom:6px;
 }
 
 .field input,
 .field select{
   width:100%;
+  padding:11px 12px;
+  border:1px solid #202b37;
+  border-radius:10px;
   background:#080c11;
-  color:var(--text);
-  border:1px solid #202b38;
-  border-radius:11px;
-  padding:12px;
+  color:#eaf0f6;
   outline:none;
 }
 
 .field input:focus,
 .field select:focus{
-  border-color:#536d87;
+  border-color:#536b82;
 }
 
 .option-grid{
@@ -212,240 +231,303 @@ a{text-decoration:none;color:inherit}
 }
 
 .option{
-  border:1px solid #202a35;
-  background:#090d13;
-  border-radius:11px;
-  padding:12px;
-  color:#aab6c3;
+  padding:11px;
+  border-radius:10px;
+  border:1px solid #202b36;
+  background:#080c11;
+  color:#8e9aa7;
   text-align:left;
   transition:.15s;
 }
-.option:hover{border-color:#405366}
-.option.active{
-  border-color:#91b6db;
+
+.option:hover{
+  border-color:#43586d;
   color:#fff;
-  background:#111b26;
 }
 
-.ob-actions{
-  margin-top:18px;
+.option.active{
+  border-color:#8eafd0;
+  background:#111b26;
+  color:#fff;
 }
 
 .primary{
-  width:100%;
   border:0;
-  background:#e8f0f8;
-  color:#080b0f;
-  border-radius:12px;
-  padding:14px;
+  background:#e5eef7;
+  color:#06090d;
   font-weight:750;
+  border-radius:11px;
+  padding:13px 16px;
   transition:.15s;
 }
+
 .primary:hover{transform:translateY(-1px)}
 
+.full{
+  width:100%;
+}
+
 .secondary{
-  border:1px solid #26313e;
-  background:#0c1118;
-  color:#d5dde6;
-  border-radius:12px;
+  border:1px solid #27333f;
+  background:#0c1117;
+  color:#d2dbe4;
+  border-radius:11px;
   padding:12px 15px;
 }
 
-.choice-buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:15px;
+/* =====================================================
+   APP
+===================================================== */
+
+#mainApp{
+  display:none;
+  min-height:100vh;
 }
-
-.chat-start{
-  background:linear-gradient(135deg,#dce9f7,#9db9d6);
-  color:#05080c;
-}
-
-/* =========================
-   APP SHELL
-========================= */
-
-#mainApp{display:none}
 
 .topbar{
   position:sticky;
   top:0;
-  z-index:1000;
-  height:58px;
-  background:rgba(6,8,12,.88);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--line);
+  z-index:2000;
+  height:57px;
+  padding:0 17px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 18px;
+  background:rgba(5,7,10,.88);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:9px;
 }
+
 .brand-dot{
-  width:8px;
-  height:8px;
+  width:7px;
+  height:7px;
   border-radius:50%;
-  background:#dbe9f8;
-  box-shadow:0 0 14px rgba(180,215,255,.7);
+  background:#dbe8f5;
+  box-shadow:0 0 13px #9dc5ec;
 }
+
 .brand-name{
-  font-size:11px;
+  font-size:10px;
   font-weight:800;
-  letter-spacing:.16em;
+  letter-spacing:.17em;
 }
 
 .top-right{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:9px;
 }
-.status{
-  font-size:10px;
-  color:#7d8b99;
+
+.system-status{
+  color:#6c7b89;
+  font-size:9px;
+  letter-spacing:.08em;
 }
+
 .menu-btn{
-  width:34px;
-  height:34px;
-  border:1px solid #25303c;
-  background:#0b1016;
-  color:#dbe4ec;
+  width:33px;
+  height:33px;
+  border:1px solid #26313d;
   border-radius:9px;
+  background:#0a0f15;
+  color:#dce5ed;
 }
 
 .drawer{
   position:fixed;
-  z-index:2000;
-  top:58px;
   right:12px;
-  width:240px;
-  padding:10px;
-  background:#0b1016;
-  border:1px solid #26313e;
+  top:68px;
+  z-index:3000;
+  width:245px;
+  background:#0a0f15;
+  border:1px solid #293540;
   border-radius:16px;
-  box-shadow:0 18px 50px #0008;
-  transform:translateY(-12px) scale(.98);
+  padding:9px;
+  box-shadow:0 22px 65px #000b;
+  transform:translateY(-8px) scale(.98);
   opacity:0;
   pointer-events:none;
-  transition:.18s;
+  transition:.17s;
 }
+
 .drawer.open{
   transform:none;
   opacity:1;
   pointer-events:auto;
 }
+
 .drawer button{
   width:100%;
   border:0;
   background:transparent;
-  color:#aab6c3;
-  padding:11px;
+  color:#9ba8b5;
+  padding:10px;
   text-align:left;
   border-radius:9px;
+  font-size:11px;
 }
+
 .drawer button:hover{
   background:#131a23;
   color:#fff;
 }
 
 .content{
-  width:min(1250px,calc(100% - 28px));
-  margin:0 auto;
-  padding:24px 0 60px;
+  width:min(1240px,calc(100% - 26px));
+  margin:auto;
+  padding:23px 0 70px;
 }
 
 .view{display:none}
 .view.active{display:block}
 
+/* =====================================================
+   COMMON
+===================================================== */
+
 .hero{
   border:1px solid var(--line);
-  border-radius:22px;
-  padding:25px;
-  background:
-    linear-gradient(120deg,rgba(255,255,255,.025),transparent),
-    #0a0e14;
-  margin-bottom:14px;
-}
-
-.eyebrow{
-  color:#8294a7;
-  font-size:9px;
-  text-transform:uppercase;
-  letter-spacing:.18em;
-  margin-bottom:10px;
+  border-radius:21px;
+  background:#090d13;
+  padding:24px;
+  margin-bottom:12px;
 }
 
 .hero h1{
-  font-size:30px;
-  letter-spacing:-.03em;
+  font-size:29px;
+  letter-spacing:-.035em;
   margin-bottom:7px;
 }
+
 .hero p{
   color:var(--muted);
-  line-height:1.6;
+  line-height:1.65;
+}
+
+.section{
+  border:1px solid var(--line);
+  background:#090e14;
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:12px;
+}
+
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:14px;
+}
+
+.section-head h2{
+  font-size:13px;
+}
+
+.section-head span{
+  color:#5f6d7b;
+  font-size:9px;
+  letter-spacing:.09em;
 }
 
 .cards{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:10px;
-  margin-bottom:14px;
+  gap:9px;
+  margin-bottom:12px;
 }
 
 .card{
-  background:#0a0f15;
+  background:#090e14;
   border:1px solid var(--line);
-  border-radius:15px;
-  padding:17px;
-}
-.card .label{
-  color:#718091;
-  font-size:9px;
-  text-transform:uppercase;
-  letter-spacing:.13em;
-}
-.card .value{
-  margin-top:8px;
-  font-size:23px;
-  font-weight:750;
-}
-.card .small{
-  margin-top:4px;
-  color:#647281;
-  font-size:10px;
+  border-radius:14px;
+  padding:16px;
 }
 
-.section{
-  background:#0a0f15;
-  border:1px solid var(--line);
-  border-radius:17px;
-  padding:19px;
-  margin-bottom:14px;
+.card-label{
+  color:#657381;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.14em;
 }
-.section-head{
+
+.card-value{
+  font-size:22px;
+  font-weight:780;
+  margin-top:7px;
+}
+
+.card-small{
+  color:#596775;
+  font-size:9px;
+  margin-top:3px;
+}
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:1.35fr .65fr;
+  gap:12px;
+}
+
+.command-status{
+  border:1px solid #19242e;
+  background:#080d12;
+  border-radius:13px;
+  padding:15px;
+}
+
+.status-line{
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:15px;
-}
-.section-head h2{
-  font-size:14px;
-}
-.section-head span{
-  color:#647281;
+  padding:8px 0;
+  border-bottom:1px solid #151e27;
   font-size:10px;
 }
 
-/* =========================
+.status-line:last-child{border-bottom:0}
+.status-line span:first-child{color:#667584}
+.status-line span:last-child{color:#d7e1e9}
+
+.progress-wrap{
+  margin-top:15px;
+}
+
+.progress-top{
+  display:flex;
+  justify-content:space-between;
+  color:#778593;
+  font-size:9px;
+  margin-bottom:6px;
+}
+
+.progress{
+  height:5px;
+  background:#18212b;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress span{
+  display:block;
+  height:100%;
+  width:0;
+  background:#a7c7e6;
+  transition:width .5s ease;
+}
+
+/* =====================================================
    HABITS
-========================= */
+===================================================== */
 
 .habit-list{
   display:grid;
@@ -456,82 +538,236 @@ a{text-decoration:none;color:inherit}
   display:grid;
   grid-template-columns:1fr auto;
   align-items:center;
-  gap:12px;
-  padding:14px;
-  border:1px solid #19222c;
+  padding:13px;
+  border:1px solid #19232d;
   border-radius:12px;
-  background:#090d12;
+  background:#080d12;
 }
 
 .habit-main{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:11px;
+  min-width:0;
 }
+
 .habit-icon{
   width:34px;
   height:34px;
+  flex-shrink:0;
   display:grid;
   place-items:center;
   border-radius:9px;
   background:#111821;
 }
-.habit-name{font-weight:650}
+
+.habit-name{
+  font-weight:680;
+  font-size:11px;
+}
+
 .habit-meta{
-  color:#657381;
-  font-size:10px;
+  color:#64727f;
+  font-size:9px;
   margin-top:3px;
+}
+
+.habit-actions{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.detail-btn{
+  border:1px solid #202c37;
+  background:#0d131a;
+  color:#83919f;
+  border-radius:8px;
+  padding:7px 9px;
+  font-size:9px;
+}
+
+.detail-btn:hover{
+  color:#fff;
+  border-color:#42566a;
 }
 
 .check{
   width:30px;
   height:30px;
-  border-radius:9px;
-  border:1px solid #273442;
-  background:#0d131a;
+  border-radius:8px;
+  border:1px solid #273440;
+  background:#0d1319;
   color:transparent;
 }
+
 .check.done{
-  background:#dbe9f7;
+  background:#dce9f5;
   color:#080b0f;
-  border-color:#dbe9f7;
+  border-color:#dce9f5;
 }
 
-/* =========================
-   CALENDAR
-========================= */
+/* =====================================================
+   HABIT INTELLIGENCE
+===================================================== */
 
-.calendar-head{
+.habit-detail-header{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:13px;
+  align-items:flex-start;
+  gap:15px;
 }
-.calendar-head h2{font-size:15px}
-.calendar-head p{
-  color:#697786;
+
+.big-habit-icon{
+  width:50px;
+  height:50px;
+  flex-shrink:0;
+  display:grid;
+  place-items:center;
+  background:#111923;
+  border:1px solid #25313d;
+  border-radius:13px;
+  font-size:22px;
+}
+
+.habit-detail-title h1{
+  font-size:25px;
+  margin-bottom:5px;
+}
+
+.habit-detail-title p{
+  color:#748290;
   font-size:10px;
 }
+
+.intel-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.intel-box{
+  background:#080d12;
+  border:1px solid #19232d;
+  border-radius:13px;
+  padding:17px;
+}
+
+.intel-box.full{
+  grid-column:1/-1;
+}
+
+.intel-box h3{
+  font-size:11px;
+  margin-bottom:9px;
+}
+
+.intel-box h4{
+  margin-top:13px;
+  margin-bottom:5px;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.13em;
+  color:#9babb9;
+}
+
+.intel-box p,
+.intel-box li{
+  color:#82909e;
+  font-size:10px;
+  line-height:1.75;
+}
+
+.intel-box ul{
+  padding-left:16px;
+}
+
+.age-chip{
+  display:inline-flex;
+  margin-top:10px;
+  padding:6px 8px;
+  border-radius:7px;
+  border:1px solid #273442;
+  background:#101721;
+  color:#aab8c5;
+  font-size:9px;
+}
+
+/* =====================================================
+   MASTER PLAN
+===================================================== */
+
+.master-grid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:10px;
+}
+
+.plan-box{
+  background:#080d12;
+  border:1px solid #19232d;
+  border-radius:13px;
+  padding:16px;
+}
+
+.plan-box h3{
+  font-size:11px;
+  margin-bottom:8px;
+}
+
+.plan-box p,
+.plan-box li{
+  color:#7d8b98;
+  font-size:10px;
+  line-height:1.7;
+}
+
+.plan-box ul{padding-left:16px}
+
+.tag-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.tag{
+  padding:6px 8px;
+  border:1px solid #222e39;
+  background:#101720;
+  border-radius:7px;
+  color:#9daab7;
+  font-size:9px;
+}
+
+/* =====================================================
+   CALENDAR
+===================================================== */
 
 .months{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:12px;
+  gap:11px;
 }
 
 .month{
-  border:1px solid #19222c;
-  border-radius:14px;
+  background:#080d12;
+  border:1px solid #19232d;
+  border-radius:13px;
   padding:13px;
-  background:#090d12;
 }
-.month-title{
+
+.month-header{
   display:flex;
   justify-content:space-between;
+  align-items:center;
   margin-bottom:10px;
 }
-.month-title strong{font-size:12px}
-.month-title span{font-size:9px;color:#667483}
+
+.month-header strong{font-size:12px}
+.month-header span{
+  color:#5e6d7b;
+  font-size:8px;
+  text-transform:uppercase;
+}
 
 .weekdays,
 .days{
@@ -539,293 +775,546 @@ a{text-decoration:none;color:inherit}
   grid-template-columns:repeat(7,1fr);
   gap:3px;
 }
+
 .weekdays div{
   text-align:center;
+  color:#4f5e6c;
   font-size:8px;
-  color:#566473;
-  padding:4px 0;
+  padding:3px;
 }
+
 .day{
-  min-height:28px;
-  border-radius:6px;
+  height:27px;
   display:grid;
   place-items:center;
-  font-size:9px;
-  color:#7d8a98;
-  border:1px solid transparent;
-}
-.day.active{
-  background:#111923;
-  color:#eef4fa;
-}
-.day.today{
-  border-color:#7696b7;
-}
-.day.rest{
-  color:#596673;
-}
-.day.future{opacity:.5}
-
-/* =========================
-   MASTER PLAN
-========================= */
-
-.master-grid{
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:12px;
+  border-radius:6px;
+  color:#7d8996;
+  font-size:8px;
 }
 
-.plan-box{
-  background:#090d12;
-  border:1px solid #19222c;
-  border-radius:14px;
-  padding:16px;
-}
-.plan-box h3{
-  font-size:12px;
-  margin-bottom:10px;
-}
-.plan-box p,
-.plan-box li{
-  color:#8a98a6;
-  line-height:1.65;
-  font-size:11px;
-}
-.plan-box ul{
-  padding-left:17px;
-}
-.tag-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-}
-.tag{
-  padding:6px 8px;
-  border-radius:7px;
-  background:#111821;
-  border:1px solid #202c38;
-  color:#a8b5c2;
-  font-size:9px;
-}
-
-/* =========================
-   HABIT DETAIL
-========================= */
-
-.detail-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-.detail{
-  border:1px solid #19222c;
-  background:#090d12;
-  border-radius:13px;
-  padding:16px;
-}
-.detail h3{
-  font-size:12px;
-  margin-bottom:8px;
-}
-.detail h4{
-  margin-top:13px;
-  margin-bottom:5px;
+.day.arc{
+  background:#0e151d;
   color:#d8e1e9;
-  font-size:9px;
-  text-transform:uppercase;
-  letter-spacing:.12em;
 }
-.detail p,.detail li{
-  color:#7c8997;
-  font-size:10px;
-  line-height:1.65;
-}
-.detail ul{padding-left:15px}
 
-/* =========================
+.day.today{
+  outline:1px solid #8caac6;
+}
+
+.day.rest{
+  color:#596774;
+  background:#0a0e13;
+}
+
+/* =====================================================
    NOVA
-========================= */
+===================================================== */
 
 .nova-layout{
   display:grid;
-  grid-template-columns:1fr 300px;
-  gap:12px;
+  grid-template-columns:1fr 290px;
+  gap:11px;
 }
 
 .nova-chat{
-  min-height:500px;
+  min-height:520px;
   display:flex;
   flex-direction:column;
 }
+
 .messages{
   flex:1;
   min-height:380px;
   overflow-y:auto;
-  padding:5px;
+  padding:4px;
 }
+
 .msg{
   max-width:82%;
-  margin-bottom:10px;
-  padding:12px 13px;
-  border-radius:13px;
-  line-height:1.6;
-  font-size:11px;
+  padding:11px 12px;
+  border-radius:12px;
+  margin-bottom:9px;
+  font-size:10px;
+  line-height:1.7;
 }
+
 .msg.nova{
-  background:#111821;
-  border:1px solid #202b37;
-  color:#c9d4de;
+  background:#111923;
+  border:1px solid #202c38;
+  color:#c8d3dd;
 }
+
 .msg.user{
   margin-left:auto;
-  background:#dbe8f4;
-  color:#091018;
+  background:#dce9f5;
+  color:#080c11;
 }
+
 .nova-input{
   display:flex;
-  gap:8px;
-  margin-top:12px;
+  gap:7px;
+  margin-top:10px;
 }
+
 .nova-input input{
   flex:1;
+  min-width:0;
   background:#080c11;
-  border:1px solid #222d39;
+  border:1px solid #202c38;
   color:#fff;
-  border-radius:11px;
-  padding:12px;
+  border-radius:10px;
+  padding:11px;
+  outline:none;
 }
+
 .nova-input button{
   border:0;
-  background:#dce9f7;
-  color:#080b0f;
-  padding:0 16px;
-  border-radius:11px;
-  font-weight:700;
+  background:#dce9f5;
+  color:#070a0e;
+  border-radius:10px;
+  padding:0 15px;
+  font-weight:750;
 }
+
 .prompt-list{
   display:grid;
   gap:7px;
 }
+
 .prompt-btn{
-  width:100%;
+  border:1px solid #202c37;
+  background:#080d12;
+  color:#8f9ca9;
+  border-radius:9px;
   padding:10px;
   text-align:left;
-  border:1px solid #202b36;
-  border-radius:10px;
-  background:#090e14;
-  color:#9aa8b6;
-  font-size:10px;
+  font-size:9px;
 }
-.prompt-btn:hover{color:#fff;border-color:#43586d}
 
-/* =========================
+.prompt-btn:hover{
+  color:#fff;
+  border-color:#43596e;
+}
+
+/* =====================================================
+   RECOVERY
+===================================================== */
+
+.recovery-banner{
+  border:1px solid #493f25;
+  background:linear-gradient(110deg,#14140f,#0c1015);
+  border-radius:15px;
+  padding:17px;
+  margin-bottom:12px;
+}
+
+.recovery-banner h2{
+  font-size:14px;
+  margin-bottom:5px;
+}
+
+.recovery-banner p{
+  color:#8d897c;
+  font-size:10px;
+  line-height:1.6;
+}
+
+.recovery-actions{
+  display:flex;
+  gap:7px;
+  margin-top:12px;
+}
+
+.recovery-actions button{
+  flex:1;
+}
+
+/* =====================================================
+   ANALYTICS
+===================================================== */
+
+.analytics-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:11px;
+}
+
+.metric-big{
+  font-size:27px;
+  font-weight:800;
+  margin-top:5px;
+}
+
+.metric-sub{
+  color:#657381;
+  font-size:9px;
+}
+
+.bar-list{
+  display:grid;
+  gap:11px;
+}
+
+.bar-row-top{
+  display:flex;
+  justify-content:space-between;
+  color:#8794a1;
+  font-size:9px;
+  margin-bottom:5px;
+}
+
+.bar-bg{
+  height:5px;
+  border-radius:20px;
+  background:#18212b;
+  overflow:hidden;
+}
+
+.bar-bg span{
+  display:block;
+  height:100%;
+  background:#93b8da;
+}
+
+.month-stat{
+  border:1px solid #19232d;
+  background:#080d12;
+  border-radius:12px;
+  padding:13px;
+}
+
+.month-stat h3{
+  font-size:11px;
+  margin-bottom:9px;
+}
+
+.month-stat-row{
+  display:flex;
+  justify-content:space-between;
+  color:#778593;
+  padding:5px 0;
+  border-bottom:1px solid #141d26;
+  font-size:9px;
+}
+
+.month-stat-row:last-child{border-bottom:0}
+
+.timeline{
+  display:grid;
+  grid-template-columns:repeat(92,1fr);
+  gap:2px;
+  align-items:end;
+  height:90px;
+}
+
+.timeline-day{
+  min-width:0;
+  background:#17212c;
+  border-radius:2px 2px 0 0;
+}
+
+.timeline-day.good{background:#7695b2}
+.timeline-day.great{background:#b3cce4}
+.timeline-day.missed{background:#252c34}
+
+.insight{
+  padding:12px;
+  background:#080d12;
+  border:1px solid #19232d;
+  border-radius:11px;
+  color:#82909d;
+  font-size:10px;
+  line-height:1.7;
+  margin-bottom:7px;
+}
+
+/* =====================================================
+   ACHIEVEMENTS
+===================================================== */
+
+.achievement-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+
+.achievement{
+  border:1px solid #19232d;
+  background:#080d12;
+  border-radius:13px;
+  padding:15px;
+}
+
+.achievement.locked{
+  opacity:.42;
+}
+
+.achievement-symbol{
+  font-size:19px;
+  margin-bottom:10px;
+}
+
+.achievement h3{
+  font-size:11px;
+  margin-bottom:5px;
+}
+
+.achievement p{
+  color:#71808e;
+  font-size:9px;
+  line-height:1.6;
+}
+
+/* =====================================================
    MODAL
-========================= */
+===================================================== */
 
 .modal{
   position:fixed;
   inset:0;
-  z-index:4000;
-  background:#0009;
+  z-index:7000;
   display:none;
   align-items:center;
   justify-content:center;
   padding:18px;
+  background:#000b;
 }
+
 .modal.open{display:flex}
+
 .modal-card{
-  width:min(600px,100%);
+  width:min(590px,100%);
   max-height:90vh;
   overflow:auto;
-  background:#0b1016;
-  border:1px solid #293541;
-  border-radius:20px;
-  padding:22px;
+  background:#0a0f15;
+  border:1px solid #293642;
+  border-radius:19px;
+  padding:21px;
 }
+
 .modal-card h2{
-  font-size:18px;
-  margin-bottom:8px;
+  font-size:17px;
+  margin-bottom:7px;
 }
+
 .modal-card>p{
-  color:#748290;
-  font-size:11px;
-  line-height:1.6;
-  margin-bottom:18px;
+  color:#758391;
+  font-size:10px;
+  line-height:1.65;
+  margin-bottom:16px;
 }
+
 .modal-actions{
   display:flex;
   gap:8px;
-  margin-top:15px;
+  margin-top:14px;
 }
+
 .modal-actions>*{flex:1}
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* =====================================================
+   TOAST / DOPAMINE
+===================================================== */
 
-@media(max-width:900px){
-  .cards{grid-template-columns:repeat(2,1fr)}
-  .master-grid,.nova-layout{grid-template-columns:1fr}
-  .months{grid-template-columns:1fr}
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:22px;
+  z-index:10000;
+  transform:translate(-50%,20px);
+  opacity:0;
+  pointer-events:none;
+  background:#e1edf8;
+  color:#070b10;
+  padding:11px 15px;
+  border-radius:11px;
+  font-size:10px;
+  font-weight:750;
+  box-shadow:0 12px 35px #0008;
+  transition:.25s;
 }
 
-@media(max-width:600px){
-  body{font-size:12px}
-  .content{width:min(100% - 18px,1250px)}
-  .topbar{padding:0 12px}
-  .hero h1{font-size:25px}
-  .grid2,.option-grid,.detail-grid{grid-template-columns:1fr}
-  .cards{gap:7px}
-  .card{padding:13px}
-  .card .value{font-size:19px}
-  .ob-card{padding:18px}
-  .choice-buttons{grid-template-columns:1fr}
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+.comeback-overlay{
+  position:fixed;
+  inset:0;
+  z-index:11000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:#030507dd;
+  backdrop-filter:blur(8px);
+}
+
+.comeback-overlay.show{
+  display:flex;
+}
+
+.comeback-card{
+  width:min(440px,calc(100% - 30px));
+  text-align:center;
+  border:1px solid #334252;
+  background:#0b1016;
+  border-radius:22px;
+  padding:30px 22px;
+  animation:pop .35s ease;
+}
+
+.comeback-icon{
+  font-size:38px;
+  margin-bottom:14px;
+}
+
+.comeback-card h2{
+  font-size:21px;
+  margin-bottom:7px;
+}
+
+.comeback-card p{
+  color:#82909e;
+  font-size:10px;
+  line-height:1.7;
+}
+
+.comeback-xp{
+  font-size:25px;
+  font-weight:800;
+  margin:16px 0;
+  color:#dceafa;
+}
+
+@keyframes pop{
+  from{opacity:0;transform:scale(.94)}
+  to{opacity:1;transform:none}
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:950px){
+  .dashboard-grid,
+  .nova-layout,
+  .master-grid{
+    grid-template-columns:1fr;
+  }
+
+  .analytics-grid{
+    grid-template-columns:1fr;
+  }
+
+  .months{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:700px){
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .achievement-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .intel-grid{
+    grid-template-columns:1fr;
+  }
+
+  .intel-box.full{
+    grid-column:auto;
+  }
+
+  .system-status{
+    display:none;
+  }
+}
+
+@media(max-width:550px){
+  .content{
+    width:calc(100% - 18px);
+  }
+
+  .grid2,
+  .option-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:25px;
+  }
+
+  .ob-wrap{
+    padding-top:30px;
+  }
+
+  .ob-card{
+    padding:17px;
+  }
+
+  .achievement-grid{
+    grid-template-columns:1fr;
+  }
+
+  .habit-actions .detail-btn{
+    display:none;
+  }
+
+  .recovery-actions{
+    flex-direction:column;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     LOADING SCREEN
-========================= -->
+<!-- =====================================================
+     LOADING
+===================================================== -->
 
 <div id="loading">
   <div class="loader">
-    <div class="loader-mark"></div>
+    <div class="loader-ring"></div>
     <h1>WINTER ARC OS</h1>
     <p>Your Winter Arc Assistant</p>
-    <div class="loader-bar"><span></span></div>
+    <div class="loader-line"><span></span></div>
   </div>
 </div>
 
-<!-- =========================
+<!-- =====================================================
      ONBOARDING
-========================= -->
+===================================================== -->
 
 <section id="onboarding">
-  <div class="onboard-wrap">
 
-    <div class="ob-top">
-      <div class="ob-brand">WINTER ARC OS</div>
-      <div class="ob-step" id="obStep">INITIALIZATION</div>
+  <div class="ob-wrap">
+
+    <div class="ob-header">
+      <div class="ob-logo">WINTER ARC OS</div>
+      <div class="ob-status">INITIALIZATION REQUIRED</div>
     </div>
 
     <div class="ob-intro">
       <div class="eyebrow">PERSONAL ARC CONFIGURATION</div>
-      <h2>Build your Arc around you.</h2>
+      <h1>Build the Arc around you.</h1>
       <p>
-        Before entering the command center, configure the basics.
-        These settings personalize your schedule, habits, rest days and Master Plan.
+        Configure your profile before entering the command center.
+        These answers personalize your schedule, habits, recovery system,
+        Master Plan and ChatGPT handoff.
       </p>
     </div>
 
     <div class="ob-card">
-      <h3>01 — Basic profile</h3>
-      <p>Used to personalize recommendations and your ChatGPT handoff.</p>
+      <h2>01 — Basic profile</h2>
+      <p>Required. Used to personalize the operating system.</p>
 
       <div class="grid2">
+
         <div class="field">
           <label>Age</label>
           <input id="age" type="number" min="10" max="100" placeholder="e.g. 18">
@@ -833,16 +1322,16 @@ a{text-decoration:none;color:inherit}
 
         <div class="field">
           <label>Height</label>
-          <input id="height" type="text" placeholder="e.g. 170 cm">
+          <input id="height" placeholder="e.g. 170 cm">
         </div>
 
         <div class="field">
           <label>Weight</label>
-          <input id="weight" type="text" placeholder="e.g. 60 kg">
+          <input id="weight" placeholder="e.g. 60 kg">
         </div>
 
         <div class="field">
-          <label>Daily available time</label>
+          <label>Available daily time</label>
           <select id="time">
             <option value="">Select</option>
             <option>15–30 min</option>
@@ -851,30 +1340,37 @@ a{text-decoration:none;color:inherit}
             <option>90+ min</option>
           </select>
         </div>
+
       </div>
     </div>
 
     <div class="ob-card">
-      <h3>02 — What are you building?</h3>
-      <p>Select everything relevant. You can change this later.</p>
+      <h2>02 — What are you building?</h2>
+      <p>Select everything relevant.</p>
 
       <div class="option-grid" id="goalOptions">
+
         <button class="option" data-value="Strength">Strength</button>
         <button class="option" data-value="Muscle & fitness">Muscle & fitness</button>
-        <button class="option" data-value="Better conditioning">Better conditioning</button>
+        <button class="option" data-value="Conditioning">Conditioning</button>
         <button class="option" data-value="Better sleep">Better sleep</button>
         <button class="option" data-value="Better focus">Better focus</button>
         <button class="option" data-value="Reading">Reading</button>
         <button class="option" data-value="Study consistency">Study consistency</button>
         <button class="option" data-value="Confidence">Confidence</button>
+
       </div>
     </div>
 
     <div class="ob-card">
-      <h3>03 — Training schedule</h3>
-      <p>Rest days will NOT be counted as workout days.</p>
+      <h2>03 — Training rest days</h2>
+      <p>
+        Select your regular training rest days. These days will NOT count
+        as missed workout days.
+      </p>
 
       <div class="option-grid" id="restOptions">
+
         <button class="option" data-value="Monday">Monday</button>
         <button class="option" data-value="Tuesday">Tuesday</button>
         <button class="option" data-value="Wednesday">Wednesday</button>
@@ -882,477 +1378,703 @@ a{text-decoration:none;color:inherit}
         <button class="option" data-value="Friday">Friday</button>
         <button class="option" data-value="Saturday">Saturday</button>
         <button class="option" data-value="Sunday">Sunday</button>
+
       </div>
     </div>
 
     <div class="ob-card">
-      <h3>04 — Arc style</h3>
-      <p>Choose how you want the system to feel.</p>
+      <h2>04 — Arc style</h2>
+      <p>Choose how the system should feel.</p>
 
       <div class="option-grid" id="styleOptions">
+
         <button class="option" data-value="Balanced">Balanced</button>
         <button class="option" data-value="Hardcore">Hardcore</button>
         <button class="option" data-value="Minimal">Minimal</button>
         <button class="option" data-value="Structured">Highly structured</button>
+
       </div>
     </div>
 
-    <div class="ob-actions">
-      <button class="primary" onclick="finishOnboarding()">
-        GENERATE MY WINTER ARC →
-      </button>
-    </div>
+    <button class="primary full" onclick="finishOnboarding()">
+      INITIALIZE MY WINTER ARC →
+    </button>
 
   </div>
+
 </section>
 
-<!-- =========================
+<!-- =====================================================
      MAIN APP
-========================= -->
+===================================================== -->
 
 <div id="mainApp">
 
-  <header class="topbar">
-    <div class="brand">
-      <span class="brand-dot"></span>
-      <span class="brand-name">WINTER ARC OS</span>
-    </div>
+<header class="topbar">
 
-    <div class="top-right">
-      <span class="status">SYSTEM ONLINE</span>
-      <button class="menu-btn" onclick="toggleDrawer()">☰</button>
-    </div>
-  </header>
-
-  <div class="drawer" id="drawer">
-    <button onclick="showView('dashboard')">⌂ Command Center</button>
-    <button onclick="showView('habits')">◉ Habits</button>
-    <button onclick="showView('master')">◆ Master Plan</button>
-    <button onclick="showView('calendar')">▦ Arc Calendar</button>
-    <button onclick="showView('nova')">✦ Nova</button>
-    <button onclick="showView('stats')">◌ Stats</button>
-    <button onclick="showView('achievements')">◇ Achievements</button>
-    <button onclick="openProfile()">⚙ Arc Configuration</button>
+  <div class="brand">
+    <span class="brand-dot"></span>
+    <span class="brand-name">WINTER ARC OS</span>
   </div>
 
-  <main class="content">
+  <div class="top-right">
+    <span class="system-status">SYSTEM ONLINE</span>
+    <button class="menu-btn" onclick="toggleDrawer()">☰</button>
+  </div>
+
+</header>
+
+<div class="drawer" id="drawer">
+
+  <button onclick="showView('dashboard')">⌂ Command Center</button>
+  <button onclick="showView('habits')">◉ Habits</button>
+  <button onclick="showView('master')">◆ Master Plan</button>
+  <button onclick="showView('calendar')">▦ Arc Calendar</button>
+  <button onclick="showView('analytics')">◌ Arc Analytics</button>
+  <button onclick="showView('nova')">✦ Nova</button>
+  <button onclick="showView('achievements')">◇ Achievements</button>
+  <button onclick="openProfile()">⚙ Arc Configuration</button>
 
-    <!-- DASHBOARD -->
-
-    <section class="view active" id="dashboard">
-
-      <div class="hero">
-        <div class="eyebrow">COMMAND CENTER / WINTER ARC</div>
-        <h1 id="dashGreeting">Good evening.</h1>
-        <p id="dashSub">
-          Your Arc runs from October 1 to December 31.
-        </p>
-      </div>
-
-      <div class="cards">
-        <div class="card">
-          <div class="label">Arc Day</div>
-          <div class="value" id="arcDay">1</div>
-          <div class="small">of 92 days</div>
-        </div>
-
-        <div class="card">
-          <div class="label">XP</div>
-          <div class="value" id="xpValue">0</div>
-          <div class="small">progress points</div>
-        </div>
-
-        <div class="card">
-          <div class="label">Habits</div>
-          <div class="value" id="habitScore">0%</div>
-          <div class="small">today</div>
-        </div>
-
-        <div class="card">
-          <div class="label">Streak</div>
-          <div class="value" id="streakValue">0</div>
-          <div class="small">days</div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-head">
-          <h2>Today's operating list</h2>
-          <span id="todayDate"></span>
-        </div>
-        <div class="habit-list" id="dashboardHabits"></div>
-      </div>
-
-      <div class="section">
-        <div class="section-head">
-          <h2>Nova Briefing</h2>
-          <span>AI CO-PILOT</span>
-        </div>
-        <div class="plan-box">
-          <p id="novaBriefing">
-            Nova is ready. Open Nova whenever you need help planning,
-            adapting or understanding your Winter Arc.
-          </p>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- HABITS -->
-
-    <section class="view" id="habits">
-
-      <div class="hero">
-        <div class="eyebrow">DAILY SYSTEM</div>
-        <h1>Habits</h1>
-        <p>
-          Every habit is tracked independently. Open a habit to see its purpose,
-          tips, do's, don'ts and operating rules.
-        </p>
-      </div>
-
-      <div class="section">
-        <div class="habit-list" id="fullHabits"></div>
-      </div>
-
-      <div class="section">
-        <div class="section-head">
-          <h2>Habit Intelligence</h2>
-          <span>DETAIL DATABASE</span>
-        </div>
-
-        <div class="detail-grid">
-
-          <div class="detail">
-            <h3>💧 Hydration</h3>
-            <p>Keep fluids available throughout the day and respond to thirst.</p>
-            <h4>Do</h4>
-            <ul>
-              <li>Keep a bottle nearby.</li>
-              <li>Drink regularly rather than relying on one large intake.</li>
-            </ul>
-            <h4>Don't</h4>
-            <ul>
-              <li>Force excessive water intake.</li>
-              <li>Use hydration as a replacement for meals.</li>
-            </ul>
-          </div>
-
-          <div class="detail">
-            <h3>😴 Sleep</h3>
-            <p>Sleep is one of the Arc's recovery systems.</p>
-            <h4>Do</h4>
-            <ul>
-              <li>Keep a reasonably consistent sleep schedule.</li>
-              <li>Reduce bright screens before bed.</li>
-            </ul>
-            <h4>Don't</h4>
-            <ul>
-              <li>Trade sleep for unnecessary late-night productivity.</li>
-            </ul>
-          </div>
-
-          <div class="detail">
-            <h3>🏋 Training</h3>
-            <p>Build consistency with appropriate resistance and recovery.</p>
-            <h4>Do</h4>
-            <ul>
-              <li>Use controlled technique.</li>
-              <li>Progress gradually.</li>
-              <li>Respect scheduled rest days.</li>
-            </ul>
-            <h4>Don't</h4>
-            <ul>
-              <li>Train through significant pain.</li>
-              <li>Use extreme volume to compensate for missed sessions.</li>
-            </ul>
-          </div>
-
-          <div class="detail">
-            <h3>📚 Reading</h3>
-            <p>Small consistent sessions compound over the Arc.</p>
-            <h4>Do</h4>
-            <ul>
-              <li>Read a manageable amount every day.</li>
-              <li>Write down useful ideas.</li>
-            </ul>
-            <h4>Don't</h4>
-            <ul>
-              <li>Turn reading into a meaningless page-count competition.</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-
-    </section>
-
-    <!-- MASTER PLAN -->
-
-    <section class="view" id="master">
-
-      <div class="hero">
-        <div class="eyebrow">PERSONAL OPERATING MANUAL</div>
-        <h1>Your Master Plan</h1>
-        <p>
-          A dynamic overview generated from your Arc configuration.
-          This is your everyday reference point.
-        </p>
-      </div>
-
-      <div class="master-grid">
-
-        <div class="section">
-          <div class="section-head">
-            <h2>Personal profile</h2>
-            <span>CONFIGURATION</span>
-          </div>
-
-          <div class="plan-box">
-            <div class="tag-row" id="profileTags"></div>
-          </div>
-        </div>
-
-        <div class="section">
-          <div class="section-head">
-            <h2>Arc objective</h2>
-            <span>FOCUS</span>
-          </div>
-
-          <div class="plan-box">
-            <p id="masterObjective"></p>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="section">
-        <div class="section-head">
-          <h2>Training & movement</h2>
-          <span>ADAPTIVE</span>
-        </div>
-
-        <div class="master-grid">
-          <div class="plan-box">
-            <h3>Weekly structure</h3>
-            <p id="trainingPlan"></p>
-          </div>
-
-          <div class="plan-box">
-            <h3>Recovery rules</h3>
-            <ul>
-              <li>Rest days remain rest days.</li>
-              <li>Prioritize technique over volume.</li>
-              <li>Progress gradually.</li>
-              <li>Stop for significant pain or concerning symptoms.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-head">
-          <h2>Nutrition & recovery guide</h2>
-          <span>FOUNDATION</span>
-        </div>
-
-        <div class="master-grid">
-          <div class="plan-box">
-            <h3>Everyday nutrition</h3>
-            <p>
-              Build meals around a variety of foods: grains or other carbohydrates,
-              protein-rich foods, vegetables or fruit, and sources of healthy fats.
-              Regular meals and adequate energy support school, activity and recovery.
-            </p>
-          </div>
-
-          <div class="plan-box">
-            <h3>Recovery</h3>
-            <p>
-              Sleep, regular meals, hydration and manageable training load are
-              foundational. For teenagers, nutrition should support normal growth
-              rather than restrictive dieting or aggressive body-composition targets.
-            </p>
-          </div>
-        </div>
-
-        <button class="primary" style="margin-top:12px" onclick="askChatGPT('master')">
-          ASK CHATGPT FOR FURTHER INFORMATION ↗
-        </button>
-      </div>
-
-    </section>
-
-    <!-- CALENDAR -->
-
-    <section class="view" id="calendar">
-
-      <div class="hero">
-        <div class="eyebrow">92-DAY OPERATING WINDOW</div>
-        <h1>Arc Calendar</h1>
-        <p>October 1 → December 31. Three months. One campaign.</p>
-      </div>
-
-      <div class="section">
-        <div class="calendar-head">
-          <h2>THE WINTER ARC</h2>
-          <p>GRIND BEGINS · 01 OCT / GRIND ENDS · 31 DEC</p>
-        </div>
-
-        <div class="months" id="months"></div>
-      </div>
-
-    </section>
-
-    <!-- NOVA -->
-
-    <section class="view" id="nova">
-
-      <div class="hero">
-        <div class="eyebrow">CO-PILOT</div>
-        <h1>NOVA</h1>
-        <p>
-          Your local Arc assistant for navigation, explanations and quick planning.
-          For full AI generation, use the ChatGPT handoff below.
-        </p>
-      </div>
-
-      <div class="nova-layout">
-
-        <div class="section nova-chat">
-          <div class="section-head">
-            <h2>Nova Console</h2>
-            <span>LOCAL ASSISTANT</span>
-          </div>
-
-          <div class="messages" id="messages">
-            <div class="msg nova">
-              Nova online. I know your Winter Arc configuration.
-              Ask me about today's habits, your schedule, your Arc calendar,
-              your Master Plan or how the system works.
-            </div>
-          </div>
-
-          <div class="nova-input">
-            <input
-              id="novaInput"
-              placeholder="Ask Nova about your Arc..."
-              onkeydown="if(event.key==='Enter')sendNova()"
-            >
-            <button onclick="sendNova()">SEND</button>
-          </div>
-        </div>
-
-        <div class="section">
-          <div class="section-head">
-            <h2>Ask ChatGPT</h2>
-            <span>FULL AI</span>
-          </div>
-
-          <p style="color:#778594;font-size:10px;line-height:1.6;margin-bottom:13px">
-            Nova can handle Arc navigation locally. For deeper personalized
-            plans and explanations, send your Arc context to ChatGPT.
-          </p>
-
-          <div class="prompt-list">
-            <button class="prompt-btn" onclick="askChatGPT('training')">
-              Build my training plan
-            </button>
-
-            <button class="prompt-btn" onclick="askChatGPT('nutrition')">
-              Build my nutrition guide
-            </button>
-
-            <button class="prompt-btn" onclick="askChatGPT('study')">
-              Build my study plan
-            </button>
-
-            <button class="prompt-btn" onclick="askChatGPT('reading')">
-              Build my reading plan
-            </button>
-
-            <button class="prompt-btn" onclick="askChatGPT('routine')">
-              Build my daily routine
-            </button>
-
-            <button class="prompt-btn" onclick="askChatGPT('master')">
-              Improve my Master Plan
-            </button>
-          </div>
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- STATS -->
-
-    <section class="view" id="stats">
-
-      <div class="hero">
-        <div class="eyebrow">PERFORMANCE DATA</div>
-        <h1>Stats</h1>
-        <p>Your Arc activity at a glance.</p>
-      </div>
-
-      <div class="cards">
-        <div class="card">
-          <div class="label">Total XP</div>
-          <div class="value" id="statXP">0</div>
-          <div class="small">earned</div>
-        </div>
-        <div class="card">
-          <div class="label">Completed</div>
-          <div class="value" id="statCompleted">0</div>
-          <div class="small">habit actions</div>
-        </div>
-        <div class="card">
-          <div class="label">Arc Progress</div>
-          <div class="value" id="statProgress">0%</div>
-          <div class="small">calendar</div>
-        </div>
-        <div class="card">
-          <div class="label">Rest Days</div>
-          <div class="value" id="statRest">0</div>
-          <div class="small">configured weekly</div>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- ACHIEVEMENTS -->
-
-    <section class="view" id="achievements">
-
-      <div class="hero">
-        <div class="eyebrow">PROGRESSION</div>
-        <h1>Achievements</h1>
-        <p>Milestones earned through consistency.</p>
-      </div>
-
-      <div class="section">
-        <div class="detail-grid" id="achievementGrid"></div>
-      </div>
-
-    </section>
-
-  </main>
 </div>
 
-<!-- PROFILE MODAL -->
+<main class="content">
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section class="view active" id="dashboard">
+
+  <div id="recoveryArea"></div>
+
+  <div class="hero">
+
+    <div class="eyebrow">COMMAND CENTER / 92-DAY CAMPAIGN</div>
+
+    <h1 id="dashGreeting">Good afternoon.</h1>
+
+    <p>
+      October 1 → December 31.
+      Three months. One Arc.
+    </p>
+
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-label">Arc Day</div>
+      <div class="card-value" id="arcDay">1</div>
+      <div class="card-small">of 92</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">XP</div>
+      <div class="card-value" id="xpValue">0</div>
+      <div class="card-small">progress points</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Streak</div>
+      <div class="card-value" id="streakValue">0</div>
+      <div class="card-small">active days</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Comebacks</div>
+      <div class="card-value" id="comebackValue">0</div>
+      <div class="card-small">recovery events</div>
+    </div>
+
+  </div>
+
+  <div class="dashboard-grid">
+
+    <div class="section">
+
+      <div class="section-head">
+        <h2>Today's operating list</h2>
+        <span id="todayDate"></span>
+      </div>
+
+      <div class="habit-list" id="dashboardHabits"></div>
+
+    </div>
+
+    <div class="section">
+
+      <div class="section-head">
+        <h2>Mission status</h2>
+        <span>LIVE</span>
+      </div>
+
+      <div class="command-status">
+
+        <div class="status-line">
+          <span>Arc status</span>
+          <span id="arcStatus">ACTIVE</span>
+        </div>
+
+        <div class="status-line">
+          <span>Training today</span>
+          <span id="trainingStatus">ACTIVE</span>
+        </div>
+
+        <div class="status-line">
+          <span>Recovery credits</span>
+          <span id="recoveryCredits">0</span>
+        </div>
+
+        <div class="status-line">
+          <span>Current goal</span>
+          <span id="goalStatus">—</span>
+        </div>
+
+      </div>
+
+      <div class="progress-wrap">
+
+        <div class="progress-top">
+          <span>DAILY COMPLETION</span>
+          <span id="dailyPercent">0%</span>
+        </div>
+
+        <div class="progress">
+          <span id="dailyProgress"></span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <div class="section-head">
+      <h2>Nova briefing</h2>
+      <span>CO-PILOT</span>
+    </div>
+
+    <div class="plan-box">
+      <p id="novaBriefing"></p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     HABITS
+===================================================== -->
+
+<section class="view" id="habits">
+
+  <div class="hero">
+
+    <div class="eyebrow">DAILY SYSTEM</div>
+
+    <h1>Habits</h1>
+
+    <p>
+      Every habit has its own intelligence profile.
+      Open one to understand why it matters, how to manage it
+      and how the guidance changes for your age.
+    </p>
+
+  </div>
+
+  <div class="section">
+
+    <div class="habit-list" id="fullHabits"></div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     HABIT INTELLIGENCE
+===================================================== -->
+
+<section class="view" id="habitDetail">
+
+  <div class="section">
+
+    <button class="secondary" onclick="showView('habits')" style="margin-bottom:18px">
+      ← BACK TO HABITS
+    </button>
+
+    <div class="habit-detail-header">
+
+      <div class="big-habit-icon" id="detailIcon">😴</div>
+
+      <div class="habit-detail-title">
+
+        <div class="eyebrow">HABIT INTELLIGENCE</div>
+
+        <h1 id="detailTitle">Sleep</h1>
+
+        <p id="detailSubtitle"></p>
+
+        <span class="age-chip" id="ageChip"></span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="intel-grid" id="habitIntel"></div>
+
+</section>
+
+<!-- =====================================================
+     MASTER PLAN
+===================================================== -->
+
+<section class="view" id="master">
+
+  <div class="hero">
+
+    <div class="eyebrow">PERSONAL OPERATING MANUAL</div>
+
+    <h1>Master Plan</h1>
+
+    <p>
+      Your personalized foundation for training, nutrition,
+      recovery, study and daily execution.
+    </p>
+
+  </div>
+
+  <div class="master-grid">
+
+    <div class="section">
+
+      <div class="section-head">
+        <h2>Personal profile</h2>
+        <span>CONFIGURATION</span>
+      </div>
+
+      <div class="plan-box">
+        <div class="tag-row" id="profileTags"></div>
+      </div>
+
+    </div>
+
+    <div class="section">
+
+      <div class="section-head">
+        <h2>Primary objective</h2>
+        <span>FOCUS</span>
+      </div>
+
+      <div class="plan-box">
+        <p id="masterObjective"></p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <div class="section-head">
+      <h2>Training & movement</h2>
+      <span>ADAPTIVE</span>
+    </div>
+
+    <div class="master-grid">
+
+      <div class="plan-box">
+        <h3>Weekly structure</h3>
+        <p id="trainingPlan"></p>
+      </div>
+
+      <div class="plan-box">
+        <h3>Recovery rules</h3>
+
+        <ul>
+          <li>Rest days remain rest days.</li>
+          <li>Technique comes before volume.</li>
+          <li>Progress gradually.</li>
+          <li>Do not compensate for missed sessions with extreme volume.</li>
+          <li>Significant pain is a reason to stop and seek appropriate help.</li>
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <div class="section-head">
+      <h2>Nutrition & recovery</h2>
+      <span>FOUNDATION</span>
+    </div>
+
+    <div class="master-grid">
+
+      <div class="plan-box">
+
+        <h3>Everyday nutrition</h3>
+
+        <p>
+          Build meals from a variety of foods including carbohydrate-rich
+          foods, protein-rich foods, vegetables and fruit, and sources
+          of healthy fats. Regular meals support school, activity,
+          recovery and normal development.
+        </p>
+
+      </div>
+
+      <div class="plan-box">
+
+        <h3>Recovery</h3>
+
+        <p>
+          Sleep, adequate food, hydration, manageable training load
+          and regular breaks form the recovery foundation. Younger
+          users should focus on growth, health and performance rather
+          than restrictive dieting or aggressive body-composition goals.
+        </p>
+
+      </div>
+
+    </div>
+
+    <button class="primary full" style="margin-top:10px" onclick="askChatGPT('master')">
+      ASK CHATGPT TO IMPROVE MY MASTER PLAN ↗
+    </button>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     CALENDAR
+===================================================== -->
+
+<section class="view" id="calendar">
+
+  <div class="hero">
+
+    <div class="eyebrow">92-DAY OPERATING WINDOW</div>
+
+    <h1>Arc Calendar</h1>
+
+    <p>
+      October 1 → December 31, 2026.
+      The complete Winter Arc campaign.
+    </p>
+
+  </div>
+
+  <div class="section">
+
+    <div class="section-head">
+      <h2>THE WINTER ARC</h2>
+      <span>01 OCT → 31 DEC</span>
+    </div>
+
+    <div class="months" id="months"></div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     ANALYTICS
+===================================================== -->
+
+<section class="view" id="analytics">
+
+  <div class="hero">
+
+    <div class="eyebrow">PERFORMANCE INTELLIGENCE</div>
+
+    <h1>Arc Analytics</h1>
+
+    <p>
+      Your consistency, XP, habits, recovery events and 92-day trajectory.
+    </p>
+
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-label">Total XP</div>
+      <div class="card-value" id="analyticsXP">0</div>
+      <div class="card-small">earned</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Completion</div>
+      <div class="card-value" id="analyticsCompletion">0%</div>
+      <div class="card-small">overall</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Longest Streak</div>
+      <div class="card-value" id="analyticsLongest">0</div>
+      <div class="card-small">days</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Comebacks</div>
+      <div class="card-value" id="analyticsComebacks">0</div>
+      <div class="card-small">registered</div>
+    </div>
+
+  </div>
+
+  <div class="analytics-grid">
+
+    <div class="section">
+
+      <div class="section-head">
+        <h2>Habit performance</h2>
+        <span>ALL TIME</span>
+      </div>
+
+      <div class="bar-list" id="habitAnalytics"></div>
+
+    </div>
+
+    <div class="section">
+
+      <div class="section-head">
+        <h2>Arc status</h2>
+        <span>92 DAYS</span>
+      </div>
+
+      <div class="metric-big" id="analyticsArcDay">1 / 92</div>
+      <div class="metric-sub">campaign progress</div>
+
+      <div class="progress-wrap">
+        <div class="progress">
+          <span id="analyticsArcProgress"></span>
+        </div>
+      </div>
+
+      <div style="margin-top:17px">
+
+        <div class="status-line">
+          <span>Recovery credits</span>
+          <span id="analyticsCredits">0</span>
+        </div>
+
+        <div class="status-line">
+          <span>Missed active days</span>
+          <span id="analyticsMissed">0</span>
+        </div>
+
+        <div class="status-line">
+          <span>Perfect days</span>
+          <span id="analyticsPerfect">0</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <div class="section-head">
+      <h2>92-day activity timeline</h2>
+      <span>OCT → DEC</span>
+    </div>
+
+    <div class="timeline" id="timeline"></div>
+
+  </div>
+
+  <div class="section">
+
+    <div class="section-head">
+      <h2>Monthly analytics</h2>
+      <span>BREAKDOWN</span>
+    </div>
+
+    <div class="master-grid" id="monthlyAnalytics"></div>
+
+  </div>
+
+  <div class="section">
+
+    <div class="section-head">
+      <h2>Consistency insights</h2>
+      <span>SYSTEM OBSERVATIONS</span>
+    </div>
+
+    <div id="insights"></div>
+
+    <button class="primary full" onclick="askChatGPT('analytics')">
+      ASK CHATGPT TO ANALYZE MY ARC ↗
+    </button>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     NOVA
+===================================================== -->
+
+<section class="view" id="nova">
+
+  <div class="hero">
+
+    <div class="eyebrow">AI CO-PILOT</div>
+
+    <h1>NOVA</h1>
+
+    <p>
+      Your local Winter Arc co-pilot. Ask about habits, schedules,
+      recovery, XP, the calendar or your Master Plan.
+      For full plan generation, use Ask ChatGPT.
+    </p>
+
+  </div>
+
+  <div class="nova-layout">
+
+    <div class="section nova-chat">
+
+      <div class="section-head">
+        <h2>Nova Console</h2>
+        <span>LOCAL AI</span>
+      </div>
+
+      <div class="messages" id="messages">
+
+        <div class="msg nova">
+          Nova online. I have your Winter Arc configuration loaded.
+          Ask me about your current day, habits, rest days, XP,
+          recovery system, calendar or Master Plan.
+        </div>
+
+      </div>
+
+      <div class="nova-input">
+
+        <input
+          id="novaInput"
+          placeholder="Ask Nova about your Arc..."
+          onkeydown="if(event.key==='Enter')sendNova()"
+        >
+
+        <button onclick="sendNova()">SEND</button>
+
+      </div>
+
+    </div>
+
+    <div class="section">
+
+      <div class="section-head">
+        <h2>Ask ChatGPT</h2>
+        <span>FULL AI</span>
+      </div>
+
+      <p style="color:#788694;font-size:9px;line-height:1.7;margin-bottom:13px">
+        Your Arc context is automatically included in the prompt.
+        The prompt is copied to your clipboard before ChatGPT opens.
+      </p>
+
+      <div class="prompt-list">
+
+        <button class="prompt-btn" onclick="askChatGPT('training')">
+          Build my training plan
+        </button>
+
+        <button class="prompt-btn" onclick="askChatGPT('nutrition')">
+          Build my nutrition guide
+        </button>
+
+        <button class="prompt-btn" onclick="askChatGPT('study')">
+          Build my study plan
+        </button>
+
+        <button class="prompt-btn" onclick="askChatGPT('reading')">
+          Build my reading plan
+        </button>
+
+        <button class="prompt-btn" onclick="askChatGPT('routine')">
+          Build my daily routine
+        </button>
+
+        <button class="prompt-btn" onclick="askChatGPT('master')">
+          Improve my Master Plan
+        </button>
+
+        <button class="prompt-btn" onclick="askChatGPT('analytics')">
+          Analyze my Arc
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     ACHIEVEMENTS
+===================================================== -->
+
+<section class="view" id="achievements">
+
+  <div class="hero">
+
+    <div class="eyebrow">PROGRESSION SYSTEM</div>
+
+    <h1>Achievements</h1>
+
+    <p>
+      Milestones earned through consistency, recovery and execution.
+    </p>
+
+  </div>
+
+  <div class="section">
+
+    <div class="achievement-grid" id="achievementGrid"></div>
+
+  </div>
+
+</section>
+
+</main>
+
+</div>
+
+<!-- =====================================================
+     PROFILE MODAL
+===================================================== -->
 
 <div class="modal" id="profileModal">
+
   <div class="modal-card">
+
     <h2>Arc Configuration</h2>
+
     <p>
-      Update your configuration. Changes affect the Master Plan and future
-      ChatGPT handoffs.
+      Update your profile. Future Master Plan and ChatGPT prompts
+      will use the new information.
     </p>
 
     <div class="grid2">
+
       <div class="field">
         <label>Age</label>
-        <input id="editAge" type="number">
+        <input id="editAge">
       </div>
 
       <div class="field">
@@ -1374,26 +2096,72 @@ a{text-decoration:none;color:inherit}
           <option>90+ min</option>
         </select>
       </div>
+
     </div>
 
     <div class="modal-actions">
-      <button class="secondary" onclick="closeProfile()">Cancel</button>
-      <button class="primary" onclick="saveProfile()">Save</button>
+
+      <button class="secondary" onclick="closeProfile()">
+        Cancel
+      </button>
+
+      <button class="primary" onclick="saveProfile()">
+        Save
+      </button>
+
     </div>
+
   </div>
+
+</div>
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div class="toast" id="toast"></div>
+
+<!-- =====================================================
+     COMEBACK OVERLAY
+===================================================== -->
+
+<div class="comeback-overlay" id="comebackOverlay">
+
+  <div class="comeback-card">
+
+    <div class="comeback-icon">⚡</div>
+
+    <h2>COMEBACK REGISTERED</h2>
+
+    <p>
+      The missed day didn't end the Arc.
+      You returned to the system and secured the next move.
+    </p>
+
+    <div class="comeback-xp">
+      +20 COMEBACK XP
+    </div>
+
+    <button class="primary full" onclick="closeComeback()">
+      RETURN TO COMMAND CENTER
+    </button>
+
+  </div>
+
 </div>
 
 <script>
 
-/* =========================================================
+/* =====================================================
    WINTER ARC OS v2.1
-   Single-file application
-========================================================= */
+===================================================== */
 
-const ARC_START = new Date(2026,9,1);
-const ARC_END   = new Date(2026,11,31);
+const ARC_START = new Date(2026,8,30,18,30,0);
+const ARC_DATE_START = new Date(2026,9,1);
+const ARC_DATE_END = new Date(2026,11,31,23,59,59);
 
 const HABITS = [
+
   {
     id:"sleep",
     icon:"😴",
@@ -1401,6 +2169,7 @@ const HABITS = [
     meta:"Recovery / consistency",
     xp:10
   },
+
   {
     id:"hydrate",
     icon:"💧",
@@ -1408,6 +2177,7 @@ const HABITS = [
     meta:"Regular hydration",
     xp:5
   },
+
   {
     id:"training",
     icon:"🏋",
@@ -1415,6 +2185,7 @@ const HABITS = [
     meta:"Movement / strength",
     xp:15
   },
+
   {
     id:"study",
     icon:"📚",
@@ -1422,6 +2193,7 @@ const HABITS = [
     meta:"Study / focused work",
     xp:15
   },
+
   {
     id:"reading",
     icon:"📖",
@@ -1429,6 +2201,7 @@ const HABITS = [
     meta:"Learning / reflection",
     xp:10
   },
+
   {
     id:"reset",
     icon:"🧹",
@@ -1436,13 +2209,21 @@ const HABITS = [
     meta:"Keep your space operational",
     xp:5
   }
+
 ];
 
 let state = loadState();
 
+/* =====================================================
+   STATE
+===================================================== */
+
 function defaultState(){
+
   return {
+
     onboarded:false,
+
     profile:{
       age:"",
       height:"",
@@ -1452,108 +2233,191 @@ function defaultState(){
       restDays:[],
       style:"Balanced"
     },
+
     completed:{},
+
     xp:0,
-    streak:0
+
+    streak:0,
+
+    longestStreak:0,
+
+    comebacks:0,
+
+    comebackStreak:0,
+
+    recoveryCredits:2,
+
+    recoveredDates:{},
+
+    perfectDays:{},
+
+    lastActiveDate:null
+
   };
+
 }
 
 function loadState(){
+
   try{
+
     const saved=localStorage.getItem("winterArcOS21");
-    return saved ? {...defaultState(),...JSON.parse(saved)} : defaultState();
+
+    if(!saved)return defaultState();
+
+    const base=defaultState();
+    const parsed=JSON.parse(saved);
+
+    return {
+      ...base,
+      ...parsed,
+      profile:{
+        ...base.profile,
+        ...(parsed.profile||{})
+      }
+    };
+
   }catch(e){
+
     return defaultState();
+
   }
+
 }
 
 function saveState(){
-  localStorage.setItem("winterArcOS21",JSON.stringify(state));
+
+  localStorage.setItem(
+    "winterArcOS21",
+    JSON.stringify(state)
+  );
+
 }
 
-function todayKey(){
-  const d=new Date();
-  return d.toISOString().slice(0,10);
+/* =====================================================
+   DATE UTILITIES
+===================================================== */
+
+function normalizeDate(date){
+
+  const d=new Date(date);
+
+  d.setHours(0,0,0,0);
+
+  return d;
+
 }
 
 function dateKey(date){
-  return date.toISOString().slice(0,10);
+
+  const d=normalizeDate(date);
+
+  const y=d.getFullYear();
+
+  const m=String(d.getMonth()+1).padStart(2,"0");
+
+  const day=String(d.getDate()).padStart(2,"0");
+
+  return `${y}-${m}-${day}`;
+
+}
+
+function todayKey(){
+
+  return dateKey(new Date());
+
 }
 
 function isInArc(date){
-  const d=new Date(date);
-  d.setHours(0,0,0,0);
 
-  const start=new Date(ARC_START);
-  start.setHours(0,0,0,0);
+  const d=normalizeDate(date);
 
-  const end=new Date(ARC_END);
-  end.setHours(23,59,59,999);
+  return d>=normalizeDate(ARC_DATE_START) &&
+         d<=normalizeDate(ARC_DATE_END);
 
-  return d>=start && d<=end;
 }
 
 function getArcDay(){
-  const now=new Date();
-  const start=new Date(ARC_START);
-  start.setHours(0,0,0,0);
 
-  const today=new Date(now);
-  today.setHours(0,0,0,0);
+  const today=normalizeDate(new Date());
+
+  const start=normalizeDate(ARC_DATE_START);
 
   if(today<start)return 0;
 
-  const diff=Math.floor((today-start)/86400000)+1;
+  const difference=
+    Math.floor((today-start)/86400000)+1;
 
-  return Math.max(1,Math.min(92,diff));
+  return Math.min(92,Math.max(1,difference));
+
 }
 
-function getTodayDayName(){
-  return new Intl.DateTimeFormat("en-US",{weekday:"long"}).format(new Date());
+function getArcDate(day){
+
+  const d=new Date(ARC_DATE_START);
+
+  d.setDate(d.getDate()+day-1);
+
+  return d;
+
 }
 
-function isRestDay(){
-  return state.profile.restDays.includes(getTodayDayName());
+function getDayName(date){
+
+  return new Intl.DateTimeFormat(
+    "en-US",
+    {weekday:"long"}
+  ).format(date);
+
 }
 
-/* =========================================================
+/* =====================================================
    ONBOARDING
-========================================================= */
+===================================================== */
 
-function initOnboarding(){
-  const onboarding=document.getElementById("onboarding");
+function setupOnboarding(){
 
-  if(state.onboarded){
-    onboarding.style.display="none";
-    document.getElementById("mainApp").style.display="block";
-    renderAll();
-  }else{
-    onboarding.style.display="block";
-  }
-}
+  document
+    .querySelectorAll("#goalOptions .option")
+    .forEach(btn=>{
 
-function setupOptionGroups(){
+      btn.addEventListener("click",()=>{
 
-  document.querySelectorAll("#goalOptions .option").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      btn.classList.toggle("active");
+        btn.classList.toggle("active");
+
+      });
+
     });
-  });
 
-  document.querySelectorAll("#restOptions .option").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      btn.classList.toggle("active");
+  document
+    .querySelectorAll("#restOptions .option")
+    .forEach(btn=>{
+
+      btn.addEventListener("click",()=>{
+
+        btn.classList.toggle("active");
+
+      });
+
     });
-  });
 
-  document.querySelectorAll("#styleOptions .option").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      document.querySelectorAll("#styleOptions .option")
-        .forEach(x=>x.classList.remove("active"));
+  document
+    .querySelectorAll("#styleOptions .option")
+    .forEach(btn=>{
 
-      btn.classList.add("active");
+      btn.addEventListener("click",()=>{
+
+        document
+          .querySelectorAll("#styleOptions .option")
+          .forEach(x=>x.classList.remove("active"));
+
+        btn.classList.add("active");
+
+      });
+
     });
-  });
+
 }
 
 function finishOnboarding(){
@@ -1563,29 +2427,50 @@ function finishOnboarding(){
   const weight=document.getElementById("weight").value.trim();
   const time=document.getElementById("time").value;
 
-  if(!age || !height || !weight || !time){
-    alert("Complete your basic profile first.");
+  if(!age||!height||!weight||!time){
+
+    alert("Complete all required profile fields first.");
+
     return;
+
   }
 
   const goals=[
-    ...document.querySelectorAll("#goalOptions .option.active")
+
+    ...document
+      .querySelectorAll("#goalOptions .option.active")
+
   ].map(x=>x.dataset.value);
 
   const restDays=[
-    ...document.querySelectorAll("#restOptions .option.active")
+
+    ...document
+      .querySelectorAll("#restOptions .option.active")
+
   ].map(x=>x.dataset.value);
 
-  const style=document.querySelector("#styleOptions .option.active");
+  const selectedStyle=document.querySelector(
+    "#styleOptions .option.active"
+  );
 
   state.profile={
+
     age,
+
     height,
+
     weight,
+
     time,
+
     goals,
+
     restDays,
-    style:style ? style.dataset.value : "Balanced"
+
+    style:selectedStyle
+      ?selectedStyle.dataset.value
+      :"Balanced"
+
   };
 
   state.onboarded=true;
@@ -1593,52 +2478,69 @@ function finishOnboarding(){
   saveState();
 
   document.getElementById("onboarding").style.display="none";
+
   document.getElementById("mainApp").style.display="block";
 
   renderAll();
 
-  /*
-    Important:
-    We intentionally do NOT force the user to ChatGPT here.
-    They can continue with the Arc or use the ChatGPT handoff.
-  */
 }
 
-/* =========================================================
+/* =====================================================
    NAVIGATION
-========================================================= */
+===================================================== */
 
 function toggleDrawer(){
-  document.getElementById("drawer").classList.toggle("open");
+
+  document
+    .getElementById("drawer")
+    .classList.toggle("open");
+
 }
 
 function showView(id){
 
-  document.querySelectorAll(".view")
+  document
+    .querySelectorAll(".view")
     .forEach(v=>v.classList.remove("active"));
 
   const target=document.getElementById(id);
 
   if(target)target.classList.add("active");
 
-  document.getElementById("drawer").classList.remove("open");
+  document
+    .getElementById("drawer")
+    .classList.remove("open");
 
-  window.scrollTo({top:0,behavior:"smooth"});
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
-  if(id==="stats")renderStats();
+  if(id==="analytics"){
+    renderAnalytics();
+  }
+
 }
 
-/* =========================================================
+/* =====================================================
    HABITS
-========================================================= */
+===================================================== */
 
-function completedToday(id){
-  const key=todayKey();
+function completedOn(date,id){
+
+  const key=dateKey(date);
 
   return !!(
     state.completed[key] &&
     state.completed[key][id]
   );
+
+}
+
+function completedToday(id){
+
+  return completedOn(new Date(),id);
+
 }
 
 function toggleHabit(id){
@@ -1649,22 +2551,85 @@ function toggleHabit(id){
     state.completed[key]={};
   }
 
-  const already=!!state.completed[key][id];
-
-  state.completed[key][id]=!already;
-
   const habit=HABITS.find(h=>h.id===id);
 
+  const wasDone=!!state.completed[key][id];
+
+  state.completed[key][id]=!wasDone;
+
   if(habit){
-    state.xp += already ? -habit.xp : habit.xp;
+
+    state.xp+=wasDone
+      ?-habit.xp
+      :habit.xp;
+
     state.xp=Math.max(0,state.xp);
+
   }
+
+  checkPerfectDay();
 
   calculateStreak();
 
   saveState();
+
   renderAll();
+
+  if(!wasDone){
+
+    showToast(
+      `+${habit.xp} XP · ${habit.name} secured`
+    );
+
+  }
+
 }
+
+function checkPerfectDay(){
+
+  const activeHabits=getActiveHabitsForToday();
+
+  if(activeHabits.length===0)return;
+
+  const allDone=activeHabits.every(
+    h=>completedToday(h.id)
+  );
+
+  const key=todayKey();
+
+  if(allDone&&!state.perfectDays[key]){
+
+    state.perfectDays[key]=true;
+
+    state.xp+=25;
+
+    showToast("⚡ PERFECT DAY · +25 BONUS XP");
+
+  }
+
+}
+
+function getActiveHabitsForToday(){
+
+  const today=new Date();
+
+  const rest=state.profile.restDays.includes(
+    getDayName(today)
+  );
+
+  return HABITS.filter(h=>{
+
+    if(h.id==="training"&&rest)return false;
+
+    return true;
+
+  });
+
+}
+
+/* =====================================================
+   STREAK
+===================================================== */
 
 function calculateStreak(){
 
@@ -1673,61 +2638,196 @@ function calculateStreak(){
   for(let i=0;i<92;i++){
 
     const d=new Date();
+
     d.setHours(0,0,0,0);
+
     d.setDate(d.getDate()-i);
 
-    const key=dateKey(d);
+    if(!isInArc(d))continue;
 
-    const data=state.completed[key];
+    const data=state.completed[dateKey(d)];
 
-    if(data && Object.values(data).some(Boolean)){
+    if(data&&Object.values(data).some(Boolean)){
+
       streak++;
+
     }else{
+
       break;
+
     }
+
   }
 
   state.streak=streak;
+
+  if(streak>state.longestStreak){
+
+    state.longestStreak=streak;
+
+  }
+
 }
 
-function renderHabitList(targetId){
+/* =====================================================
+   RECOVERY SYSTEM
+===================================================== */
 
-  const container=document.getElementById(targetId);
-  if(!container)return;
+function findLatestMissedDay(){
 
-  container.innerHTML="";
+  const today=normalizeDate(new Date());
 
-  HABITS.forEach(habit=>{
+  const start=normalizeDate(ARC_DATE_START);
 
-    const done=completedToday(habit.id);
+  const cursor=new Date(today);
 
-    const row=document.createElement("div");
-    row.className="habit-row";
+  cursor.setDate(cursor.getDate()-1);
 
-    row.innerHTML=`
-      <div class="habit-main">
-        <div class="habit-icon">${habit.icon}</div>
-        <div>
-          <div class="habit-name">${habit.name}</div>
-          <div class="habit-meta">${habit.meta} · +${habit.xp} XP</div>
-        </div>
+  while(cursor>=start){
+
+    const dayName=getDayName(cursor);
+
+    const isRest=state.profile.restDays.includes(dayName);
+
+    if(!isRest){
+
+      const key=dateKey(cursor);
+
+      const data=state.completed[key];
+
+      const completed=data
+        ?Object.values(data).filter(Boolean).length
+        :0;
+
+      if(completed===0){
+
+        return cursor;
+
+      }
+
+    }
+
+    cursor.setDate(cursor.getDate()-1);
+
+  }
+
+  return null;
+
+}
+
+function renderRecovery(){
+
+  const area=document.getElementById("recoveryArea");
+
+  const missed=findLatestMissedDay();
+
+  if(!missed){
+
+    area.innerHTML="";
+
+    return;
+
+  }
+
+  const daysAgo=Math.floor(
+    (normalizeDate(new Date())-missed)/86400000
+  );
+
+  area.innerHTML=`
+
+    <div class="recovery-banner">
+
+      <h2>⚡ ARC INTERRUPTION DETECTED</h2>
+
+      <p>
+        Day ${getArcDay()-daysAgo} was incomplete.
+        Your Arc is not over. You have a recovery path available.
+      </p>
+
+      <div class="recovery-actions">
+
+        <button
+          class="primary"
+          onclick="recoverMissedDay('${dateKey(missed)}')"
+          ${state.recoveryCredits<=0?"disabled":""}
+        >
+          ${state.recoveryCredits>0
+            ?"INITIATE RECOVERY"
+            :"NO RECOVERY CREDITS"}
+        </button>
+
+        <button
+          class="secondary"
+          onclick="acceptMissedDay('${dateKey(missed)}')"
+        >
+          ACCEPT & CONTINUE
+        </button>
+
       </div>
 
-      <button
-        class="check ${done?"done":""}"
-        onclick="toggleHabit('${habit.id}')"
-      >
-        ${done?"✓":""}
-      </button>
-    `;
+    </div>
 
-    container.appendChild(row);
-  });
+  `;
+
 }
 
-/* =========================================================
-   DASHBOARD
-========================================================= */
+function recoverMissedDay(key){
+
+  if(state.recoveryCredits<=0){
+
+    showToast("No Recovery Credits available.");
+
+    return;
+
+  }
+
+  state.recoveryCredits--;
+
+  state.comebacks++;
+
+  state.comebackStreak++;
+
+  state.recoveredDates[key]=true;
+
+  state.xp+=20;
+
+  delete state.completed[key];
+
+  saveState();
+
+  document
+    .getElementById("comebackOverlay")
+    .classList.add("show");
+
+  renderAll();
+
+}
+
+function acceptMissedDay(key){
+
+  state.comebackStreak=0;
+
+  state.recoveredDates[key]=false;
+
+  saveState();
+
+  showToast("Day accepted. Arc continues.");
+
+  renderRecovery();
+
+}
+
+function closeComeback(){
+
+  document
+    .getElementById("comebackOverlay")
+    .classList.remove("show");
+
+}
+
+/* =====================================================
+   RENDER DASHBOARD
+===================================================== */
 
 function renderDashboard(){
 
@@ -1736,73 +2836,625 @@ function renderDashboard(){
   let greeting="Good evening.";
 
   if(hour<12)greeting="Good morning.";
+
   else if(hour<18)greeting="Good afternoon.";
 
-  document.getElementById("dashGreeting").textContent=
-    `${greeting} ${state.profile.age ? "" : ""}`.trim();
+  document.getElementById(
+    "dashGreeting"
+  ).textContent=greeting;
 
-  document.getElementById("todayDate").textContent=
-    new Intl.DateTimeFormat("en-US",{
-      weekday:"short",
-      month:"short",
-      day:"numeric"
-    }).format(new Date());
+  document.getElementById(
+    "arcDay"
+  ).textContent=getArcDay();
 
-  document.getElementById("arcDay").textContent=getArcDay();
-  document.getElementById("xpValue").textContent=state.xp;
-  document.getElementById("streakValue").textContent=state.streak;
+  document.getElementById(
+    "xpValue"
+  ).textContent=state.xp;
 
-  const completed=HABITS.filter(h=>completedToday(h.id)).length;
-  const percent=Math.round((completed/HABITS.length)*100);
+  document.getElementById(
+    "streakValue"
+  ).textContent=state.streak;
 
-  document.getElementById("habitScore").textContent=percent+"%";
+  document.getElementById(
+    "comebackValue"
+  ).textContent=state.comebacks;
 
-  document.getElementById("novaBriefing").textContent=
-    isRestDay()
-      ? `Today is ${getTodayDayName()}, one of your configured rest days. Training is not counted today. Use the day for recovery, study, reading and your other habits.`
-      : `Today is ${getTodayDayName()}. Training is an active Arc day. Your available time is ${state.profile.time || "not configured"}. Nova recommends focusing on consistency rather than trying to do everything at once.`;
+  document.getElementById(
+    "todayDate"
+  ).textContent=
+    new Intl.DateTimeFormat(
+      "en-US",
+      {
+        weekday:"short",
+        month:"short",
+        day:"numeric"
+      }
+    ).format(new Date());
 
-  renderHabitList("dashboardHabits");
+  const rest=state.profile.restDays.includes(
+    getDayName(new Date())
+  );
+
+  document.getElementById(
+    "trainingStatus"
+  ).textContent=rest
+    ?"REST DAY"
+    :"ACTIVE";
+
+  document.getElementById(
+    "recoveryCredits"
+  ).textContent=state.recoveryCredits;
+
+  document.getElementById(
+    "goalStatus"
+  ).textContent=
+    state.profile.goals[0]||"GENERAL";
+
+  const active=getActiveHabitsForToday();
+
+  const completed=active.filter(
+    h=>completedToday(h.id)
+  ).length;
+
+  const percent=active.length
+    ?Math.round(completed/active.length*100)
+    :100;
+
+  document.getElementById(
+    "dailyPercent"
+  ).textContent=percent+"%";
+
+  document.getElementById(
+    "dailyProgress"
+  ).style.width=percent+"%";
+
+  document.getElementById(
+    "novaBriefing"
+  ).textContent=rest
+
+    ?`Today is ${getDayName(new Date())}, one of your configured training rest days. Training is excluded from today's workout expectations. Use the day for recovery, study, reading and your other habits.`
+
+    :`Today is an active Arc day. You have ${state.profile.time} available. Focus on completing the next useful action rather than trying to maximize volume.`;
+
+  renderHabitList(
+    "dashboardHabits",
+    true
+  );
+
+  renderRecovery();
+
 }
 
-/* =========================================================
+/* =====================================================
+   HABIT LIST
+===================================================== */
+
+function renderHabitList(targetId,compact=false){
+
+  const container=document.getElementById(targetId);
+
+  if(!container)return;
+
+  container.innerHTML="";
+
+  const rest=state.profile.restDays.includes(
+    getDayName(new Date())
+  );
+
+  HABITS.forEach(habit=>{
+
+    if(compact&&habit.id==="training"&&rest){
+
+      return;
+
+    }
+
+    const done=completedToday(habit.id);
+
+    const row=document.createElement("div");
+
+    row.className="habit-row";
+
+    row.innerHTML=`
+
+      <div class="habit-main">
+
+        <div class="habit-icon">
+          ${habit.icon}
+        </div>
+
+        <div>
+
+          <div class="habit-name">
+            ${habit.name}
+          </div>
+
+          <div class="habit-meta">
+            ${habit.meta} · +${habit.xp} XP
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="habit-actions">
+
+        <button
+          class="detail-btn"
+          onclick="openHabit('${habit.id}')"
+        >
+          INFO
+        </button>
+
+        <button
+          class="check ${done?"done":""}"
+          onclick="toggleHabit('${habit.id}')"
+        >
+          ${done?"✓":""}
+        </button>
+
+      </div>
+
+    `;
+
+    container.appendChild(row);
+
+  });
+
+}
+
+/* =====================================================
+   AGE-AWARE HABIT INTELLIGENCE
+===================================================== */
+
+const HABIT_GUIDES={
+
+  sleep:{
+
+    title:"Sleep",
+
+    subtitle:"Recovery / consistency",
+
+    importance:`
+      Sleep supports learning, attention, emotional regulation,
+      physical recovery and everyday performance. It is not simply
+      "time when nothing is happening"; your body and brain use this
+      period for important recovery processes.
+
+      For a Winter Arc, the objective is not to turn sleep into
+      another competition. A sustainable schedule that allows you
+      to wake up reasonably refreshed is more useful than chasing
+      a perfect streak while repeatedly cutting your sleep short.
+    `,
+
+    ageGuide:age=>{
+
+      if(age<18){
+
+        return `
+          Because your profile indicates that you are under 18,
+          sleep should be treated as a growth and recovery priority.
+          Teenagers generally need more sleep than adults, so the
+          Arc should never reward sacrificing sleep simply to complete
+          another task.
+
+          A consistent sleep and wake window, a manageable evening
+          routine and enough time in bed are more useful than trying
+          to "hack" sleep with extreme schedules.
+        `;
+
+      }
+
+      return `
+        As an adult, aim for a consistent sleep schedule that gives
+        you enough time for recovery and normal daytime functioning.
+        If persistent sleep problems interfere with daily life,
+        discuss them with an appropriate healthcare professional.
+      `;
+
+    },
+
+    dos:[
+      "Keep sleep and wake times reasonably consistent.",
+      "Create a short wind-down routine.",
+      "Keep late-night work proportional to its importance.",
+      "Treat sleep as part of the training system."
+    ],
+
+    donts:[
+      "Do not intentionally cut sleep to protect a streak.",
+      "Do not treat exhaustion as a badge of discipline.",
+      "Do not repeatedly rely on large schedule swings."
+    ],
+
+    target:age=>age<18
+      ?"Teen-focused: prioritize adequate nightly sleep and consistency."
+      :"Adult-focused: prioritize sufficient, consistent sleep."
+
+  },
+
+  hydrate:{
+
+    title:"Hydration",
+
+    subtitle:"Regular hydration / daily function",
+
+    importance:`
+      Hydration supports normal body function, concentration,
+      physical activity and temperature regulation. The useful
+      approach is consistency throughout the day rather than
+      treating water intake as a challenge to maximize.
+
+      Your Winter Arc should make hydration easy by putting water
+      where you naturally spend time: near your desk, school bag,
+      training area or workspace.
+    `,
+
+    ageGuide:age=>age<18
+      ?`
+        For teenagers, hydration needs can vary with weather,
+        activity, food intake and individual circumstances.
+        Drink regularly and respond to thirst rather than forcing
+        extreme amounts.
+      `
+      :`
+        For adults, hydration needs also vary considerably with
+        climate, activity, diet and individual circumstances.
+        Regular intake and thirst are useful practical guides.
+      `,
+
+    dos:[
+      "Keep water accessible.",
+      "Drink regularly throughout the day.",
+      "Increase attention to hydration during heat or activity.",
+      "Use thirst and normal body signals as useful feedback."
+    ],
+
+    donts:[
+      "Do not force excessive water intake.",
+      "Do not use water to replace meals.",
+      "Do not treat dehydration as a challenge."
+    ],
+
+    target:age=> "Consistent hydration appropriate to activity and environment."
+
+  },
+
+  training:{
+
+    title:"Training",
+
+    subtitle:"Movement / strength / physical development",
+
+    importance:`
+      Training is the physical engine of the Winter Arc. Consistent
+      movement can support strength, fitness, coordination and
+      confidence when it is matched to the person's current ability.
+
+      The objective is progressive practice, not destroying yourself
+      in one session. A good session leaves room for recovery and
+      allows you to repeat the work consistently over the following
+      weeks.
+    `,
+
+    ageGuide:age=>age<18
+      ?`
+        Because you are under 18, training should emphasize
+        technique, appropriate resistance, gradual progression,
+        enjoyable movement and recovery. The goal should not be
+        extreme dieting, aggressive body transformation or
+        maximal training volume.
+
+        If a movement causes significant pain, stop and involve a
+        parent/guardian or qualified professional as appropriate.
+      `
+      :`
+        Adults can generally structure training around their goals,
+        experience and available equipment while still progressing
+        gradually and allowing adequate recovery.
+      `,
+
+    dos:[
+      "Prioritize controlled technique.",
+      "Progress gradually.",
+      "Respect your scheduled rest days.",
+      "Track useful performance improvements."
+    ],
+
+    donts:[
+      "Do not train through significant pain.",
+      "Do not compensate for a missed workout with extreme volume.",
+      "Do not treat soreness as proof that a session was successful."
+    ],
+
+    target:age=>age<18
+      ?"Technique + consistency + recovery."
+      :"Progressive training + recovery."
+
+  },
+
+  study:{
+
+    title:"Deep Work",
+
+    subtitle:"Study / focused work",
+
+    importance:`
+      Deep work turns intention into actual progress. Instead of
+      repeatedly switching between notifications, apps and tasks,
+      the goal is to give one meaningful task a protected period
+      of attention.
+
+      The Winter Arc does not require enormous study sessions.
+      A focused block that is repeated consistently can be much
+      more valuable than a long session performed only when
+      motivation appears.
+    `,
+
+    ageGuide:age=>`
+      At age ${age}, your school or learning workload may vary.
+      Build focus blocks around your real responsibilities and
+      protect breaks so that concentration remains sustainable.
+    `,
+
+    dos:[
+      "Choose one clear task before starting.",
+      "Remove obvious distractions.",
+      "Use focused blocks followed by breaks.",
+      "Track completed work rather than only hours."
+    ],
+
+    donts:[
+      "Do not confuse sitting at a desk with studying.",
+      "Do not multitask unnecessarily.",
+      "Do not sacrifice essential sleep for routine study."
+    ],
+
+    target:age=>"One clearly defined focused block at a time."
+
+  },
+
+  reading:{
+
+    title:"Reading",
+
+    subtitle:"Learning / reflection",
+
+    importance:`
+      Reading is the Arc's slower information system. Unlike short
+      bursts of scrolling, sustained reading gives you time to follow
+      an argument, understand a story or build a mental model.
+
+      The purpose is not to manufacture a huge page count. The
+      purpose is to consistently expose yourself to useful ideas
+      and actually remember or apply some of them.
+    `,
+
+    ageGuide:age=>`
+      At age ${age}, choose material appropriate to your interests,
+      school level and goals. Fiction, nonfiction, textbooks and
+      high-quality long-form writing can all count when they support
+      your current objective.
+    `,
+
+    dos:[
+      "Keep a book accessible.",
+      "Read a manageable amount consistently.",
+      "Highlight or note genuinely useful ideas.",
+      "Return to difficult sections instead of rushing."
+    ],
+
+    donts:[
+      "Do not turn page count into the only measure of success.",
+      "Do not force yourself through material that is completely inappropriate for your level.",
+      "Do not sacrifice sleep to hit a reading target."
+    ],
+
+    target:age=>"A sustainable daily reading habit."
+
+  },
+
+  reset:{
+
+    title:"Environment Reset",
+
+    subtitle:"Organization / friction reduction",
+
+    importance:`
+      Your environment changes the number of small decisions you have
+      to make. A clear desk, prepared school bag or organized training
+      area makes the next useful action easier to start.
+
+      The Winter Arc uses a reset because discipline becomes easier
+      when the environment supports the behavior. This is not about
+      keeping everything perfect. It is about reducing unnecessary
+      friction.
+    `,
+
+    ageGuide:age=>`
+      At age ${age}, keep the reset simple enough to fit around school,
+      family responsibilities and your normal routine. A short daily
+      reset is usually more sustainable than a large cleaning session
+      that happens once every few weeks.
+    `,
+
+    dos:[
+      "Reset the space you use most.",
+      "Prepare tomorrow's essentials.",
+      "Put frequently used items where they are easy to reach.",
+      "Keep the routine short."
+    ],
+
+    donts:[
+      "Do not spend an hour reorganizing when five minutes would work.",
+      "Do not use cleaning as a way to avoid your main task.",
+      "Do not chase perfection."
+    ],
+
+    target:age=>"A short daily environment reset."
+
+  }
+
+};
+
+function openHabit(id){
+
+  const habit=HABITS.find(h=>h.id===id);
+
+  const guide=HABIT_GUIDES[id];
+
+  if(!habit||!guide)return;
+
+  document.getElementById(
+    "detailIcon"
+  ).textContent=habit.icon;
+
+  document.getElementById(
+    "detailTitle"
+  ).textContent=guide.title;
+
+  document.getElementById(
+    "detailSubtitle"
+  ).textContent=guide.subtitle;
+
+  const age=Number(state.profile.age)||18;
+
+  document.getElementById(
+    "ageChip"
+  ).textContent=
+    `AGE PROFILE · ${age}`;
+
+  const dos=guide.dos
+    .map(x=>`<li>${escapeHTML(x)}</li>`)
+    .join("");
+
+  const donts=guide.donts
+    .map(x=>`<li>${escapeHTML(x)}</li>`)
+    .join("");
+
+  document.getElementById(
+    "habitIntel"
+  ).innerHTML=`
+
+    <div class="intel-box full">
+
+      <h3>WHY THIS HABIT MATTERS</h3>
+
+      <p>
+        ${guide.importance}
+      </p>
+
+    </div>
+
+    <div class="intel-box full">
+
+      <h3>YOUR AGE-AWARE GUIDE</h3>
+
+      <p>
+        ${guide.ageGuide(age)}
+      </p>
+
+      <span class="age-chip">
+        ${guide.target(age)}
+      </span>
+
+    </div>
+
+    <div class="intel-box">
+
+      <h3>DO</h3>
+
+      <ul>
+        ${dos}
+      </ul>
+
+    </div>
+
+    <div class="intel-box">
+
+      <h3>DON'T</h3>
+
+      <ul>
+        ${donts}
+      </ul>
+
+    </div>
+
+    <div class="intel-box full">
+
+      <h3>WINTER ARC RULE</h3>
+
+      <p>
+        Consistency beats intensity. If today's ideal version of this
+        habit is not possible, perform a smaller sensible version
+        instead of abandoning the entire system.
+      </p>
+
+    </div>
+
+  `;
+
+  showView("habitDetail");
+
+}
+
+/* =====================================================
    MASTER PLAN
-========================================================= */
+===================================================== */
 
 function renderMaster(){
 
   const p=state.profile;
 
   const tags=[
+
     `Age ${p.age}`,
+
     p.height,
+
     p.weight,
+
     p.time,
+
     ...(p.goals||[]),
+
     `Style: ${p.style}`
+
   ].filter(Boolean);
 
-  document.getElementById("profileTags").innerHTML=
-    tags.map(x=>`<span class="tag">${escapeHTML(x)}</span>`).join("");
+  document.getElementById(
+    "profileTags"
+  ).innerHTML=tags
+    .map(x=>`
+      <span class="tag">
+        ${escapeHTML(x)}
+      </span>
+    `)
+    .join("");
 
   const goals=p.goals.length
-    ? p.goals.join(", ")
-    : "consistent personal development";
+    ?p.goals.join(", ")
+    :"personal consistency";
 
-  document.getElementById("masterObjective").textContent=
-    `Your Arc is centered on ${goals.toLowerCase()}. The system is designed to make those priorities repeatable across the 92-day window rather than relying on motivation.`;
+  document.getElementById(
+    "masterObjective"
+  ).textContent=
+    `Your Arc is centered on ${goals.toLowerCase()}. The system converts those priorities into repeatable daily actions across the 92-day campaign.`;
 
   const rest=p.restDays.length
-    ? p.restDays.join(", ")
-    : "No fixed rest days configured";
+    ?p.restDays.join(", ")
+    :"No fixed rest days";
 
-  document.getElementById("trainingPlan").textContent=
-    `Available time: ${p.time || "not configured"}. Fixed rest day(s): ${rest}. Active training days are every other day within the Arc window. If you are still growing, training should emphasize technique, gradual progression and recovery rather than extreme volume or restrictive eating.`;
+  document.getElementById(
+    "trainingPlan"
+  ).textContent=
+    `Available time: ${p.time}. Fixed training rest days: ${rest}. Active training days are every other day within your personal schedule. The system prioritizes gradual progression, appropriate recovery and sustainable execution.`;
+
 }
 
-/* =========================================================
+/* =====================================================
    CALENDAR
-========================================================= */
+===================================================== */
 
 function renderCalendar(){
 
@@ -1811,227 +3463,858 @@ function renderCalendar(){
   container.innerHTML="";
 
   const months=[
-    {month:9,name:"October",days:31},
-    {month:10,name:"November",days:30},
-    {month:11,name:"December",days:31}
+
+    {
+      month:9,
+      name:"October",
+      days:31,
+      label:"GRIND BEGINS"
+    },
+
+    {
+      month:10,
+      name:"November",
+      days:30,
+      label:"ARC"
+    },
+
+    {
+      month:11,
+      name:"December",
+      days:31,
+      label:"GRIND ENDS"
+    }
+
   ];
 
   months.forEach(m=>{
 
     const box=document.createElement("div");
+
     box.className="month";
 
-    const firstDay=new Date(2026,m.month,1).getDay();
+    const firstDay=
+      new Date(2026,m.month,1).getDay();
 
     let html=`
-      <div class="month-title">
+
+      <div class="month-header">
+
         <strong>${m.name} 2026</strong>
-        <span>${m.name==="October"?"GRIND BEGINS":m.name==="December"?"GRIND ENDS":"ARC"}</span>
+
+        <span>${m.label}</span>
+
       </div>
 
       <div class="weekdays">
-        <div>S</div><div>M</div><div>T</div>
-        <div>W</div><div>T</div><div>F</div><div>S</div>
+
+        <div>S</div>
+        <div>M</div>
+        <div>T</div>
+        <div>W</div>
+        <div>T</div>
+        <div>F</div>
+        <div>S</div>
+
       </div>
 
       <div class="days">
+
     `;
 
     for(let i=0;i<firstDay;i++){
+
       html+=`<div class="day"></div>`;
+
     }
 
     for(let day=1;day<=m.days;day++){
 
-      const date=new Date(2026,m.month,day);
-      const today=new Date();
+      const date=
+        new Date(2026,m.month,day);
+
+      const today=
+        normalizeDate(new Date());
 
       const isToday=
-        date.getFullYear()===today.getFullYear() &&
-        date.getMonth()===today.getMonth() &&
-        date.getDate()===today.getDate();
+        date.getTime()===today.getTime();
 
-      const rest=state.profile.restDays.includes(
-        new Intl.DateTimeFormat("en-US",{weekday:"long"}).format(date)
-      );
+      const rest=
+        state.profile.restDays.includes(
+          getDayName(date)
+        );
 
       html+=`
-        <div class="day active ${isToday?"today":""} ${rest?"rest":""}">
+
+        <div class="
+          day
+          arc
+          ${isToday?"today":""}
+          ${rest?"rest":""}
+        ">
           ${day}
         </div>
+
       `;
+
     }
 
-    html+="</div>";
+    html+=`</div>`;
 
     box.innerHTML=html;
+
     container.appendChild(box);
+
   });
+
 }
 
-/* =========================================================
-   STATS
-========================================================= */
+/* =====================================================
+   ANALYTICS HELPERS
+===================================================== */
 
-function renderStats(){
+function getCompletedCountForDate(date){
 
-  document.getElementById("statXP").textContent=state.xp;
+  const data=
+    state.completed[dateKey(date)];
 
+  if(!data)return 0;
+
+  return Object.values(data)
+    .filter(Boolean)
+    .length;
+
+}
+
+function getExpectedHabitCount(date){
+
+  const rest=
+    state.profile.restDays.includes(
+      getDayName(date)
+    );
+
+  return rest
+    ?HABITS.length-1
+    :HABITS.length;
+
+}
+
+function getDayCompletionPercent(date){
+
+  if(!isInArc(date))return 0;
+
+  const expected=getExpectedHabitCount(date);
+
+  if(expected<=0)return 0;
+
+  return Math.round(
+    getCompletedCountForDate(date)/
+    expected*100
+  );
+
+}
+
+function getHabitCompletionRate(id){
+
+  let expected=0;
   let completed=0;
 
-  Object.values(state.completed).forEach(day=>{
-    Object.values(day).forEach(v=>{
-      if(v)completed++;
-    });
-  });
+  for(let day=1;day<=92;day++){
 
-  document.getElementById("statCompleted").textContent=completed;
+    const date=getArcDate(day);
 
-  const progress=getArcDay();
+    if(id==="training" &&
+       state.profile.restDays.includes(
+         getDayName(date)
+       )){
 
-  document.getElementById("statProgress").textContent=
-    Math.round((progress/92)*100)+"%";
+      continue;
 
-  document.getElementById("statRest").textContent=
-    state.profile.restDays.length;
+    }
+
+    expected++;
+
+    if(completedOn(date,id)){
+      completed++;
+    }
+
+  }
+
+  return expected
+    ?Math.round(completed/expected*100)
+    :0;
+
 }
 
-/* =========================================================
+function getOverallCompletion(){
+
+  let expected=0;
+  let completed=0;
+
+  for(let day=1;day<=92;day++){
+
+    const date=getArcDate(day);
+
+    expected+=getExpectedHabitCount(date);
+
+    completed+=getCompletedCountForDate(date);
+
+  }
+
+  return expected
+    ?Math.round(completed/expected*100)
+    :0;
+
+}
+
+function getPerfectDayCount(){
+
+  return Object.keys(
+    state.perfectDays||{}
+  ).filter(
+    key=>state.perfectDays[key]
+  ).length;
+
+}
+
+function getMissedActiveDays(){
+
+  let missed=0;
+
+  const current=Math.min(
+    92,
+    Math.max(0,getArcDay())
+  );
+
+  for(let day=1;day<=current;day++){
+
+    const date=getArcDate(day);
+
+    const rest=
+      state.profile.restDays.includes(
+        getDayName(date)
+      );
+
+    if(rest)continue;
+
+    if(getCompletedCountForDate(date)===0){
+
+      missed++;
+
+    }
+
+  }
+
+  return missed;
+
+}
+
+/* =====================================================
+   ANALYTICS
+===================================================== */
+
+function renderAnalytics(){
+
+  const overall=getOverallCompletion();
+
+  document.getElementById(
+    "analyticsXP"
+  ).textContent=state.xp;
+
+  document.getElementById(
+    "analyticsCompletion"
+  ).textContent=overall+"%";
+
+  document.getElementById(
+    "analyticsLongest"
+  ).textContent=state.longestStreak;
+
+  document.getElementById(
+    "analyticsComebacks"
+  ).textContent=state.comebacks;
+
+  document.getElementById(
+    "analyticsArcDay"
+  ).textContent=
+    `${getArcDay()} / 92`;
+
+  const arcProgress=
+    Math.round(getArcDay()/92*100);
+
+  document.getElementById(
+    "analyticsArcProgress"
+  ).style.width=
+    arcProgress+"%";
+
+  document.getElementById(
+    "analyticsCredits"
+  ).textContent=
+    state.recoveryCredits;
+
+  document.getElementById(
+    "analyticsMissed"
+  ).textContent=
+    getMissedActiveDays();
+
+  document.getElementById(
+    "analyticsPerfect"
+  ).textContent=
+    getPerfectDayCount();
+
+  renderHabitAnalytics();
+
+  renderTimeline();
+
+  renderMonthlyAnalytics();
+
+  renderInsights();
+
+}
+
+function renderHabitAnalytics(){
+
+  const container=
+    document.getElementById(
+      "habitAnalytics"
+    );
+
+  container.innerHTML="";
+
+  HABITS.forEach(habit=>{
+
+    const rate=
+      getHabitCompletionRate(habit.id);
+
+    container.innerHTML+=`
+
+      <div>
+
+        <div class="bar-row-top">
+
+          <span>
+            ${habit.icon} ${habit.name}
+          </span>
+
+          <span>${rate}%</span>
+
+        </div>
+
+        <div class="bar-bg">
+
+          <span style="width:${rate}%"></span>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+function renderTimeline(){
+
+  const container=
+    document.getElementById(
+      "timeline"
+    );
+
+  container.innerHTML="";
+
+  for(let day=1;day<=92;day++){
+
+    const date=getArcDate(day);
+
+    const percent=
+      getDayCompletionPercent(date);
+
+    const bar=document.createElement("div");
+
+    bar.className="timeline-day";
+
+    if(percent>=100){
+      bar.classList.add("great");
+    }else if(percent>=50){
+      bar.classList.add("good");
+    }else if(percent===0){
+      bar.classList.add("missed");
+    }
+
+    bar.style.height=
+      Math.max(5,percent*.85)+"px";
+
+    bar.title=
+      `Day ${day}: ${percent}%`;
+
+    container.appendChild(bar);
+
+  }
+
+}
+
+function getMonthData(monthIndex){
+
+  const first=new Date(
+    2026,
+    monthIndex,
+    1
+  );
+
+  const last=new Date(
+    2026,
+    monthIndex+1,
+    0
+  );
+
+  let expected=0;
+  let completed=0;
+  let activeDays=0;
+  let missed=0;
+
+  for(
+    let date=new Date(first);
+    date<=last;
+    date.setDate(date.getDate()+1)
+  ){
+
+    if(!isInArc(date))continue;
+
+    const exp=
+      getExpectedHabitCount(date);
+
+    const comp=
+      getCompletedCountForDate(date);
+
+    expected+=exp;
+    completed+=comp;
+
+    const rest=
+      state.profile.restDays.includes(
+        getDayName(date)
+      );
+
+    if(!rest){
+
+      activeDays++;
+
+      if(comp===0){
+        missed++;
+      }
+
+    }
+
+  }
+
+  return {
+    expected,
+    completed,
+    activeDays,
+    missed,
+    completion:expected
+      ?Math.round(completed/expected*100)
+      :0
+  };
+
+}
+
+function renderMonthlyAnalytics(){
+
+  const container=
+    document.getElementById(
+      "monthlyAnalytics"
+    );
+
+  container.innerHTML="";
+
+  [
+    {month:9,name:"October"},
+    {month:10,name:"November"},
+    {month:11,name:"December"}
+  ].forEach(m=>{
+
+    const d=getMonthData(m.month);
+
+    container.innerHTML+=`
+
+      <div class="month-stat">
+
+        <h3>${m.name} 2026</h3>
+
+        <div class="month-stat-row">
+          <span>Completion</span>
+          <span>${d.completion}%</span>
+        </div>
+
+        <div class="month-stat-row">
+          <span>Actions completed</span>
+          <span>${d.completed}</span>
+        </div>
+
+        <div class="month-stat-row">
+          <span>Active days</span>
+          <span>${d.activeDays}</span>
+        </div>
+
+        <div class="month-stat-row">
+          <span>Missed active days</span>
+          <span>${d.missed}</span>
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+function renderInsights(){
+
+  const container=
+    document.getElementById(
+      "insights"
+    );
+
+  const rates=
+    HABITS.map(h=>({
+      ...h,
+      rate:getHabitCompletionRate(h.id)
+    }))
+    .sort((a,b)=>b.rate-a.rate);
+
+  const best=rates[0];
+
+  const weakest=
+    rates[rates.length-1];
+
+  const insights=[];
+
+  insights.push(
+    `Your overall Arc completion rate is ${getOverallCompletion()}%.`
+  );
+
+  if(best){
+
+    insights.push(
+      `${best.icon} ${best.name} currently has your highest completion rate at ${best.rate}%.`
+    );
+
+  }
+
+  if(weakest){
+
+    insights.push(
+      `${weakest.icon} ${weakest.name} currently has the most room for consistency at ${weakest.rate}%.`
+    );
+
+  }
+
+  if(state.comebacks>0){
+
+    insights.push(
+      `You have registered ${state.comebacks} comeback${state.comebacks===1?"":"s"}. Recovery is now part of your Arc history.`
+    );
+
+  }else{
+
+    insights.push(
+      "No comeback events have been registered yet. If an interruption happens, use Recovery Protocol instead of abandoning the campaign."
+    );
+
+  }
+
+  container.innerHTML=
+    insights.map(x=>`
+      <div class="insight">${escapeHTML(x)}</div>
+    `).join("");
+
+}
+
+/* =====================================================
    ACHIEVEMENTS
-========================================================= */
+===================================================== */
 
 function renderAchievements(){
 
-  const grid=document.getElementById("achievementGrid");
-
-  const completed=Object.values(state.completed)
-    .reduce((total,day)=>
-      total+Object.values(day).filter(Boolean).length,0);
+  const completedActions=
+    Object.values(state.completed)
+    .reduce(
+      (total,day)=>
+        total+
+        Object.values(day)
+          .filter(Boolean).length,
+      0
+    );
 
   const achievements=[
+
     {
       title:"Arc Initiated",
-      text:"Complete the initial Arc configuration.",
+      icon:"🚀",
+      text:"Complete your initial Arc configuration.",
       unlocked:state.onboarded
     },
+
     {
       title:"First Signal",
+      icon:"◉",
       text:"Complete your first habit.",
-      unlocked:completed>=1
+      unlocked:completedActions>=1
     },
+
     {
       title:"10 Actions",
+      icon:"◆",
       text:"Complete ten habit actions.",
-      unlocked:completed>=10
+      unlocked:completedActions>=10
     },
+
     {
-      title:"XP 100",
+      title:"100 XP",
+      icon:"⚡",
       text:"Earn 100 XP.",
       unlocked:state.xp>=100
     },
+
+    {
+      title:"Perfect Day",
+      icon:"✦",
+      text:"Complete every scheduled habit on one day.",
+      unlocked:getPerfectDayCount()>=1
+    },
+
     {
       title:"7-Day Operator",
-      text:"Maintain activity across seven consecutive days.",
-      unlocked:state.streak>=7
+      icon:"🔥",
+      text:"Reach a seven-day active streak.",
+      unlocked:state.longestStreak>=7
     },
+
+    {
+      title:"First Comeback",
+      icon:"↻",
+      text:"Successfully recover from an interruption.",
+      unlocked:state.comebacks>=1
+    },
+
+    {
+      title:"Three Comebacks",
+      icon:"⚔",
+      text:"Register three successful recovery events.",
+      unlocked:state.comebacks>=3
+    },
+
     {
       title:"Quarter Complete",
+      icon:"◇",
       text:"Reach December 31.",
       unlocked:getArcDay()>=92
     }
+
   ];
 
-  grid.innerHTML=achievements.map(a=>`
-    <div class="detail" style="opacity:${a.unlocked?1:.5}">
-      <h3>${a.unlocked?"◆":"◇"} ${a.title}</h3>
-      <p>${a.text}</p>
-      <h4>${a.unlocked?"UNLOCKED":"LOCKED"}</h4>
-    </div>
-  `).join("");
+  document.getElementById(
+    "achievementGrid"
+  ).innerHTML=
+
+    achievements.map(a=>`
+
+      <div class="
+        achievement
+        ${a.unlocked?"":"locked"}
+      ">
+
+        <div class="achievement-symbol">
+          ${a.icon}
+        </div>
+
+        <h3>${a.title}</h3>
+
+        <p>${a.text}</p>
+
+      </div>
+
+    `).join("");
+
 }
 
-/* =========================================================
-   NOVA LOCAL ASSISTANT
-========================================================= */
+/* =====================================================
+   NOVA
+===================================================== */
 
-function addMessage(text,type){
+function addNovaMessage(text,type){
 
-  const messages=document.getElementById("messages");
+  const messages=
+    document.getElementById(
+      "messages"
+    );
 
   const div=document.createElement("div");
-  div.className="msg "+type;
+
+  div.className=
+    `msg ${type}`;
+
   div.textContent=text;
 
   messages.appendChild(div);
-  messages.scrollTop=messages.scrollHeight;
+
+  messages.scrollTop=
+    messages.scrollHeight;
+
 }
 
 function sendNova(){
 
-  const input=document.getElementById("novaInput");
-  const text=input.value.trim();
+  const input=
+    document.getElementById(
+      "novaInput"
+    );
+
+  const text=
+    input.value.trim();
 
   if(!text)return;
 
-  addMessage(text,"user");
+  addNovaMessage(text,"user");
 
   input.value="";
 
   setTimeout(()=>{
-    addMessage(novaResponse(text),"nova");
-  },250);
+
+    addNovaMessage(
+      novaResponse(text),
+      "nova"
+    );
+
+  },220);
+
 }
 
 function novaResponse(text){
 
   const q=text.toLowerCase();
 
-  if(q.includes("rest")){
-    return `Your configured rest days are ${state.profile.restDays.length ? state.profile.restDays.join(", ") : "none yet"}. Rest days are excluded from the training-day count.`;
+  if(
+    q.includes("rest")||
+    q.includes("rest day")
+  ){
+
+    return `
+      Your configured training rest days are:
+      ${state.profile.restDays.length
+        ?state.profile.restDays.join(", ")
+        :"none"}.
+      These days are excluded from the training-day expectation.
+    `;
+
   }
 
-  if(q.includes("calendar") || q.includes("november")){
-    return "The Arc calendar is locked to October, November and December 2026. November has 30 days, and the Arc ends on December 31.";
+  if(
+    q.includes("miss")||
+    q.includes("recover")||
+    q.includes("comeback")
+  ){
+
+    return `
+      Recovery Protocol is active. You currently have
+      ${state.recoveryCredits} Recovery Credit${state.recoveryCredits===1?"":"s"}.
+      A successful recovery gives +20 Comeback XP.
+    `;
+
+  }
+
+  if(
+    q.includes("calendar")||
+    q.includes("november")
+  ){
+
+    return `
+      The Arc calendar is locked to October, November and December 2026.
+      October has 31 days, November has 30, and December has 31.
+      The campaign ends on December 31.
+    `;
+
   }
 
   if(q.includes("xp")){
-    return `You currently have ${state.xp} XP. Habits award XP when completed and remove that XP again if you uncheck them.`;
+
+    return `
+      You currently have ${state.xp} XP.
+      Normal habits award XP, Perfect Days give bonus XP,
+      and successful recoveries award Comeback XP.
+    `;
+
   }
 
-  if(q.includes("habit")){
-    return "Your current habit system covers sleep, hydration, training, deep work, reading and environment reset. Open Habits for the individual operating guides.";
+  if(
+    q.includes("habit")||
+    q.includes("sleep")||
+    q.includes("training")||
+    q.includes("reading")
+  ){
+
+    return `
+      Open the Habits page and tap INFO on any habit.
+      Each habit now has an age-aware intelligence page with
+      importance, practical guidance, do's, don'ts and an Arc rule.
+    `;
+
   }
 
-  if(q.includes("master plan") || q.includes("plan")){
-    return "Your Master Plan is personalized around your configured goals, available time and rest days. For a deeper plan, use one of the Ask ChatGPT options.";
+  if(
+    q.includes("analytics")||
+    q.includes("stats")
+  ){
+
+    return `
+      Your Analytics page tracks XP, completion percentage,
+      longest streak, comeback events, habit performance,
+      monthly performance and your full 92-day activity timeline.
+    `;
+
+  }
+
+  if(
+    q.includes("master")||
+    q.includes("plan")
+  ){
+
+    return `
+      Your Master Plan uses your profile, goals, available time
+      and rest days. For a deeper personalized plan, use the
+      Ask ChatGPT tools.
+    `;
+
   }
 
   if(q.includes("today")){
-    return isRestDay()
-      ? "Today is a configured rest day. Training is not counted. Focus on recovery and your other Arc habits."
-      : "Today is an active Arc day. Your configured training time is "+state.profile.time+". Keep the session manageable and prioritize good technique.";
+
+    const rest=
+      state.profile.restDays.includes(
+        getDayName(new Date())
+      );
+
+    return rest
+
+      ?"Today is one of your configured training rest days. Training is not counted."
+
+      :`Today is an active Arc day. You have ${state.profile.time} available. Focus on your next useful action.`;
+
   }
 
-  if(q.includes("training") || q.includes("workout")){
-    return isRestDay()
-      ? "Today is a configured training rest day."
-      : "Today is an active training day. Use gradual progression, controlled technique and adequate recovery.";
-  }
+  return `
+    I'm tracking your Winter Arc configuration.
+    I can explain your habits, recovery system, calendar,
+    XP, streak, analytics and Master Plan.
+    For deeper plan generation, use Ask ChatGPT.
+  `;
 
-  if(q.includes("nutrition") || q.includes("food")){
-    return "For the nutrition side, use the Master Plan for the foundation guide or send your Arc context to ChatGPT for a more detailed personalized plan.";
-  }
-
-  if(q.includes("study")){
-    return "Your Deep Work habit is worth +15 XP. Choose one clear task, remove distractions and work for a manageable focused block.";
-  }
-
-  return "I can help with your Arc calendar, habits, XP, rest days, Master Plan, training structure and navigation. For deeper personalized planning, use Ask ChatGPT.";
 }
 
-/* =========================================================
+/* =====================================================
    CHATGPT HANDOFF
-========================================================= */
+===================================================== */
 
 function buildChatGPTPrompt(type){
 
@@ -2040,174 +4323,323 @@ function buildChatGPTPrompt(type){
   const taskMap={
 
     training:
-    "Build an age-appropriate training and movement plan for my Winter Arc.",
+      "Build my personalized training and movement plan.",
 
     nutrition:
-    "Build an age-appropriate everyday nutrition and recovery guide for my Winter Arc.",
+      "Build my personalized nutrition and recovery guide.",
 
     study:
-    "Build a practical study and deep-work plan for my Winter Arc.",
+      "Build my personalized study and deep-work plan.",
 
     reading:
-    "Build a reading plan for my Winter Arc.",
+      "Build my personalized reading plan.",
 
     routine:
-    "Build a daily routine that fits my Winter Arc configuration.",
+      "Build my personalized daily routine.",
 
     master:
-    "Review and improve my existing Winter Arc Master Plan."
+      "Review and improve my existing Winter Arc Master Plan.",
+
+    analytics:
+      "Analyze my Winter Arc performance and identify practical improvements."
+
   };
 
-  const task=taskMap[type] || taskMap.master;
-
   return `
-You are helping me operate my WINTER ARC OS.
 
-WINTER ARC WINDOW:
+I am using a personal system called WINTER ARC OS.
+
+WINTER ARC:
 October 1, 2026 → December 31, 2026
-92 days total.
+92-day campaign.
 
-MY PROFILE:
+MY PROFILE
 Age: ${p.age}
 Height: ${p.height}
 Weight: ${p.weight}
 Available daily time: ${p.time}
 
-MY ARC GOALS:
-${p.goals.length ? p.goals.join(", ") : "Not specified"}
+MY GOALS
+${p.goals.length
+  ?p.goals.join(", ")
+  :"Not specified"}
 
-MY FIXED TRAINING REST DAYS:
-${p.restDays.length ? p.restDays.join(", ") : "None specified"}
+TRAINING REST DAYS
+${p.restDays.length
+  ?p.restDays.join(", ")
+  :"None configured"}
 
-ARC STYLE:
+ARC STYLE
 ${p.style}
 
-CURRENT ARC DATA:
+LIVE ARC DATA
+Arc Day: ${getArcDay()} / 92
 XP: ${state.xp}
-Current Arc Day: ${getArcDay()}
 Current streak: ${state.streak}
+Longest streak: ${state.longestStreak}
+Comebacks: ${state.comebacks}
+Comeback streak: ${state.comebackStreak}
+Recovery Credits: ${state.recoveryCredits}
+Overall completion: ${getOverallCompletion()}%
 
-CURRENT HABITS:
-${HABITS.map(h=>"- "+h.name).join("\n")}
+HABITS
+${HABITS.map(
+  h=>`- ${h.name}: ${getHabitCompletionRate(h.id)}% completion`
+).join("\n")}
 
-REQUEST:
-${task}
+MY REQUEST
+${taskMap[type]||taskMap.master}
 
-IMPORTANT:
-- Treat the Winter Arc as a 92-day personal-development system.
-- Personalize the answer using the information above.
-- Do not make me repeat information already provided here.
-- Respect my configured training rest days.
-- If I am under 18, keep exercise and nutrition guidance age-appropriate and focused on health, growth, performance, recovery and sustainable habits rather than restrictive dieting or aggressive body-composition targets.
-- Do not recommend unsafe training, extreme calorie restriction, dehydration, supplements or other risky shortcuts.
-- Give me something practical that I can actually follow.
-- Explain how the plan fits into October, November and December.
-- If you need information that genuinely cannot be inferred, ask only for that information.
+INSTRUCTIONS
+- Use the information above instead of asking me to repeat it.
+- Make the response practical and personalized.
+- Respect my configured rest days.
+- Treat the Winter Arc as October 1 through December 31 only.
+- If I am under 18, keep nutrition and exercise guidance age-appropriate,
+  health-focused and supportive of normal growth and development.
+- Do not recommend restrictive dieting, dehydration, unsafe supplements,
+  extreme exercise or aggressive body-composition strategies.
+- Do not treat one missed day as a reason to abandon the entire Arc.
+- Give me a plan that can realistically fit my available daily time.
+- Explain how the recommendation can work across October, November and December.
+- If information is genuinely missing, ask only for what is necessary.
 
-Return the plan in a clean, structured format that I can directly add to my Winter Arc OS.
+Return a clear plan that I can use inside WINTER ARC OS.
+
 `;
+
 }
 
 async function askChatGPT(type){
 
-  const prompt=buildChatGPTPrompt(type);
+  const prompt=
+    buildChatGPTPrompt(type);
+
+  let copied=false;
 
   try{
+
     await navigator.clipboard.writeText(prompt);
+
+    copied=true;
+
   }catch(e){
-    /*
-      Clipboard may be blocked on some browsers.
-      We still open ChatGPT.
-    */
+
+    copied=false;
+
   }
 
-  const proceed=confirm(
-    "Your personalized Winter Arc prompt has been prepared.\n\n" +
-    "It will be copied to your clipboard. ChatGPT will open next.\n\n" +
-    "Paste the prompt into ChatGPT and send it."
+  if(copied){
+
+    const proceed=confirm(
+      "Your personalized Winter Arc prompt is copied.\n\n" +
+      "ChatGPT will open next.\n\n" +
+      "Paste the prompt and send it."
+    );
+
+    if(!proceed)return;
+
+  }else{
+
+    alert(
+      "Your browser blocked automatic clipboard access. " +
+      "ChatGPT will open, but you will need to copy the prompt manually."
+    );
+
+  }
+
+  window.open(
+    "https://chatgpt.com/",
+    "_blank"
   );
 
-  if(!proceed)return;
-
-  window.open("https://chatgpt.com/","_blank");
 }
 
-/* =========================================================
+/* =====================================================
    PROFILE
-========================================================= */
+===================================================== */
 
 function openProfile(){
 
   const p=state.profile;
 
-  document.getElementById("editAge").value=p.age;
-  document.getElementById("editHeight").value=p.height;
-  document.getElementById("editWeight").value=p.weight;
-  document.getElementById("editTime").value=p.time;
+  document.getElementById(
+    "editAge"
+  ).value=p.age;
 
-  document.getElementById("profileModal").classList.add("open");
+  document.getElementById(
+    "editHeight"
+  ).value=p.height;
+
+  document.getElementById(
+    "editWeight"
+  ).value=p.weight;
+
+  document.getElementById(
+    "editTime"
+  ).value=p.time;
+
+  document.getElementById(
+    "profileModal"
+  ).classList.add("open");
+
 }
 
 function closeProfile(){
-  document.getElementById("profileModal").classList.remove("open");
+
+  document.getElementById(
+    "profileModal"
+  ).classList.remove("open");
+
 }
 
 function saveProfile(){
 
-  state.profile.age=document.getElementById("editAge").value.trim();
-  state.profile.height=document.getElementById("editHeight").value.trim();
-  state.profile.weight=document.getElementById("editWeight").value.trim();
-  state.profile.time=document.getElementById("editTime").value;
+  state.profile.age=
+    document.getElementById(
+      "editAge"
+    ).value.trim();
+
+  state.profile.height=
+    document.getElementById(
+      "editHeight"
+    ).value.trim();
+
+  state.profile.weight=
+    document.getElementById(
+      "editWeight"
+    ).value.trim();
+
+  state.profile.time=
+    document.getElementById(
+      "editTime"
+    ).value;
 
   saveState();
+
   closeProfile();
+
   renderAll();
+
+  showToast("Arc configuration updated.");
+
 }
 
-/* =========================================================
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer;
+
+function showToast(text){
+
+  const toast=
+    document.getElementById(
+      "toast"
+    );
+
+  toast.textContent=text;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer=setTimeout(()=>{
+
+    toast.classList.remove("show");
+
+  },2300);
+
+}
+
+/* =====================================================
    UTILITIES
-========================================================= */
+===================================================== */
 
 function escapeHTML(str){
+
   return String(str)
+
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
+
 }
+
+/* =====================================================
+   MASTER RENDER
+===================================================== */
 
 function renderAll(){
+
   calculateStreak();
+
   renderDashboard();
-  renderHabitList("fullHabits");
+
+  renderHabitList(
+    "fullHabits",
+    false
+  );
+
   renderMaster();
+
   renderCalendar();
-  renderStats();
+
+  renderAnalytics();
+
   renderAchievements();
+
   saveState();
+
 }
 
-/* =========================================================
+/* =====================================================
    STARTUP
-========================================================= */
+===================================================== */
 
-window.addEventListener("load",()=>{
+window.addEventListener(
+  "load",
+  ()=>{
 
-  setupOptionGroups();
-
-  setTimeout(()=>{
-
-    document.getElementById("loading").style.opacity="0";
+    setupOnboarding();
 
     setTimeout(()=>{
-      document.getElementById("loading").style.display="none";
-      initOnboarding();
-    },650);
 
-  },1900);
+      const loading=
+        document.getElementById(
+          "loading"
+        );
 
-});
+      loading.style.opacity="0";
+
+      setTimeout(()=>{
+
+        loading.style.display="none";
+
+        if(state.onboarded){
+
+          document.getElementById(
+            "mainApp"
+          ).style.display="block";
+
+          renderAll();
+
+        }else{
+
+          document.getElementById(
+            "onboarding"
+          ).style.display="block";
+
+        }
+
+      },650);
+
+    },1900);
+
+  }
+);
 
 </script>
 
